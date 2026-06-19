@@ -1,19 +1,25 @@
 @echo off
 setlocal
 
-title Taranga+ Electron
+title Taranga+ (তরঙ্গ+) - Electron App
 cd /d "%~dp0\.."
 
 echo.
 echo ========================================
-echo   Taranga+ (তরঙ্গ+) - Electron Dev Launcher
+echo   Taranga+ (তরঙ্গ+) - Electron App
+echo ========================================
+echo.
+echo   Version: 2.0.0
+echo   Platform: Windows Desktop (Electron)
+echo   Channels: 551+ validated
+echo.
 echo ========================================
 echo.
 
 where node >nul 2>nul
 if errorlevel 1 (
-  echo Node.js is not installed or not available in PATH.
-  echo Please install Node.js LTS, then run this file again.
+  echo [ERROR] Node.js is not installed.
+  echo Please install from: https://nodejs.org
   echo.
   pause
   exit /b 1
@@ -21,31 +27,48 @@ if errorlevel 1 (
 
 where npm >nul 2>nul
 if errorlevel 1 (
-  echo npm is not installed or not available in PATH.
-  echo Please reinstall Node.js LTS, then run this file again.
+  echo [ERROR] npm is not installed.
+  echo Please reinstall Node.js.
   echo.
   pause
   exit /b 1
 )
 
 if not exist "node_modules" (
-  echo Installing project dependencies...
+  echo [INFO] First time setup - Installing dependencies...
+  echo This may take 1-2 minutes.
   echo.
   call npm install
   if errorlevel 1 (
     echo.
-    echo Dependency install failed.
+    echo [ERROR] Dependency install failed.
     pause
     exit /b 1
   )
+  echo.
+  echo [SUCCESS] Dependencies installed!
+  echo.
 )
 
-echo Starting Taranga+ Electron app...
-echo Keep this window open while testing. Press Ctrl+C here to stop.
+echo [INFO] Building Electron app...
+echo.
+call npm run build:electron
+if errorlevel 1 (
+  echo.
+  echo [ERROR] Electron build failed.
+  pause
+  exit /b 1
+)
+
+echo [SUCCESS] Build complete!
+echo.
+echo [INFO] Starting Taranga+ in Electron window...
+echo [INFO] App will open in a new window.
+echo [INFO] Close the window to stop the app.
 echo.
 
-call npm run dev
+call npm run dev:electron
 
 echo.
-echo App stopped.
+echo [INFO] Taranga+ stopped.
 pause
