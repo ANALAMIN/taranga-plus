@@ -1,0 +1,11 @@
+name = "taranga-plus-backend"
+main = "src/api/router.ts"
+compatibility_date = "2024-03-20"
+
+[triggers]
+crons = ["0 * * * *"] # Run every hour
+
+[[kv_namespaces]]
+binding = "TARANGA_KV"
+id = "<YOUR_KV_NAMESPACE_ID_HERE>"
+preview_id = "<YOUR_PREVIEW_KV_NAMESPACE_ID_HERE>"
