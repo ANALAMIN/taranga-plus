@@ -23,7 +23,7 @@ const SOURCES = [
 ];
 
 const TIMEOUT_MS = 3000;
-const BATCH_SIZE = 100;
+const BATCH_SIZE = 50;
 const VALID_CATEGORIES = ['all', 'sports', 'movies', 'music', 'entertainment', 'kids', 'documentary'];
 
 // ── M3U Parser ───────────────────────────────────────────
@@ -75,12 +75,13 @@ async function fetchAllSources() {
   return results.flat();
 }
 
-// ── Validate Channels (HEAD request) ─────────────────────
+// ── Validate Channels (Smart Check) ─────────────────────
 async function testStream(channel) {
   const start = Date.now();
   try {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), TIMEOUT_MS);
+    
     const res = await fetch(channel.url, {
       method: 'HEAD',
       signal: controller.signal,
@@ -89,9 +90,27 @@ async function testStream(channel) {
       },
     });
     clearTimeout(timeout);
-    if (res.ok) {
+    
+    if (!res.ok) {
+      return { ...channel, isAlive: false, latencyMs: Date.now() - start };
+    }
+    
+    // Check content-type to verify it's video/HLS
+    const contentType = (res.headers.get('content-type') || '').toLowerCase();
+    const isVideo = contentType.includes('video') || 
+                    contentType.includes('mpegurl') || 
+                    contentType.includes('octet-stream') ||
+                    contentType.includes('x-mpegurl') ||
+                    contentType.includes('apple') ||
+                    contentType.includes('application');
+    
+    // If HEAD ok and content-type suggests video, consider alive
+    if (isVideo || res.ok) {
       return { ...channel, isAlive: true, latencyMs: Date.now() - start };
     }
+    
+    return { ...channel, isAlive: false, latencyMs: Date.now() - start };
+    
   } catch {}
   return { ...channel, isAlive: false, latencyMs: TIMEOUT_MS };
 }
