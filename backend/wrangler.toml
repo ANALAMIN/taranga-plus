@@ -7,5 +7,5 @@ crons = ["0 * * * *"] # Run every hour
 
 [[kv_namespaces]]
 binding = "TARANGA_KV"
-id = "<YOUR_KV_NAMESPACE_ID_HERE>"
-preview_id = "<YOUR_PREVIEW_KV_NAMESPACE_ID_HERE>"
+id = "b0b98e15f22c4be8a25226df118b752e"
+preview_id = "b0b98e15f22c4be8a25226df118b752e"

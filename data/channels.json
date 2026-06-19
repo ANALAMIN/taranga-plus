@@ -1,0 +1,1498 @@
+[
+  {
+    "id": "e38112ab35f525b3",
+    "name": "30A Golf Kingdom (720p)",
+    "logoUrl": "https://i.imgur.com/Lv53nh4.png",
+    "streamUrl": "https://30a-tv.com/feeds/vidaa/golf.m3u8",
+    "category": "sports",
+    "latencyMs": 748
+  },
+  {
+    "id": "0abd47dbb4eedb4e",
+    "name": "A Spor (1080p)",
+    "logoUrl": "https://i.imgur.com/ZhkZzLf.png",
+    "streamUrl": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/aspor/aspor.m3u8",
+    "category": "sports",
+    "latencyMs": 1135
+  },
+  {
+    "id": "740b465203b1f5be",
+    "name": "Aamar Bangla (720p)",
+    "logoUrl": "https://jiotvimages.cdn.jio.com/dare_images/images/Amaar_Bangla.png",
+    "streamUrl": "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI/amarbanglatv.stream/playlist.m3u8",
+    "category": "entertainment",
+    "latencyMs": 376
+  },
+  {
+    "id": "305e08b4004f8211",
+    "name": "ACCDN (1080p)",
+    "logoUrl": "https://i.imgur.com/V6Kaqha.png",
+    "streamUrl": "https://raycom-accdn-firetv.amagi.tv/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 112
+  },
+  {
+    "id": "699de1f0910731ef",
+    "name": "ACI Sport TV (1080p)",
+    "logoUrl": "https://i.imgur.com/U8cHMOt.png",
+    "streamUrl": "https://webstream.multistream.it/memfs/e2cb3629-c1a2-495b-b43a-9eb386f04ed8.m3u8",
+    "category": "sports",
+    "latencyMs": 696
+  },
+  {
+    "id": "f29e6e52e5d0975d",
+    "name": "ADO TV (720p)",
+    "logoUrl": "https://i.imgur.com/pxFamLr.png",
+    "streamUrl": "https://strhls.streamakaci.tv/ortb/ortb2-multi/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 761
+  },
+  {
+    "id": "afd4bff68bf9a64d",
+    "name": "Africa 24 Sport (1080p)",
+    "logoUrl": "https://i0.wp.com/africa24tv.com/wp-content/uploads/2023/12/LOGO-AFRICASPORT-4-HD-sans-fond.png?fit=512%2C107&ssl=1",
+    "streamUrl": "https://africa24.vedge.infomaniak.com/livecast/ik:africa24sport/manifest.m3u8",
+    "category": "sports",
+    "latencyMs": 2374
+  },
+  {
+    "id": "8640f135cc0befbe",
+    "name": "Al Iraqia Sport (720p)",
+    "logoUrl": "https://i.imgur.com/DrrlxTO.png",
+    "streamUrl": "https://imn-live.esite-lab.com/hls/iraqia-sports-1.m3u8",
+    "category": "sports",
+    "latencyMs": 844
+  },
+  {
+    "id": "169bc5a940abe921",
+    "name": "Alkass Four (1080p)",
+    "logoUrl": "https://i.imgur.com/iDL65Wu.png",
+    "streamUrl": "https://liveeu-gcp.alkassdigital.net/alkass4-p/main.m3u8",
+    "category": "sports",
+    "latencyMs": 1866
+  },
+  {
+    "id": "32a0ac68ee9f49ad",
+    "name": "Alkass One (1080p)",
+    "logoUrl": "https://i.imgur.com/10mmlha.png",
+    "streamUrl": "https://liveeu-gcp.alkassdigital.net/alkass1-p/main.m3u8",
+    "category": "sports",
+    "latencyMs": 1894
+  },
+  {
+    "id": "5c403819af685470",
+    "name": "Alkass SHOOF (1080p)",
+    "logoUrl": "https://shoof.alkass.net/assets/images/shoof.png",
+    "streamUrl": "https://liveeu-gcp.alkassdigital.net/shooflive/main.m3u8",
+    "category": "sports",
+    "latencyMs": 1929
+  },
+  {
+    "id": "83375d13bb4907be",
+    "name": "Alkass SHOOF 2 (1080p)",
+    "logoUrl": "https://shoof.alkass.net/assets/images/shoof2.png",
+    "streamUrl": "https://liveeu-gcp.alkassdigital.net/shooflive2/main.m3u8",
+    "category": "sports",
+    "latencyMs": 857
+  },
+  {
+    "id": "7a3ca8ac3820b7d0",
+    "name": "Alkass Six (1080p)",
+    "logoUrl": "https://i.imgur.com/CrPSPSC.png",
+    "streamUrl": "https://liveeu-gcp.alkassdigital.net/alkass6-p/main.m3u8",
+    "category": "sports",
+    "latencyMs": 1913
+  },
+  {
+    "id": "38a4024c67c8bc4e",
+    "name": "Alkass Three (1080p)",
+    "logoUrl": "https://i.imgur.com/d57BdFh.png",
+    "streamUrl": "https://liveeu-gcp.alkassdigital.net/alkass3-p/main.m3u8",
+    "category": "sports",
+    "latencyMs": 800
+  },
+  {
+    "id": "e56e57c8d0e06d51",
+    "name": "Alkass Two (1080p)",
+    "logoUrl": "https://i.imgur.com/8w61kFX.png",
+    "streamUrl": "https://liveeu-gcp.alkassdigital.net/alkass2-p/main.m3u8",
+    "category": "sports",
+    "latencyMs": 820
+  },
+  {
+    "id": "b209b539f9c78602",
+    "name": "Arryadia (480p)",
+    "logoUrl": "https://i.imgur.com/XjzK3gZ.png",
+    "streamUrl": "https://snrtworker.kharazbelaid.workers.dev/?id=arryadia.m3u8",
+    "category": "sports",
+    "latencyMs": 2072
+  },
+  {
+    "id": "7d175de891816cfc",
+    "name": "Arryadia (720p)",
+    "logoUrl": "https://i.imgur.com/XjzK3gZ.png",
+    "streamUrl": "https://stream-lb.livemediama.com/arryadia/hls/master.m3u8",
+    "category": "sports",
+    "latencyMs": 849
+  },
+  {
+    "id": "3410a039c94008ea",
+    "name": "Arryadia HD 1 (1080p)",
+    "logoUrl": "https://i.ibb.co/fYNx6Fk1/image-removebg-preview-1.png",
+    "streamUrl": "https://stream-lb.livemediama.com/arryadia-hd-01/hls/master.m3u8",
+    "category": "sports",
+    "latencyMs": 838
+  },
+  {
+    "id": "dccc8c5c837f12d7",
+    "name": "Arryadia HD 2 (1080p)",
+    "logoUrl": "https://i.ibb.co/jPFCVFNS/image-removebg-preview-3.png",
+    "streamUrl": "https://stream-lb.livemediama.com/arryadia-hd-02/hls/master.m3u8",
+    "category": "sports",
+    "latencyMs": 837
+  },
+  {
+    "id": "2e74df4826f74c4c",
+    "name": "Arryadia HD 3 (1080p)",
+    "logoUrl": "https://i.ibb.co/mCnJzvvB/image-removebg-preview-4.png",
+    "streamUrl": "https://stream-lb.livemediama.com/arryadia-hd-03/hls/master.m3u8",
+    "category": "sports",
+    "latencyMs": 838
+  },
+  {
+    "id": "c8eb807a9926a492",
+    "name": "Arryadia HD TNT (1080p)",
+    "logoUrl": "https://i.imgur.com/XjzK3gZ.png",
+    "streamUrl": "https://stream-lb.livemediama.com/arryadia-tnt/hls/master.m3u8",
+    "category": "sports",
+    "latencyMs": 836
+  },
+  {
+    "id": "9d2d1f897a424365",
+    "name": "AS3 Sport TV (1080p)",
+    "logoUrl": "https://i.ibb.co/bRmGbsyV/A3-SPORTTV.jpg",
+    "streamUrl": "https://streamtv.as3sport.online:3394/hybrid/play.m3u8",
+    "category": "sports",
+    "latencyMs": 1969
+  },
+  {
+    "id": "6e36a43f3651fd47",
+    "name": "ATG Live (720p)",
+    "logoUrl": "https://i.imgur.com/bPWFXkL.png",
+    "streamUrl": "https://kanal75xto-llhls.akamaized.net/live/Data/atg-kanal-15-02a-rr/HLS-Legacy-HL/atg-kanal-15-02a-rr.m3u8",
+    "category": "sports",
+    "latencyMs": 498
+  },
+  {
+    "id": "1181691e157a7ce7",
+    "name": "ATN Music (360p)",
+    "logoUrl": "https://www.jagobd.com/wp-content/uploads/2015/12/atnmusic.jpg?x50681",
+    "streamUrl": "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI/atnmusic.stream/playlist.m3u8",
+    "category": "music",
+    "latencyMs": 372
+  },
+  {
+    "id": "3ac2e21dd6177321",
+    "name": "ATN News (1080p)",
+    "logoUrl": "https://i.imgur.com/4qZQKjo.png",
+    "streamUrl": "https://bozztv.com/rongo/rongo-ATNNews/index.m3u8",
+    "category": "all",
+    "latencyMs": 1083
+  },
+  {
+    "id": "ec8169302d219cf7",
+    "name": "Bahrain Sports 1 (720p) [Not 24/7]",
+    "logoUrl": "https://i.imgur.com/fBpLsbC.png",
+    "streamUrl": "https://5c7b683162943.streamlock.net/live/ngrp:sportsone_all/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 1169
+  },
+  {
+    "id": "bd674c003b620d7b",
+    "name": "Bahrain Sports 2 (720p) [Not 24/7]",
+    "logoUrl": "https://i.imgur.com/ZkuZmIo.png",
+    "streamUrl": "https://5c7b683162943.streamlock.net/live/ngrp:bahrainsportstwo_all/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 1144
+  },
+  {
+    "id": "84917544697c18ab",
+    "name": "Bangla Vision (1080p)",
+    "logoUrl": "https://i.imgur.com/nCWgp38.png",
+    "streamUrl": "https://owrcovcrpy.gpcdn.net/bpk-tv/1715/output/index.m3u8",
+    "category": "entertainment",
+    "latencyMs": 91
+  },
+  {
+    "id": "f4b5a53fff104078",
+    "name": "beIN Sports USA (720p)",
+    "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/BeIN_Sports_logo_%28vertical_version%29.svg/500px-BeIN_Sports_logo_%28vertical_version%29.svg.png",
+    "streamUrl": "http://23.237.104.106:8080/USA_BEIN/index.m3u8",
+    "category": "sports",
+    "latencyMs": 561
+  },
+  {
+    "id": "bbbcecd4008e428f",
+    "name": "beIN SPORTS XTRA (1080p)",
+    "logoUrl": "https://i.ibb.co/HT49GPmB/XTRA-2.png",
+    "streamUrl": "https://bein-xtra-bein.amagi.tv/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 138
+  },
+  {
+    "id": "e2c3fef4287cd947",
+    "name": "beIN Sports XTRA en Espanol (1080p)",
+    "logoUrl": "https://i.imgur.com/V562tpO.png",
+    "streamUrl": "https://dc1644a9jazgj.cloudfront.net/beIN_Sports_Xtra_Espanol.m3u8",
+    "category": "sports",
+    "latencyMs": 366
+  },
+  {
+    "id": "c804a8fa2ff061b1",
+    "name": "BEK TV Sports West (720p)",
+    "logoUrl": "https://i.imgur.com/1l3t5jd.png",
+    "streamUrl": "https://cdn3.wowza.com/5/ZWQ1K2NYTmpFbGsr/BEK-WOWZA-1/smil:BEKPRIMEW.smil/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 216
+  },
+  {
+    "id": "bc4b82be117b44cc",
+    "name": "BTV Chattogram (1080p)",
+    "logoUrl": "https://i.imgur.com/hvpyuek.png",
+    "streamUrl": "https://bozztv.com/rongo/rongo-BTVChattagram/index.m3u8",
+    "category": "all",
+    "latencyMs": 1080
+  },
+  {
+    "id": "9eaa2213126b3783",
+    "name": "BTV National (1080p)",
+    "logoUrl": "https://i.imgur.com/5OE2FDt.png",
+    "streamUrl": "https://owrcovcrpy.gpcdn.net/bpk-tv/1709/output/1709.m3u8",
+    "category": "all",
+    "latencyMs": 86
+  },
+  {
+    "id": "0c2700b571383756",
+    "name": "Canal+ Foot",
+    "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/e/eb/Canal%2BFoot.png",
+    "streamUrl": "https://test.946985.filegear-sg.me/proxy/ef3174f16d4557d2",
+    "category": "sports",
+    "latencyMs": 1239
+  },
+  {
+    "id": "a023eb100667efce",
+    "name": "Canal+ Sport (1080p)",
+    "logoUrl": "https://i.imgur.com/EOXnU15.png",
+    "streamUrl": "http://151.80.18.177:86/Canal+_sport_HD/index.m3u8",
+    "category": "sports",
+    "latencyMs": 494
+  },
+  {
+    "id": "527d33306f1647fb",
+    "name": "CazeTV (1080i)",
+    "logoUrl": "https://upload.wikimedia.org/wikipedia/en/thumb/6/64/Caz%C3%A9TV_logo.svg/1280px-Caz%C3%A9TV_logo.svg.png",
+    "streamUrl": "https://dfr80qz435crc.cloudfront.net/MNOP/Amagi/Caze/Caze_TV_BR/Caze_TV.m3u8",
+    "category": "sports",
+    "latencyMs": 253
+  },
+  {
+    "id": "061f0b0d6e21d6ef",
+    "name": "CCTV-Billiards (1080p)",
+    "logoUrl": "https://i.imgur.com/WK3keM9.png",
+    "streamUrl": "http://38.75.136.137:98/gslb/dsdqpub/ystq.m3u8?auth=testpub",
+    "category": "sports",
+    "latencyMs": 978
+  },
+  {
+    "id": "8b8504637d745f05",
+    "name": "CCTV-Golf & Tennis (1080p)",
+    "logoUrl": "https://i.imgur.com/iqJJTmH.png",
+    "streamUrl": "http://38.75.136.137:98/gslb/dsdqpub/gefwq.m3u8?auth=testpub",
+    "category": "sports",
+    "latencyMs": 991
+  },
+  {
+    "id": "4d4d969351320f9c",
+    "name": "CCTV-Storm Football (1080p)",
+    "logoUrl": "https://i.imgur.com/Fy6HkX0.png",
+    "streamUrl": "http://38.75.136.137:98/gslb/dsdqpub/fyzq.m3u8?auth=testpub",
+    "category": "sports",
+    "latencyMs": 1019
+  },
+  {
+    "id": "323de735ac562fc0",
+    "name": "Channel 24 (1080p)",
+    "logoUrl": "https://i.imgur.com/4JLkaF7.png",
+    "streamUrl": "https://bozztv.com/rongo/rongo-Channel24HD/index.m3u8",
+    "category": "all",
+    "latencyMs": 1122
+  },
+  {
+    "id": "2a604dae62157971",
+    "name": "Channel 9 (1080p)",
+    "logoUrl": "https://i.imgur.com/Xf5YuoE.png",
+    "streamUrl": "https://owrcovcrpy.gpcdn.net/bpk-tv/1729/output/index.m3u8",
+    "category": "entertainment",
+    "latencyMs": 61
+  },
+  {
+    "id": "6ed7bb3817eef22c",
+    "name": "Channel I (1080p)",
+    "logoUrl": "https://i.imgur.com/X0JJlOX.png",
+    "streamUrl": "https://owrcovcrpy.gpcdn.net/bpk-tv/1723/output/index.m3u8",
+    "category": "entertainment",
+    "latencyMs": 54
+  },
+  {
+    "id": "d12f60697f11f001",
+    "name": "Channel S (576p)",
+    "logoUrl": "https://i.imgur.com/hJxFLvF.png",
+    "streamUrl": "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI/chsukoff.stream/playlist.m3u8",
+    "category": "all",
+    "latencyMs": 371
+  },
+  {
+    "id": "440fa03793063f66",
+    "name": "ColimdoT TV (720p)",
+    "logoUrl": "https://i.imgur.com/ZeUgLCa.png",
+    "streamUrl": "https://cnn.livestreaminggroup.info:3132/live/colimdotvlive.m3u8",
+    "category": "sports",
+    "latencyMs": 2730
+  },
+  {
+    "id": "9ab22e102131e9ff",
+    "name": "Cricket Gold (1080p)",
+    "logoUrl": "https://resources.cricket-australia.pulselive.com/cricket-australia/photo/2025/07/25/836eddae-4329-4542-ad17-dcd37e9d951a/Cricket-Gold-1920x1080_noBG.png",
+    "streamUrl": "https://streams2.sofast.tv/ptnr-yupptv/title-cricketgold/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/b2048bb8-1686-4432-aa50-647245383e0c/manifest.m3u8",
+    "category": "sports",
+    "latencyMs": 1649
+  },
+  {
+    "id": "ff8385f7b17a847d",
+    "name": "ČT Sport (720p)",
+    "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/%C4%8CT_sport_logo.png/960px-%C4%8CT_sport_logo.png",
+    "streamUrl": "http://88.212.15.19/live/test_ctsport_25p/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 519
+  },
+  {
+    "id": "dc3a5596cb1320b1",
+    "name": "DAZN Combat (1080p)",
+    "logoUrl": "https://i.postimg.cc/VsW3Jsrz/logo-DAZN-Combat.png",
+    "streamUrl": "https://dazn-combat-rakuten.amagi.tv/hls/amagi_hls_data_rakutenAA-dazn-combat-rakuten/CDN/master.m3u8",
+    "category": "sports",
+    "latencyMs": 1694
+  },
+  {
+    "id": "e999649ddd078fd4",
+    "name": "DBC News (1080p)",
+    "logoUrl": "https://i.imgur.com/Qbt6q4z.png",
+    "streamUrl": "https://owrcovcrpy.gpcdn.net/bpk-tv/1728/output/index.m3u8",
+    "category": "all",
+    "latencyMs": 83
+  },
+  {
+    "id": "586c9efee33cff56",
+    "name": "DD Sports SD (1080p)",
+    "logoUrl": "https://dtil.tmsimg.com/assets/s158255_ld_h15_aa.png?lock=720x540",
+    "streamUrl": "https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/b17adfe543354fdd8d189b110617cddd/index.m3u8",
+    "category": "sports",
+    "latencyMs": 785
+  },
+  {
+    "id": "709eac2fb3ce79d2",
+    "name": "Deepto TV (1080p)",
+    "logoUrl": "https://i.imgur.com/F62GUqS.png",
+    "streamUrl": "https://owrcovcrpy.gpcdn.net/bpk-tv/1711/output/index.m3u8",
+    "category": "entertainment",
+    "latencyMs": 55
+  },
+  {
+    "id": "7c61937c8ac9c659",
+    "name": "Deportes TVC (1080p)",
+    "logoUrl": "https://i.imgur.com/Y1t8xkL.png",
+    "streamUrl": "http://162.19.255.233:8080/play/UNbAl57p9hXZClOu56FCTYXmD-MOS3u5IUkeXPpBt80/m3u8",
+    "category": "sports",
+    "latencyMs": 477
+  },
+  {
+    "id": "fed3bb488422e7b1",
+    "name": "Desh TV (1080p)",
+    "logoUrl": "https://i.imgur.com/ItrZok1.png",
+    "streamUrl": "https://bozztv.com/rongo/rongo-DeshTV/index.m3u8",
+    "category": "all",
+    "latencyMs": 1055
+  },
+  {
+    "id": "caee87837361df4c",
+    "name": "Deshi TV (720p)",
+    "logoUrl": "https://i.imgur.com/PzqzgMm.png",
+    "streamUrl": "https://deshitv.deshitv24.net/live/myStream/playlist.m3u8",
+    "category": "entertainment",
+    "latencyMs": 211
+  },
+  {
+    "id": "d3a4b4ae5f1994f9",
+    "name": "Digi Sport 1 HD",
+    "logoUrl": "https://i.imgur.com/5zMxDYq.png",
+    "streamUrl": "https://dokagents.site/live/digisport1/mono.m3u8",
+    "category": "sports",
+    "latencyMs": 1251
+  },
+  {
+    "id": "22c6b6bcb8a312aa",
+    "name": "Digi Sport 2 HD",
+    "logoUrl": "https://i.imgur.com/KWDUi3v.png",
+    "streamUrl": "https://dokagents.site/live/digisport2/mono.m3u8",
+    "category": "sports",
+    "latencyMs": 1252
+  },
+  {
+    "id": "214146934daf753d",
+    "name": "Digi Sport 3 HD",
+    "logoUrl": "https://i.imgur.com/T1ci5UK.png",
+    "streamUrl": "https://dokagents.site/live/digisport3/mono.m3u8",
+    "category": "sports",
+    "latencyMs": 1247
+  },
+  {
+    "id": "1f8b6e48663d1b91",
+    "name": "Digi Sport 4",
+    "logoUrl": "https://i.imgur.com/Knj9I6f.png",
+    "streamUrl": "https://dokagents.site/live/digisport4/mono.m3u8",
+    "category": "sports",
+    "latencyMs": 1253
+  },
+  {
+    "id": "5abd66a9a9461359",
+    "name": "Đồng Nai 2 (480p) [Not 24/7]",
+    "logoUrl": "https://i.imgur.com/tNKPSkO.png",
+    "streamUrl": "http://118.107.85.4:1935/live/smil:DNTV2.smil/chunklist.m3u8",
+    "category": "sports",
+    "latencyMs": 235
+  },
+  {
+    "id": "e39195a2f861542b",
+    "name": "DraftKings Network (1080p)",
+    "logoUrl": "https://i.imgur.com/SFYhgrt.png",
+    "streamUrl": "https://na.linear.zype.com/e0bd0e23-a958-4e43-8164-4f2fef8876a8/fd3614bd-90bf-4530-a277-65ae3a1720c8-zype/live.m3u8",
+    "category": "sports",
+    "latencyMs": 631
+  },
+  {
+    "id": "1515005cc046cab1",
+    "name": "Ekattor TV (1080p)",
+    "logoUrl": "https://i.imgur.com/zoLwwUK.png",
+    "streamUrl": "https://owrcovcrpy.gpcdn.net/bpk-tv/1705/output/1705.m3u8",
+    "category": "all",
+    "latencyMs": 55
+  },
+  {
+    "id": "83ef1bbc27469458",
+    "name": "Equalympic (1080p)",
+    "logoUrl": "https://i.imgur.com/ixSj4H7.png",
+    "streamUrl": "https://iptv.prosto.tv/ch215/index.m3u8",
+    "category": "sports",
+    "latencyMs": 1400
+  },
+  {
+    "id": "a9d5806a9665beae",
+    "name": "Equidia (1080p)",
+    "logoUrl": "https://i.imgur.com/QPpbRcZ.png",
+    "streamUrl": "https://raw.githubusercontent.com/Paradise-91/ParaTV/main/streams/equidia/live2.m3u8",
+    "category": "sports",
+    "latencyMs": 162
+  },
+  {
+    "id": "a584003c71566085",
+    "name": "ESPN8 The Ocho (1080p)",
+    "logoUrl": "https://images.fubo.tv/channel-config-ui/station-logos/on-dark/espn_8_the_ocho_bw.png",
+    "streamUrl": "https://d3b6q2ou5kp8ke.cloudfront.net/ESPNTheOcho.m3u8",
+    "category": "sports",
+    "latencyMs": 443
+  },
+  {
+    "id": "bbf5fea9fae04d53",
+    "name": "Esport3 (1080p) [Not 24/7]",
+    "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Esport3.svg/960px-Esport3.svg.png",
+    "streamUrl": "https://directes-tv-int.3catdirectes.cat/live-content/esport3-hls/master.m3u8",
+    "category": "sports",
+    "latencyMs": 1132
+  },
+  {
+    "id": "381027c71dfbb6f1",
+    "name": "Extreme Sports Channel Polska",
+    "logoUrl": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f0/Extreme_Sports_Channel.svg/960px-Extreme_Sports_Channel.svg.png",
+    "streamUrl": "http://81.15.109.89:8001/play/ExtremeSports",
+    "category": "sports",
+    "latencyMs": 507
+  },
+  {
+    "id": "ca5a8d9cf617e324",
+    "name": "Fast&FunBox (1080p)",
+    "logoUrl": "https://spiintl.com/data/files/kcfinderUploadDir/images/logo/fastandfunbox-logo.png",
+    "streamUrl": "https://iptv.prosto.tv/ch120/index.m3u8",
+    "category": "sports",
+    "latencyMs": 1412
+  },
+  {
+    "id": "316eee22038ab579",
+    "name": "FB TV",
+    "logoUrl": "https://i.imgur.com/qBVqtYd.png",
+    "streamUrl": "http://1hskrdto.rocketcdn.com/fenerbahcetv.smil/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 1088
+  },
+  {
+    "id": "db7dbd18ef9ef5a2",
+    "name": "Fight Klub",
+    "logoUrl": "https://i.imgur.com/6kaNvZi.png",
+    "streamUrl": "http://81.15.109.89:8001/play/Fightklub",
+    "category": "sports",
+    "latencyMs": 510
+  },
+  {
+    "id": "c03cef1a8ddbcc59",
+    "name": "FightBox",
+    "logoUrl": "https://i.imgur.com/mRsnztA.png",
+    "streamUrl": "https://webtvstream.bhtelecom.ba/hls7/fightbox.m3u8",
+    "category": "sports",
+    "latencyMs": 1511
+  },
+  {
+    "id": "55894d7ebc243ba6",
+    "name": "FloHockey 24/7 (1080p)",
+    "logoUrl": "https://images.fubo.tv/channel-config-ui/station-logos/on-dark/flohockey-white.png",
+    "streamUrl": "https://amg02278-amg02278c2-flosports-worldwide-9916.playouts.now.amagi.tv/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 1463
+  },
+  {
+    "id": "5caaa365af8dad9c",
+    "name": "FloRacing 24/7 (1080p)",
+    "logoUrl": "https://images.fubo.tv/channel-config-ui/station-logos/on-dark/floracing-white.png",
+    "streamUrl": "https://amg02278-amg02278c1-flosports-worldwide-7592.playouts.now.amagi.tv/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 930
+  },
+  {
+    "id": "7f8201d89ccc2c7b",
+    "name": "FTF Sports (720p)",
+    "logoUrl": "https://i.imgur.com/yvUjOI3.png",
+    "streamUrl": "https://1657061170.rsc.cdn77.org/HLS/FTF-LINEAR.m3u8",
+    "category": "sports",
+    "latencyMs": 1280
+  },
+  {
+    "id": "a9f2952123d6c492",
+    "name": "FTV (720p)",
+    "logoUrl": "https://i.imgur.com/YOr1Oac.png",
+    "streamUrl": "https://master.tucableip.com/ftvhd/index.m3u8",
+    "category": "sports",
+    "latencyMs": 1431
+  },
+  {
+    "id": "df3ce8b60305c269",
+    "name": "fubo Sports Network (1080p)",
+    "logoUrl": "https://i.imgur.com/qFNRJLb.png",
+    "streamUrl": "https://dnf08l6u6uxnz.cloudfront.net/master.m3u8",
+    "category": "sports",
+    "latencyMs": 1198
+  },
+  {
+    "id": "d0f2ba3a16a7282f",
+    "name": "Fuel TV (1080p)",
+    "logoUrl": "https://i.imgur.com/I8mviBy.png",
+    "streamUrl": "https://amg01074-fueltv-fueltvau-samsungau-g09kq.amagi.tv/playlist/amg01074-fueltv-fueltvau-samsungau/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 440
+  },
+  {
+    "id": "796bb26d3b227cf0",
+    "name": "Futbol (1080p)",
+    "logoUrl": "https://i.imgur.com/RngmCDn.png",
+    "streamUrl": "https://live.teleradiocom.tj/8/3m.m3u8",
+    "category": "sports",
+    "latencyMs": 761
+  },
+  {
+    "id": "91e362440b164734",
+    "name": "Game+ (720p)",
+    "logoUrl": "https://i.imgur.com/Lj69WbR.png",
+    "streamUrl": "https://a-cdn.klowdtv.com/live2/fntsy_720p/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 885
+  },
+  {
+    "id": "b3ba7290140e94c9",
+    "name": "Gol Classics (1080p)",
+    "logoUrl": "https://golstadium.com/_next/image?url=%2Fimg%2Fhome%2Fchannels%2Fthumb-gol-classics.jpg&w=1920&q=75",
+    "streamUrl": "https://d71gqtnep83vb.cloudfront.net/gol_classics/gol_classics.m3u8",
+    "category": "sports",
+    "latencyMs": 742
+  },
+  {
+    "id": "82ad7ec7a5892fa1",
+    "name": "Horse TV (720p)",
+    "logoUrl": "https://i.imgur.com/nK4UUX4.png",
+    "streamUrl": "https://a-cdn.klowdtv.com/live2/horsetv_720p/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 665
+  },
+  {
+    "id": "e61220a2879205b0",
+    "name": "HTSpor TV (1080p)",
+    "logoUrl": "https://www.htspor.com/images/manifest/social-share-logo.png",
+    "streamUrl": "https://ciner.daioncdn.net/ht-spor/ht-spor.m3u8?app=web",
+    "category": "sports",
+    "latencyMs": 1675
+  },
+  {
+    "id": "17a67d6110e13291",
+    "name": "Independent TV (1080p)",
+    "logoUrl": "https://i.imgur.com/POXFhGN.png",
+    "streamUrl": "https://bozztv.com/rongo/rongo-IndependentTV/index.m3u8",
+    "category": "all",
+    "latencyMs": 1090
+  },
+  {
+    "id": "0fc04831e5ac2543",
+    "name": "INTROUBLE (1080p)",
+    "logoUrl": "https://i.imgur.com/a40chFI.png",
+    "streamUrl": "https://amg00861-amg00861c6-stirr-us-8229.playouts.now.amagi.tv/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 728
+  },
+  {
+    "id": "c40c613c45ea137b",
+    "name": "ITV Deportes (720p)",
+    "logoUrl": "https://iili.io/J1kV1Bn.png",
+    "streamUrl": "https://thm-it-roku.otteravision.com/thm/it/it.m3u8",
+    "category": "sports",
+    "latencyMs": 626
+  },
+  {
+    "id": "321ac5aaece6bbca",
+    "name": "Jamuna TV (1080p)",
+    "logoUrl": "https://www.jamuna.tv/wp-content/themes/jtv-news/img/logo.png",
+    "streamUrl": "https://bozztv.com/rongo/rongo-JamunaTelevision/index.m3u8",
+    "category": "all",
+    "latencyMs": 1059
+  },
+  {
+    "id": "620fcdf990f50fd7",
+    "name": "Jordan Sport (1080p)",
+    "logoUrl": "https://i.imgur.com/2EmrZPQ.png",
+    "streamUrl": "http://93.184.10.248/JordanSport/index.m3u8",
+    "category": "sports",
+    "latencyMs": 477
+  },
+  {
+    "id": "c2faad4e0cdfcca1",
+    "name": "KCMN-LD6 (1080p)",
+    "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/QVC_logo_2019.svg/960px-QVC_logo_2019.svg.png",
+    "streamUrl": "https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg02873-kravemedia-mtrspt1-distrotv/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 1689
+  },
+  {
+    "id": "9362b763d9e47f42",
+    "name": "KHL (720p)",
+    "logoUrl": "https://i.imgur.com/RgdHdOV.png",
+    "streamUrl": "http://31.148.48.15/KHL_TV/index.m3u8",
+    "category": "sports",
+    "latencyMs": 605
+  },
+  {
+    "id": "eaae6d9fed45438f",
+    "name": "KHL Prime (720p)",
+    "logoUrl": "https://i.imgur.com/pwxT0ON.png",
+    "streamUrl": "http://31.148.48.15/KHL_TV_HD/index.m3u8",
+    "category": "sports",
+    "latencyMs": 618
+  },
+  {
+    "id": "513257317dbb2c88",
+    "name": "KTV Sport (1080p)",
+    "logoUrl": "https://i.imgur.com/R1hGX1d.png",
+    "streamUrl": "https://kwtspta.cdn.mangomolo.com/sp/smil:sp.stream.smil/chunklist.m3u8",
+    "category": "sports",
+    "latencyMs": 608
+  },
+  {
+    "id": "918b649513e7617a",
+    "name": "KTV Sport Plus (1080p)",
+    "logoUrl": "https://i.imgur.com/l4oX0gf.png",
+    "streamUrl": "https://kwtsplta.cdn.mangomolo.com/spl/smil:spl.stream.smil/chunklist.m3u8",
+    "category": "sports",
+    "latencyMs": 628
+  },
+  {
+    "id": "931e1ec515454021",
+    "name": "LaLiga TV",
+    "logoUrl": "https://i.imgur.com/ilay5Jr.png",
+    "streamUrl": "http://162.19.255.233:8080/play/UNbAl57p9hXZClOu56FCTZID4SFOqZLZ81NguVP-JxM/m3u8",
+    "category": "sports",
+    "latencyMs": 461
+  },
+  {
+    "id": "5e2a88a1339de746",
+    "name": "M-Net Sport (720p)",
+    "logoUrl": "https://i.imgur.com/7k8ar1Z.png",
+    "streamUrl": "http://ares.mnet.mk/hls/mnet-sport.m3u8",
+    "category": "sports",
+    "latencyMs": 1126
+  },
+  {
+    "id": "a191d40d60456a44",
+    "name": "Maasranga TV (1080p)",
+    "logoUrl": "https://i.imgur.com/uVZJMed.png",
+    "streamUrl": "https://owrcovcrpy.gpcdn.net/bpk-tv/1722/output/index.m3u8",
+    "category": "entertainment",
+    "latencyMs": 53
+  },
+  {
+    "id": "3350657c40d2da70",
+    "name": "Madani Channel Bangla (1080p)",
+    "logoUrl": "https://i.imgur.com/vIJTVia.png",
+    "streamUrl": "https://streaming.madanichannel.tv/static/streaming-playlists/hls/d3e49b76-ac06-4689-a641-9200445b647f/master.m3u8",
+    "category": "all",
+    "latencyMs": 2931
+  },
+  {
+    "id": "db05a3404d15a916",
+    "name": "MadeinBO TV (1080p)",
+    "logoUrl": "https://i.imgur.com/47X44DD.png",
+    "streamUrl": "https://srvx1.selftv.video/dmchannel/live/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 1676
+  },
+  {
+    "id": "0a108c8132fb3180",
+    "name": "Match! Strana (720p)",
+    "logoUrl": "https://i.imgur.com/X02s2UE.png",
+    "streamUrl": "http://31.148.48.15/Match_Strana/index.m3u8",
+    "category": "sports",
+    "latencyMs": 596
+  },
+  {
+    "id": "fa9786379ca5267d",
+    "name": "Max Sport 4",
+    "logoUrl": "https://i.imgur.com/7IxXX6f.png",
+    "streamUrl": "http://213.91.179.28:8000/play/a05n",
+    "category": "sports",
+    "latencyMs": 533
+  },
+  {
+    "id": "2c9e7b1fa476bc00",
+    "name": "MMA TV.com (1080p)",
+    "logoUrl": "https://i.imgur.com/QhdxNsB.png",
+    "streamUrl": "https://streams2.sofast.tv/vglive-sk-462904/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 1320
+  },
+  {
+    "id": "611319366b7b90aa",
+    "name": "MMA-TV (576p)",
+    "logoUrl": "https://i.imgur.com/Qxco1eW.png",
+    "streamUrl": "http://31.148.48.15/M1_Global/index.m3u8",
+    "category": "sports",
+    "latencyMs": 618
+  },
+  {
+    "id": "6cdb37ca712161d2",
+    "name": "MNB Sport (1080p)",
+    "logoUrl": "https://i.imgur.com/z854PC3.png",
+    "streamUrl": "https://live.mnb.mn/hls/mnb_sport.stream.m3u8",
+    "category": "sports",
+    "latencyMs": 1519
+  },
+  {
+    "id": "5fe6da8ce5ea7448",
+    "name": "Mohona TV (1080p)",
+    "logoUrl": "https://i.imgur.com/E6doEWH.png",
+    "streamUrl": "https://bozztv.com/rongo/rongo-MohonaTV/index.m3u8",
+    "category": "entertainment",
+    "latencyMs": 1084
+  },
+  {
+    "id": "8588f54033341aaf",
+    "name": "More Than Sports TV (1080p)",
+    "logoUrl": "https://i.imgur.com/SLrjImc.png",
+    "streamUrl": "https://mts1.iptv-playoutcenter.de/mts/mts-web/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 1432
+  },
+  {
+    "id": "6c115800c8f0e68f",
+    "name": "Movie Bangla",
+    "logoUrl": "https://www.jagobd.com/wp-content/uploads/2016/02/moviebangla.jpg?x50681",
+    "streamUrl": "http://alvetv.com/moviebanglatv/8080/index.m3u8",
+    "category": "movies",
+    "latencyMs": 68
+  },
+  {
+    "id": "b36379498024065a",
+    "name": "Multivisión Sports (720p) [Not 24/7]",
+    "logoUrl": "https://i.imgur.com/wLjSSo2.jpg",
+    "streamUrl": "https://stream.digitalgt.com:3605/live/multivisionsportslive.m3u8",
+    "category": "sports",
+    "latencyMs": 1248
+  },
+  {
+    "id": "98d584bfe62afc37",
+    "name": "Nautical Channel (720p)",
+    "logoUrl": "https://i.imgur.com/2ByDyzL.png",
+    "streamUrl": "https://a-cdn.klowdtv.com/live2/nautical_720p/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 324
+  },
+  {
+    "id": "be8226791ef45acf",
+    "name": "NBA TV Canada (1080p)",
+    "logoUrl": "https://upload.wikimedia.org/wikipedia/en/a/a4/NBA_TV_Canada_2020.png",
+    "streamUrl": "http://user.scalecdn.co:8080/live/54706135/09221986/3092.m3u8",
+    "category": "sports",
+    "latencyMs": 1096
+  },
+  {
+    "id": "dd8ad3e1bbda5053",
+    "name": "NHRA TV (1080p)",
+    "logoUrl": "https://i.imgur.com/jZgcm4k.png",
+    "streamUrl": "https://d265y4sk8257lt.cloudfront.net/nh.m3u8",
+    "category": "sports",
+    "latencyMs": 614
+  },
+  {
+    "id": "5d366d13164c2b7e",
+    "name": "NTV (1080p)",
+    "logoUrl": "https://i.imgur.com/l75bDTx.png",
+    "streamUrl": "https://owrcovcrpy.gpcdn.net/bpk-tv/1716/output/index.m3u8",
+    "category": "entertainment",
+    "latencyMs": 72
+  },
+  {
+    "id": "8718069aa2a288aa",
+    "name": "Oman Sports TV (1080p) [Not 24/7]",
+    "logoUrl": "https://i.imgur.com/1omi7p8.png",
+    "streamUrl": "https://partneta.cdn.mgmlcdn.com/omsport/smil:omsport.stream.smil/chunklist.m3u8",
+    "category": "sports",
+    "latencyMs": 592
+  },
+  {
+    "id": "11dffb4428ac2be1",
+    "name": "Ovacion TV (720p) [Not 24/7]",
+    "logoUrl": "https://i.imgur.com/7Xndgxk.png",
+    "streamUrl": "http://cdn2.ujjina.com:1935/iptvovacion1/liveovacion1tv/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 890
+  },
+  {
+    "id": "bfa7b79362c78f13",
+    "name": "Overtime (1080p)",
+    "logoUrl": "https://i.imgur.com/9S9k4IK.png",
+    "streamUrl": "https://d1a8aq6t30gkqj.cloudfront.net/v1/amc_overtime_1/samsungheadend_us/latest/main/hls/playlist_hd.m3u8",
+    "category": "sports",
+    "latencyMs": 857
+  },
+  {
+    "id": "3812a58785edcc70",
+    "name": "Pac 12 Insider (1080p)",
+    "logoUrl": "https://i.imgur.com/736QREy.png",
+    "streamUrl": "https://pac12-firetv.amagi.tv/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 488
+  },
+  {
+    "id": "73372d3cd24c79de",
+    "name": "Peace TV Bangla (1080p)",
+    "logoUrl": "https://i.imgur.com/1ztVXUi.png",
+    "streamUrl": "https://dzkyvlfyge.erbvr.com/PeaceTvBangla/index.m3u8",
+    "category": "all",
+    "latencyMs": 1292
+  },
+  {
+    "id": "ceb767e7d85fb9a1",
+    "name": "Persiana Fight",
+    "logoUrl": "",
+    "streamUrl": "https://fighthls.persiana.live/hls/stream.m3u8",
+    "category": "sports",
+    "latencyMs": 1053
+  },
+  {
+    "id": "2de48664c38d961f",
+    "name": "PGA Tour (1080p)",
+    "logoUrl": "https://i.imgur.com/J0TY9dG.png",
+    "streamUrl": "https://d11k1mnrgfposz.cloudfront.net/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 791
+  },
+  {
+    "id": "b2e61e962d3a2562",
+    "name": "Probashi TV News (1080p)",
+    "logoUrl": "https://i.imgur.com/7oTsfQ4.png",
+    "streamUrl": "http://158.69.24.53:8080/probashi_tv/index.m3u8",
+    "category": "all",
+    "latencyMs": 607
+  },
+  {
+    "id": "ce5b6f6aed3589f4",
+    "name": "QazSport (480p) [Geo-blocked]",
+    "logoUrl": "https://i.imgur.com/UDJ0P5Q.png",
+    "streamUrl": "https://qazsporttv-stream.qazcdn.com/qazsporttv/qazsporttv/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 2948
+  },
+  {
+    "id": "25fc5c945729537b",
+    "name": "RACER International (1080p)",
+    "logoUrl": "https://provider-static.plex.tv/epg/cms/production/dd4e5871-4347-49e3-9ea1-a8770ea9c518/RACER_Intl_logo_1500x1000.png",
+    "streamUrl": "https://amg00378-mavtv-amg00378c2-rakuten-us-1048.playouts.now.amagi.tv/playlist/amg00378-mavtvfast-motorsportsnetwork-rakutenus/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 557
+  },
+  {
+    "id": "8333cc2349614091",
+    "name": "Racer Select (1080p)",
+    "logoUrl": "https://i.imgur.com/CurtYvn.png",
+    "streamUrl": "https://amg00378-amg00378c4-freelivesports-emea-5637.playouts.now.amagi.tv/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 815
+  },
+  {
+    "id": "6d6841d76af825ea",
+    "name": "Rally TV (1080p)",
+    "logoUrl": "https://i.postimg.cc/WtLq2C7c/logo-Rally-Tv1.png",
+    "streamUrl": "https://rally-tv-live.akamaized.net/hls/live/2117704/RallyTV-Pri/master.m3u8",
+    "category": "sports",
+    "latencyMs": 358
+  },
+  {
+    "id": "f05b61370495f00b",
+    "name": "Red Bull TV (1080p)",
+    "logoUrl": "https://images.pluto.tv/channels/5e7cb84a172a0f0007da69e4/colorLogoPNG.png",
+    "streamUrl": "https://rbmn-live.akamaized.net/hls/live/590964/BoRB-AT/master.m3u8",
+    "category": "sports",
+    "latencyMs": 617
+  },
+  {
+    "id": "9f4cef5ac0a0f072",
+    "name": "RTI La 3 (1080p) [Not 24/7]",
+    "logoUrl": "https://i.imgur.com/HdNshgF.png",
+    "streamUrl": "http://69.64.57.208/la3/index.m3u8",
+    "category": "sports",
+    "latencyMs": 578
+  },
+  {
+    "id": "3d383a145f8203bf",
+    "name": "RTV (1080p)",
+    "logoUrl": "https://i.imgur.com/yu8ugqt.png",
+    "streamUrl": "https://bozztv.com/rongo/rongo-RTV/index.m3u8",
+    "category": "entertainment",
+    "latencyMs": 1108
+  },
+  {
+    "id": "a4430d1b3f080efe",
+    "name": "San Marino RTV Sport (720p)",
+    "logoUrl": "https://i.imgur.com/PGm944g.png",
+    "streamUrl": "https://d2hrvno5bw6tg2.cloudfront.net/smrtv-ch02/smil:ch-02.smil/master.m3u8",
+    "category": "sports",
+    "latencyMs": 735
+  },
+  {
+    "id": "1698fde2aa682653",
+    "name": "Sky Racing 1 (720p)",
+    "logoUrl": "https://i.imgur.com/Hf0EiaW.png",
+    "streamUrl": "https://636ffd31f0e12.streamlock.net/RacingStream1/RacingStream1/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 641
+  },
+  {
+    "id": "dc1fedf13a03eb71",
+    "name": "Sky Racing 2 (720p)",
+    "logoUrl": "https://i.imgur.com/TxQvFnQ.png",
+    "streamUrl": "https://636ffd31f0e12.streamlock.net/RacingStream2/RacingStream2/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 656
+  },
+  {
+    "id": "39662bfb50650d6e",
+    "name": "Somoy News TV (1080p)",
+    "logoUrl": "https://i.imgur.com/i54AQic.png",
+    "streamUrl": "https://bozztv.com/rongo/rongo-somoy/index.m3u8",
+    "category": "all",
+    "latencyMs": 1123
+  },
+  {
+    "id": "8ab6a8a0cf069e37",
+    "name": "Sport",
+    "logoUrl": "https://i.imgur.com/2WJE9CM.png",
+    "streamUrl": "https://stream8.cinerama.uz/1004/tracks-v1a1/mono.m3u8",
+    "category": "sports",
+    "latencyMs": 1348
+  },
+  {
+    "id": "e3bc6cb0dc340373",
+    "name": "Sport 1 (1280p)",
+    "logoUrl": "https://i.imgur.com/X5X3tKC.png",
+    "streamUrl": "http://46.149.191.217:9005/play/a017",
+    "category": "sports",
+    "latencyMs": 610
+  },
+  {
+    "id": "a17ddb1f6e9437df",
+    "name": "Sport TV1",
+    "logoUrl": "https://i.imgur.com/YWic36u.png",
+    "streamUrl": "https://test.946985.filegear-sg.me/proxy/b57707d48ea3395e",
+    "category": "sports",
+    "latencyMs": 853
+  },
+  {
+    "id": "9def81bae4ba3072",
+    "name": "Sport TV5",
+    "logoUrl": "https://i.imgur.com/4w4vuad.png",
+    "streamUrl": "https://test.946985.filegear-sg.me/proxy/2e5a3cb38f72a6dd",
+    "category": "sports",
+    "latencyMs": 807
+  },
+  {
+    "id": "7f112e81ee061eed",
+    "name": "Sport TV7",
+    "logoUrl": "https://i.imgur.com/2HmCAm5.png",
+    "streamUrl": "https://test.946985.filegear-sg.me/proxy/a8c7608240dec023",
+    "category": "sports",
+    "latencyMs": 801
+  },
+  {
+    "id": "3545e4b249f31ccd",
+    "name": "Sportitalia (1080p)",
+    "logoUrl": "https://i.imgur.com/0CJGGgd.png",
+    "streamUrl": "https://edge-001.streamup.eu/sportitalia/sihd_abr/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 1037
+  },
+  {
+    "id": "4d4e7f61c3807780",
+    "name": "Sports Connect (720p)",
+    "logoUrl": "https://i.imgur.com/0sNWg54.png",
+    "streamUrl": "https://streamdot.broadpeak.io/cff02a74da64d1459391ce1f72d58f1a/afxpstr/SportsConnect/index.m3u8",
+    "category": "sports",
+    "latencyMs": 1724
+  },
+  {
+    "id": "8f57b4ee4c945b2d",
+    "name": "SPOTV (720p)",
+    "logoUrl": "https://i.imgur.com/HaoVsm5.png",
+    "streamUrl": "http://primestreams.tv:826/live/mookie22/49aV7nBsK4/119515.m3u8",
+    "category": "sports",
+    "latencyMs": 898
+  },
+  {
+    "id": "d1fd308a8a2b2907",
+    "name": "SPOTV 2 (1080p)",
+    "logoUrl": "https://i.imgur.com/YD8fbTH.png",
+    "streamUrl": "http://primestreams.tv:826/live/mookie22/49aV7nBsK4/119516.m3u8",
+    "category": "sports",
+    "latencyMs": 900
+  },
+  {
+    "id": "f33d05f7c0f5f3ba",
+    "name": "Stadium (720p)",
+    "logoUrl": "https://upload.wikimedia.org/wikipedia/en/thumb/5/53/Stadium_%28sports_network%29_logo.svg/960px-Stadium_%28sports_network%29_logo.svg.png",
+    "streamUrl": "https://wurl120sports.global.transmit.live/hls/679a907dce42a042c23ace37/v1/stadium_gracenote/samsung_us/latest/main/hls/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 879
+  },
+  {
+    "id": "55f479047e53e760",
+    "name": "Star Jalsha HD (720p)",
+    "logoUrl": "https://i.imgur.com/IlufzR5.png",
+    "streamUrl": "https://tvsen4.aynaott.com/n64PH4YL/index.m3u8",
+    "category": "entertainment",
+    "latencyMs": 710
+  },
+  {
+    "id": "c6c832574267357b",
+    "name": "Star News (1080p)",
+    "logoUrl": "https://upload.wikimedia.org/wikipedia/en/thumb/d/d5/Star_News_Bangladesh_Logo.svg/1280px-Star_News_Bangladesh_Logo.svg.png",
+    "streamUrl": "https://owrcovcrpy.gpcdn.net/bpk-tv/1710/output/index.m3u8",
+    "category": "all",
+    "latencyMs": 70
+  },
+  {
+    "id": "2d4988ddc23f1188",
+    "name": "Star Sports 1 HD (1080p)",
+    "logoUrl": "https://i.imgur.com/E5jjKHI.png",
+    "streamUrl": "http://103.253.18.58:8000/play/a00m",
+    "category": "sports",
+    "latencyMs": 317
+  },
+  {
+    "id": "7df5d4b0a3bc3f84",
+    "name": "Star Sports 1 Hindi (576p)",
+    "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_STAR_SPORTS_1_HINDI/images/LOGO_HD/image.png",
+    "streamUrl": "http://103.253.18.58:8000/play/a03o",
+    "category": "sports",
+    "latencyMs": 308
+  },
+  {
+    "id": "cc594b679b8a6c88",
+    "name": "Star Sports 2 Hindi HD (1080p)",
+    "logoUrl": "https://i.imgur.com/kHerF19.png",
+    "streamUrl": "http://103.157.248.140:8000/play/a01m/index.m3u8",
+    "category": "sports",
+    "latencyMs": 330
+  },
+  {
+    "id": "8a0fc163cc46c614",
+    "name": "Strongman (720p)",
+    "logoUrl": "https://i.imgur.com/bVQBF6R.png",
+    "streamUrl": "https://rightsboosterltd-scl-1-eu.rakuten.wurl.tv/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 1061
+  },
+  {
+    "id": "f53fc453eb645311",
+    "name": "Strongman Champions League (720p)",
+    "logoUrl": "https://i.imgur.com/bVQBF6R.png",
+    "streamUrl": "https://rightsboosterltd-scl-2-eu.rakuten.wurl.tv/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 887
+  },
+  {
+    "id": "b0f86cc87ee25065",
+    "name": "SuperTennis (1080p)",
+    "logoUrl": "https://upload.wikimedia.org/wikipedia/it/thumb/6/6a/SuperTennis_-_Logo_2016.svg/960px-SuperTennis_-_Logo_2016.svg.png",
+    "streamUrl": "https://live-embed.supertennix.hiway.media/restreamer/supertennix_client/gpu-a-c0-16/restreamer/outgest/aa3673f1-e178-44a9-a947-ef41db73211a/manifest.m3u8",
+    "category": "sports",
+    "latencyMs": 999
+  },
+  {
+    "id": "5ee7efd5f9d0cb81",
+    "name": "Suspilne. Sport",
+    "logoUrl": "https://i.imgur.com/16IhU0M.png",
+    "streamUrl": "https://iptv.prosto.tv/ch112/tracks-v2a1/mono.m3u8?21yo=0&e=1783247457&id=921233&ip=178.136.40.86&live=1&secret=9szoe89y&st=jPS6nYqNZLDECF8uSDa74g",
+    "category": "sports",
+    "latencyMs": 1430
+  },
+  {
+    "id": "0f8f202c02641add",
+    "name": "Swerve Combat (1080p)",
+    "logoUrl": "https://i.imgur.com/GT0Yi2T.png",
+    "streamUrl": "https://linear-253.frequency.stream/mt/roku/253/hls/master/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 1166
+  },
+  {
+    "id": "457f602d7ecbeb7f",
+    "name": "Talent TV (720p)",
+    "logoUrl": "https://talenttv.lk/logo-footer.png",
+    "streamUrl": "http://live.talenttv.lk:8080/hls/x8kd5n3tm8e8lsv/index.m3u8",
+    "category": "sports",
+    "latencyMs": 1021
+  },
+  {
+    "id": "3af457c68882dcc0",
+    "name": "Tele Rebelde (480p) [Not 24/7]",
+    "logoUrl": "https://i.imgur.com/M6wZzuz.png",
+    "streamUrl": "https://tv.picta.cu/telerebelde/telerebelde_1.m3u8",
+    "category": "sports",
+    "latencyMs": 1695
+  },
+  {
+    "id": "15d4273531d7346c",
+    "name": "Teledeporte (720p) [Geo-blocked]",
+    "logoUrl": "https://i.ibb.co/0jxLdjnY/TDP.png",
+    "streamUrl": "https://rtvelivestream.rtve.es/rtvesec/tdp/tdp_main.m3u8",
+    "category": "sports",
+    "latencyMs": 1302
+  },
+  {
+    "id": "f706d258f87e7b7e",
+    "name": "Teletrak (720p)",
+    "logoUrl": "https://i.imgur.com/NoJvlig.png",
+    "streamUrl": "https://unlimited6-cl.dps.live/sportinghd/sportinghd.smil/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 2089
+  },
+  {
+    "id": "f0e39dfdc3b44220",
+    "name": "Tennis Channel (1080p)",
+    "logoUrl": "https://i.imgur.com/tsljAnY.png",
+    "streamUrl": "https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg01444-tennischannelth-tennischannelnl-samsungnl/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 1186
+  },
+  {
+    "id": "ce2974882c5bef23",
+    "name": "Tigo Sports (1080p)",
+    "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Tigo_Sports_2025.png/960px-Tigo_Sports_2025.png",
+    "streamUrl": "http://162.19.255.233:8080/play/UNbAl57p9hXZClOu56FCTf_5weWAERKDgrt9JpvlAiI/m3u8",
+    "category": "sports",
+    "latencyMs": 459
+  },
+  {
+    "id": "7a363a8cfb5be964",
+    "name": "Tigo Sports+",
+    "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Tigo_Sports_2025.png/960px-Tigo_Sports_2025.png",
+    "streamUrl": "http://45.170.130.224:8000/play/a04i/index.m3u8",
+    "category": "sports",
+    "latencyMs": 680
+  },
+  {
+    "id": "432ede4fb9b1b731",
+    "name": "TJK TV (1080p)",
+    "logoUrl": "https://i.imgur.com/3zHdkYG.png",
+    "streamUrl": "https://tjktv-live.tjk.org/tjktv.m3u8",
+    "category": "sports",
+    "latencyMs": 1320
+  },
+  {
+    "id": "1a46b944f1d8455f",
+    "name": "Tour Spot TV (1280p) [Not 24/7]",
+    "logoUrl": "https://imgur.com/khj869k.png",
+    "streamUrl": "https://fox.hostlagarto.com:8081/toursporttv/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 3098
+  },
+  {
+    "id": "4253522cbbdc8771",
+    "name": "TR Sport (480p)",
+    "logoUrl": "https://i.imgur.com/ELXmaqg.png",
+    "streamUrl": "https://livetr.teleromagna.it/mia/live/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 1880
+  },
+  {
+    "id": "7eca5c77be5beff0",
+    "name": "Trace Sport Stars (Australia) (1080p)",
+    "logoUrl": "https://i.imgur.com/FabFP5A.png",
+    "streamUrl": "https://lightning-tracesport-samsungau.amagi.tv/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 1310
+  },
+  {
+    "id": "01de1439c08a2451",
+    "name": "Türkmenistan Sport (406p) [Not 24/7]",
+    "logoUrl": "https://i.imgur.com/n6vITLu.png",
+    "streamUrl": "https://alpha.tv.online.tm/hls/ch004.m3u8",
+    "category": "sports",
+    "latencyMs": 1330
+  },
+  {
+    "id": "254a414cea732e93",
+    "name": "TV Cuatro 4.3 (1080p)",
+    "logoUrl": "https://i.imgur.com/Of044Jx.png",
+    "streamUrl": "https://5ca3e84a76d30.streamlock.net/tv43gto/tv43gto.smil/.m3u8",
+    "category": "sports",
+    "latencyMs": 782
+  },
+  {
+    "id": "160cf362587052db",
+    "name": "TVMsport+ (1080p)",
+    "logoUrl": "https://i.imgur.com/YIreFti.png",
+    "streamUrl": "https://stream.smashmalta.com:25463/live/webplayer/livestream/29.m3u8",
+    "category": "sports",
+    "latencyMs": 987
+  },
+  {
+    "id": "fb613fe3b8f43b98",
+    "name": "TVP Sport (1080p)",
+    "logoUrl": "https://i.imgur.com/JUZDOCO.png",
+    "streamUrl": "https://estreams.tv.nej.cz/dash/CH_TVP_SPORT_Portable.ism/playlist.mpd",
+    "category": "sports",
+    "latencyMs": 1454
+  },
+  {
+    "id": "f34c4697cbc789fc",
+    "name": "TVR Sport",
+    "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/TVR_Sport_Logo_2023.svg/960px-TVR_Sport_Logo_2023.svg.png",
+    "streamUrl": "https://tvr-sport.lg.mncdn.com/tvrsport/smil:tvrsport.smil/chunklist_b5160000.m3u8",
+    "category": "sports",
+    "latencyMs": 849
+  },
+  {
+    "id": "d6ea44688db4b939",
+    "name": "TVS Bowling Network (720p)",
+    "logoUrl": "https://www.watchyour.tv/channels/logo/tvs-bowling-network.jpg",
+    "streamUrl": "https://rpn.bozztv.com/gusa/gusa-tvsbowling/index.m3u8",
+    "category": "sports",
+    "latencyMs": 1492
+  },
+  {
+    "id": "47da818de8f79e69",
+    "name": "TVS Boxing (360p)",
+    "logoUrl": "https://i.imgur.com/30ZoF75.png",
+    "streamUrl": "https://rpn.bozztv.com/gusa/gusa-tvsboxing/index.m3u8",
+    "category": "sports",
+    "latencyMs": 1524
+  },
+  {
+    "id": "f06829d636a831d1",
+    "name": "TVS Classic Sports (360p)",
+    "logoUrl": "https://i.imgur.com/auR0Mi6.png",
+    "streamUrl": "https://rpn.bozztv.com/gusa/gusa-tvs/index.m3u8",
+    "category": "sports",
+    "latencyMs": 1559
+  },
+  {
+    "id": "f5c5d7431cb6caf7",
+    "name": "TVS Sports (720p) [Not 24/7]",
+    "logoUrl": "https://i.imgur.com/Lwwq62E.png",
+    "streamUrl": "https://rpn.bozztv.com/gusa/gusa-tvssports/index.m3u8",
+    "category": "sports",
+    "latencyMs": 1483
+  },
+  {
+    "id": "1b42717ed58c086b",
+    "name": "TVS Sports Bureau (720p)",
+    "logoUrl": "",
+    "streamUrl": "https://rpn.bozztv.com/gusa/gusa-tvssportsbureau/index.m3u8",
+    "category": "sports",
+    "latencyMs": 1506
+  },
+  {
+    "id": "bc74bcaa9e707289",
+    "name": "TVS Turbo (360p)",
+    "logoUrl": "https://i.imgur.com/7zYIbU1.png",
+    "streamUrl": "https://rpn.bozztv.com/gusa/gusa-tvsturbo/index.m3u8",
+    "category": "sports",
+    "latencyMs": 1535
+  },
+  {
+    "id": "1391b8239ecd16d4",
+    "name": "TVS Women Sports (720p)",
+    "logoUrl": "https://i.imgur.com/8hC4PfF.png",
+    "streamUrl": "https://rpn.bozztv.com/gusa/gusa-tvswsn/index.m3u8",
+    "category": "sports",
+    "latencyMs": 1527
+  },
+  {
+    "id": "31d4d9bd135051af",
+    "name": "TyC Sports (1080p)",
+    "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/TyC_Sports_logo.svg/960px-TyC_Sports_logo.svg.png",
+    "streamUrl": "https://amg26268-amg26268c14-freelivesports-emea-10267.playouts.now.amagi.tv/ts-us-e2-n2/playlist/amg26268-sportsstudio-tycsports-freelivesportsemea/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 503
+  },
+  {
+    "id": "741148abc15bec8e",
+    "name": "TyC Sports USA",
+    "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/TyC_Sports_logo.svg/960px-TyC_Sports_logo.svg.png",
+    "streamUrl": "http://45.170.130.224:8000/play/a020/index.m3u8",
+    "category": "sports",
+    "latencyMs": 687
+  },
+  {
+    "id": "d7bee0bef7946c7c",
+    "name": "Unbeaten Sports Channel (1080p)",
+    "logoUrl": "https://i.imgur.com/LmkNt3v.png",
+    "streamUrl": "https://d1t5afz6qed3xk.cloudfront.net/Unbeaten.m3u8",
+    "category": "sports",
+    "latencyMs": 576
+  },
+  {
+    "id": "0c8937d2e47cc43b",
+    "name": "viju+ Sport",
+    "logoUrl": "https://i.imgur.com/fXESG0l.png",
+    "streamUrl": "https://stream8.cinerama.uz/1229/tracks-v1a1/mono.m3u8",
+    "category": "sports",
+    "latencyMs": 872
+  },
+  {
+    "id": "2f619255a5a29fc9",
+    "name": "VTV6 (1080p)",
+    "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/VTV6_logo_2026_final.svg/960px-VTV6_logo_2026_final.svg.png",
+    "streamUrl": "https://live.fptplay53.net/live/media/vtv6/live247-hls-avc/index.m3u8",
+    "category": "sports",
+    "latencyMs": 1433
+  },
+  {
+    "id": "0e3ed3150690197a",
+    "name": "W14DK-D 14.5 All Sports Television Network",
+    "logoUrl": "https://i.imgur.com/D4mZ8ll.png",
+    "streamUrl": "https://2-fss-2.streamhoster.com/pl_118/204972-2205186-1/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 709
+  },
+  {
+    "id": "6ec612897f93d39a",
+    "name": "Willow Sports (1080p)",
+    "logoUrl": "https://provider-static.plex.tv/epg/cms/production/acf3d1d8-c53e-49ca-86e9-0d9410b106b4/Willow_Sports_dark_Background_1500_1000_color.png",
+    "streamUrl": "https://d36r8jifhgsk5j.cloudfront.net/Willow_TV1080p.m3u8",
+    "category": "sports",
+    "latencyMs": 517
+  },
+  {
+    "id": "2a14279c4b0b8c88",
+    "name": "World of Freesports (1080p)",
+    "logoUrl": "https://i.imgur.com/lta5Mog.png",
+    "streamUrl": "https://mainstreammedia-worldoffreesportsintl-rakuten.amagi.tv/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 567
+  },
+  {
+    "id": "207d6940d6e40c1a",
+    "name": "World Poker Tour (1080p)",
+    "logoUrl": "https://i.imgur.com/98kLMjj.png",
+    "streamUrl": "https://amg00477-samsungelectron-worldpokertour-samsunguk-81igb.amagi.tv/playlist/amg00477-samsungelectron-worldpokertour-samsunguk/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 750
+  },
+  {
+    "id": "62613956cbddea69",
+    "name": "Ziggo Sport",
+    "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Ziggo_Sport_logo.svg/960px-Ziggo_Sport_logo.svg.png",
+    "streamUrl": "http://86.87.15.10:8004/play/a02d/index.m3u8",
+    "category": "sports",
+    "latencyMs": 478
+  },
+  {
+    "id": "3aded4f74bfe1585",
+    "name": "Ziggo Sport 2",
+    "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Ziggo_Sport_logo.svg/960px-Ziggo_Sport_logo.svg.png",
+    "streamUrl": "http://86.87.15.10:8004/play/a02b/index.m3u8",
+    "category": "sports",
+    "latencyMs": 498
+  },
+  {
+    "id": "b49179c8836ff9be",
+    "name": "Ziggo Sport 3",
+    "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Ziggo_Sport_logo.svg/960px-Ziggo_Sport_logo.svg.png",
+    "streamUrl": "http://86.87.15.10:8003/play/a02k/index.m3u8",
+    "category": "sports",
+    "latencyMs": 475
+  },
+  {
+    "id": "43622685408ed4f0",
+    "name": "Астрахань.Ru Sport (720p)",
+    "logoUrl": "https://i.imgur.com/BKaEtqL.png",
+    "streamUrl": "https://streaming.astrakhan.ru/astrakhanrusporthd/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 1489
+  },
+  {
+    "id": "2fa67443393b86fc",
+    "name": "Беларусь 5 (1080p) [Not 24/7]",
+    "logoUrl": "https://i.imgur.com/NJsRFud.png",
+    "streamUrl": "https://ngtrk.dc.beltelecom.by/ngtrk/smil:belarus5.smil/playlist.m3u8",
+    "category": "sports",
+    "latencyMs": 1435
+  },
+  {
+    "id": "90079c34c769b425",
+    "name": "Русский Экстрим (576p)",
+    "logoUrl": "https://i.imgur.com/hJK7mOW.png",
+    "streamUrl": "http://31.148.48.15/Russkiy_Ekstrim/index.m3u8",
+    "category": "sports",
+    "latencyMs": 606
+  },
+  {
+    "id": "62bbbdee2d8a977e",
+    "name": "Футбол (720p)",
+    "logoUrl": "https://i.imgur.com/pEuaZVx.png",
+    "streamUrl": "http://31.148.48.15/Futbol_HD/index.m3u8",
+    "category": "sports",
+    "latencyMs": 600
+  }
+]
