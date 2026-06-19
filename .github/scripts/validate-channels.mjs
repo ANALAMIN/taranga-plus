@@ -14,13 +14,16 @@ const ROOT = join(__dirname, '..', '..');
 
 // ── Sources ──────────────────────────────────────────────
 const SOURCES = [
+  // Bangladesh specific (primary)
   { id: 'iptv-org-bd', url: 'https://iptv-org.github.io/iptv/countries/bd.m3u' },
   { id: 'iptv-org-sports', url: 'https://iptv-org.github.io/iptv/categories/sports.m3u' },
-  { id: 'free-iptv-bd', url: 'https://raw.githubusercontent.com/Free-IPTV/Countries/master/BD.m3u' },
+  { id: 'sacuar-bangla', url: 'https://raw.githubusercontent.com/sacuar/MyIPTV/main/bangla.m3u' },
+  // India (for cricket, Bollywood - secondary)
+  { id: 'iptv-org-india', url: 'https://iptv-org.github.io/iptv/countries/in.m3u' },
 ];
 
-const TIMEOUT_MS = 4000;
-const BATCH_SIZE = 50;
+const TIMEOUT_MS = 3000;
+const BATCH_SIZE = 100;
 const VALID_CATEGORIES = ['all', 'sports', 'movies', 'music', 'entertainment', 'kids', 'documentary'];
 
 // ── M3U Parser ───────────────────────────────────────────
@@ -127,11 +130,12 @@ function mapCategory(rawCategory, sourceId) {
   if (!rawCategory) return 'all';
   const c = rawCategory.toLowerCase();
   if (c.includes('sport')) return 'sports';
-  if (c.includes('movie') || c.includes('cinema')) return 'movies';
-  if (c.includes('music')) return 'music';
-  if (c.includes('kid') || c.includes('child') || c.includes('cartoon')) return 'kids';
-  if (c.includes('doc')) return 'documentary';
-  if (c.includes('entertain') || c.includes('general')) return 'entertainment';
+  if (c.includes('movie') || c.includes('cinema') || c.includes('film')) return 'movies';
+  if (c.includes('music') || c.includes('gaan')) return 'music';
+  if (c.includes('kid') || c.includes('child') || c.includes('cartoon') || c.includes('duronto')) return 'kids';
+  if (c.includes('doc') || c.includes('nature')) return 'documentary';
+  if (c.includes('entertain') || c.includes('general') || c.includes('natore')) return 'entertainment';
+  if (c.includes('news') || c.includes('bangla')) return 'all';
   return 'all';
 }
 
