@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taranga+ Preview</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #080808; 
+      color: #F5F5F5; 
+      min-height: 100vh;
+    }
+    
+    /* Topbar */
+    .topbar {
+      height: 64px;
+      padding: 0 32px;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+    }
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      background: linear-gradient(to right, #fff, rgba(255,255,255,0.6));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo svg { 
+      width: 28px; 
+      height: 28px; 
+      color: #E50914;
+      filter: drop-shadow(0 0 12px rgba(229,9,20,0.6));
+    }
+    .search-box {
+      position: relative;
+      width: 100%;
+      max-width: 440px;
+    }
+    .search-box input {
+      width: 100%;
+      background: rgba(28,28,30,0.6);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 999px;
+      padding: 8px 40px 8px 40px;
+      color: white;
+      font-size: 14px;
+      outline: none;
+    }
+    .search-box input:focus {
+      border-color: rgba(229,9,20,0.3);
+    }
+    .search-box svg {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      color: rgba(255,255,255,0.4);
+    }
+    
+    /* Layout */
+    .layout {
+      display: flex;
+      height: calc(100vh - 64px);
+    }
+    
+    /* Sidebar */
+    .sidebar {
+      width: 120px;
+      background: #050505;
+      border-right: 1px solid #151515;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 20px;
+      gap: 24px;
+      box-shadow: 8px 0 32px rgba(0,0,0,0.6);
+    }
+    .sidebar-btn {
+      width: 72px;
+      height: 72px;
+      border-radius: 16px;
+      background: radial-gradient(circle 80px at 80% -10%, #ffffff, #181b1b);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+    }
+    .sidebar-btn:hover {
+      transform: scale(1.08);
+    }
+    .sidebar-btn.active {
+      transform: scale(1.1);
+    }
+    .sidebar-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 65%;
+      height: 60%;
+      border-radius: 120px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.23);
+    }
+    .sidebar-btn.active::before {
+      box-shadow: 0 0 40px rgba(255,255,255,0.38);
+    }
+    .sidebar-btn::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 50%;
+      width: 50px;
+      border-radius: 17px;
+      background: radial-gradient(circle 60px at 0% 100%, #E50914, rgba(229,9,20,0.3), transparent);
+      transition: all 0.3s;
+    }
+    .sidebar-btn.active::after {
+      width: 70px;
+    }
+    .sidebar-btn .icon {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 14px;
+      background: radial-gradient(circle 80px at 80% -50%, #777, #0f1111);
+    }
+    .sidebar-btn .icon svg {
+      width: 32px;
+      height: 32px;
+      color: white;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+    }
+    
+    /* Main Content */
+    .main {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    /* Gradient Background */
+    .gradient-bg {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      z-index: 0;
+    }
+    .gradient-bars {
+      display: flex;
+      height: 100%;
+    }
+    .gradient-bar {
+      flex: 1;
+      background: linear-gradient(to top, rgba(229,9,20,1), transparent);
+      transform-origin: bottom;
+      animation: pulseBar 2s ease-in-out infinite alternate;
+    }
+    @keyframes pulseBar {
+      0% { transform: scaleY(var(--scale)); }
+      100% { transform: scaleY(calc(var(--scale) * 0.7)); }
+    }
+    
+    /* Channel Grid */
+    .channel-grid {
+      position: relative;
+      z-index: 10;
+      padding: 24px;
+      height: 100%;
+      overflow-y: auto;
+    }
+    .channel-grid::-webkit-scrollbar { display: none; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+    }
+    
+    /* Channel Card */
+    .channel-card {
+      aspect-ratio: 16/10;
+      border-radius: 16px;
+      cursor: pointer;
+      transition: all 0.5s;
+      position: relative;
+      background: radial-gradient(circle 120px at 80% -10%, #ffffff, #181b1b);
+    }
+    .channel-card:hover {
+      transform: scale(1.05);
+      z-index: 10;
+    }
+    .channel-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 65%;
+      height: 60%;
+      border-radius: 120px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.23);
+      transition: all 0.5s;
+    }
+    .channel-card:hover::before {
+      box-shadow: 0 0 40px rgba(255,255,255,0.38);
+    }
+    .channel-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 60%;
+      width: 40%;
+      border-radius: 17px;
+      background: radial-gradient(circle 80px at 0% 100%, #E50914, rgba(229,9,20,0.3), transparent);
+      transition: all 0.5s;
+    }
+    .channel-card:hover::after {
+      width: 70%;
+    }
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: 14px;
+      background: radial-gradient(circle 120px at 80% -50%, #777, #0f1111);
+      z-index: 10;
+      overflow: hidden;
+    }
+    .channel-card:hover .card-inner {
+      transform: scale(1.05);
+    }
+    .channel-card img {
+      width: 65%;
+      height: 65%;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+      transition: all 0.5s;
+    }
+    .channel-card:hover img {
+      opacity: 1;
+      transform: scale(1.1);
+      filter: drop-shadow(0 0 15px rgba(255,255,255,0.6));
+    }
+    .channel-name {
+      position: absolute;
+      bottom: 8px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 10px;
+      color: rgba(255,255,255,0.5);
+      padding: 0 8px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    /* Loading */
+    .loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      font-size: 18px;
+      color: rgba(255,255,255,0.5);
+    }
+    
+    /* Status Badge */
+    .status-badge {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 12px 20px;
+      z-index: 100;
+      font-size: 13px;
+    }
+    .status-badge .dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #22C55E;
+      margin-right: 8px;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 4V20M4 8H20M12 20C15 20 18 19 20 18"/>
+      </svg>
+      <span>Taranga+</span>
+    </div>
+    <div class="search-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/>
+        <path d="m21 21-4.3-4.3"/>
+      </svg>
+      <input type="text" placeholder="Discover something new..." id="searchInput">
+    </div>
+    <div></div>
+  </header>
+
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-btn active" data-category="all" title="All Channels">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7"/>
+            <rect x="14" y="3" width="7" height="7"/>
+            <rect x="14" y="14" width="7" height="7"/>
+            <rect x="3" y="14" width="7" height="7"/>
+          </svg>
+        </div>
+      </div>
+      <div class="sidebar-btn" data-category="sports" title="Sports">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="5" r="3"/>
+            <path d="M6.5 8a2 2 0 0 0-1.905 1.46L2.1 18.23A2 2 0 0 0 4 21h16a2 2 0 0 0 1.9-2.77l-2.495-8.77A2 2 0 0 0 17.5 8z"/>
+          </svg>
+        </div>
+      </div>
+      <div class="sidebar-btn" data-category="movies" title="Movies">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/>
+            <line x1="7" y1="2" x2="7" y2="22"/>
+            <line x1="17" y1="2" x2="17" y2="22"/>
+            <line x1="2" y1="12" x2="22" y2="12"/>
+            <line x1="2" y1="7" x2="7" y2="7"/>
+            <line x1="2" y1="17" x2="7" y2="17"/>
+            <line x1="17" y1="7" x2="22" y2="7"/>
+            <line x1="17" y1="17" x2="22" y2="17"/>
+          </svg>
+        </div>
+      </div>
+      <div class="sidebar-btn" data-category="music" title="Music">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 18V5l12-2v13"/>
+            <circle cx="6" cy="18" r="3"/>
+            <circle cx="18" cy="16" r="3"/>
+          </svg>
+        </div>
+      </div>
+      <div class="sidebar-btn" data-category="kids" title="Kids">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+          </svg>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+      <div class="gradient-bg">
+        <div class="gradient-bars" id="gradientBars"></div>
+      </div>
+      <div class="channel-grid">
+        <div class="grid" id="channelGrid">
+          <div class="loading">Loading channels...</div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Status Badge -->
+  <div class="status-badge" id="statusBadge">
+    <span class="dot"></span>
+    <span id="statusText">Loading...</span>
+  </div>
+
+  <script>
+    // Generate gradient bars
+    const gradientBars = document.getElementById('gradientBars');
+    for (let i = 0; i < 11; i++) {
+      const bar = document.createElement('div');
+      bar.className = 'gradient-bar';
+      const position = i / 10;
+      const height = 30 + 70 * Math.pow(Math.abs(position - 0.5) * 2, 1.2);
+      bar.style.setProperty('--scale', height / 100);
+      bar.style.animationDelay = `${i * 0.1}s`;
+      gradientBars.appendChild(bar);
+    }
+
+    // Fetch channels
+    const GITHUB_URL = 'https://raw.githubusercontent.com/ANALAMIN/taranga-plus/master/data/channels.json';
+    let allChannels = [];
+    let currentCategory = 'all';
+
+    async function loadChannels() {
+      try {
+        const res = await fetch(GITHUB_URL);
+        allChannels = await res.json();
+        document.getElementById('statusText').textContent = `${allChannels.length} channels loaded`;
+        renderChannels(allChannels);
+      } catch (e) {
+        document.getElementById('statusText').textContent = 'Using mock data';
+        renderChannels(getMockChannels());
+      }
+    }
+
+    function getMockChannels() {
+      return [
+        { id: '1', name: 'Gazi TV', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/GTV_Logo.png/200px-GTV_Logo.png', category: 'sports' },
+        { id: '2', name: 'T Sports', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/T_Sports_logo.svg/200px-T_Sports_logo.svg.png', category: 'sports' },
+        { id: '3', name: 'Sony Six', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Sony_Sports_Network_logo.svg/200px-Sony_Sports_Network_logo.svg.png', category: 'sports' },
+        { id: '4', name: 'BTV National', logoUrl: '', category: 'all' },
+        { id: '5', name: 'Channel i', logoUrl: '', category: 'entertainment' },
+        { id: '6', name: 'NTV', logoUrl: '', category: 'entertainment' },
+        { id: '7', name: 'ATN Bangla', logoUrl: '', category: 'entertainment' },
+        { id: '8', name: 'Banglavision', logoUrl: '', category: 'entertainment' },
+        { id: '9', name: 'Duronto TV', logoUrl: '', category: 'kids' },
+        { id: '10', name: 'Cartoon Network', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Cartoon_Network_2010_logo.svg/200px-Cartoon_Network_2010_logo.svg.png', category: 'kids' },
+        { id: '11', name: 'Nat Geo', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/NatGeo_logo.svg/200px-NatGeo_logo.svg.png', category: 'documentary' },
+        { id: '12', name: 'Sony TEN 3', logoUrl: '', category: 'sports' },
+      ];
+    }
+
+    function renderChannels(channels) {
+      const grid = document.getElementById('channelGrid');
+      const filtered = currentCategory === 'all' 
+        ? channels 
+        : channels.filter(c => c.category === currentCategory);
+      
+      grid.innerHTML = filtered.map(ch => `
+        <div class="channel-card" title="${ch.name}">
+          <div class="card-inner">
+            ${ch.logoUrl 
+              ? `<img src="${ch.logoUrl}" alt="${ch.name}" loading="lazy" onerror="this.style.display='none'">`
+              : `<span style="color:rgba(255,255,255,0.6);font-weight:bold;font-size:14px">${ch.name.charAt(0)}</span>`
+            }
+            <span class="channel-name">${ch.name}</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Category filter
+    document.querySelectorAll('.sidebar-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentCategory = btn.dataset.category;
+        renderChannels(allChannels);
+      });
+    });
+
+    // Search
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase();
+      const filtered = allChannels.filter(c => c.name.toLowerCase().includes(query));
+      renderChannels(filtered);
+    });
+
+    loadChannels();
+  </script>
+</body>
+</html>
