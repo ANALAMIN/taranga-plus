@@ -5,7 +5,7 @@
     "logoUrl": "https://i.imgur.com/Lv53nh4.png",
     "streamUrl": "https://30a-tv.com/feeds/vidaa/golf.m3u8",
     "category": "sports",
-    "latencyMs": 540
+    "latencyMs": 604
   },
   {
     "id": "0abd47dbb4eedb4e",
@@ -13,7 +13,7 @@
     "logoUrl": "https://i.imgur.com/ZhkZzLf.png",
     "streamUrl": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/aspor/aspor.m3u8",
     "category": "sports",
-    "latencyMs": 915
+    "latencyMs": 893
   },
   {
     "id": "305e08b4004f8211",
@@ -21,7 +21,7 @@
     "logoUrl": "https://i.imgur.com/V6Kaqha.png",
     "streamUrl": "https://raycom-accdn-firetv.amagi.tv/playlist.m3u8",
     "category": "sports",
-    "latencyMs": 354
+    "latencyMs": 304
   },
   {
     "id": "699de1f0910731ef",
@@ -29,7 +29,7 @@
     "logoUrl": "https://i.imgur.com/U8cHMOt.png",
     "streamUrl": "https://webstream.multistream.it/memfs/e2cb3629-c1a2-495b-b43a-9eb386f04ed8.m3u8",
     "category": "sports",
-    "latencyMs": 860
+    "latencyMs": 781
   },
   {
     "id": "f29e6e52e5d0975d",
@@ -37,7 +37,7 @@
     "logoUrl": "https://i.imgur.com/pxFamLr.png",
     "streamUrl": "https://strhls.streamakaci.tv/ortb/ortb2-multi/playlist.m3u8",
     "category": "sports",
-    "latencyMs": 784
+    "latencyMs": 737
   },
   {
     "id": "afd4bff68bf9a64d",
@@ -45,7 +45,7 @@
     "logoUrl": "https://i0.wp.com/africa24tv.com/wp-content/uploads/2023/12/LOGO-AFRICASPORT-4-HD-sans-fond.png?fit=512%2C107&ssl=1",
     "streamUrl": "https://africa24.vedge.infomaniak.com/livecast/ik:africa24sport/manifest.m3u8",
     "category": "sports",
-    "latencyMs": 2143
+    "latencyMs": 2080
   },
   {
     "id": "8640f135cc0befbe",
@@ -53,7 +53,7 @@
     "logoUrl": "https://i.imgur.com/DrrlxTO.png",
     "streamUrl": "https://imn-live.esite-lab.com/hls/iraqia-sports-1.m3u8",
     "category": "sports",
-    "latencyMs": 1238
+    "latencyMs": 1076
   },
   {
     "id": "169bc5a940abe921",
@@ -61,7 +61,7 @@
     "logoUrl": "https://i.imgur.com/iDL65Wu.png",
     "streamUrl": "https://liveeu-gcp.alkassdigital.net/alkass4-p/main.m3u8",
     "category": "sports",
-    "latencyMs": 1060
+    "latencyMs": 1327
   },
   {
     "id": "32a0ac68ee9f49ad",
@@ -69,7 +69,7 @@
     "logoUrl": "https://i.imgur.com/10mmlha.png",
     "streamUrl": "https://liveeu-gcp.alkassdigital.net/alkass1-p/main.m3u8",
     "category": "sports",
-    "latencyMs": 1052
+    "latencyMs": 1078
   },
   {
     "id": "5c403819af685470",
@@ -77,7 +77,7 @@
     "logoUrl": "https://shoof.alkass.net/assets/images/shoof.png",
     "streamUrl": "https://liveeu-gcp.alkassdigital.net/shooflive/main.m3u8",
     "category": "sports",
-    "latencyMs": 1062
+    "latencyMs": 1078
   },
   {
     "id": "83375d13bb4907be",
@@ -85,7 +85,7 @@
     "logoUrl": "https://shoof.alkass.net/assets/images/shoof2.png",
     "streamUrl": "https://liveeu-gcp.alkassdigital.net/shooflive2/main.m3u8",
     "category": "sports",
-    "latencyMs": 1311
+    "latencyMs": 1092
   },
   {
     "id": "7a3ca8ac3820b7d0",
@@ -93,7 +93,7 @@
     "logoUrl": "https://i.imgur.com/CrPSPSC.png",
     "streamUrl": "https://liveeu-gcp.alkassdigital.net/alkass6-p/main.m3u8",
     "category": "sports",
-    "latencyMs": 1069
+    "latencyMs": 1076
   },
   {
     "id": "38a4024c67c8bc4e",
@@ -101,7 +101,7 @@
     "logoUrl": "https://i.imgur.com/d57BdFh.png",
     "streamUrl": "https://liveeu-gcp.alkassdigital.net/alkass3-p/main.m3u8",
     "category": "sports",
-    "latencyMs": 1058
+    "latencyMs": 1080
   },
   {
     "id": "e56e57c8d0e06d51",
@@ -109,7 +109,7 @@
     "logoUrl": "https://i.imgur.com/8w61kFX.png",
     "streamUrl": "https://liveeu-gcp.alkassdigital.net/alkass2-p/main.m3u8",
     "category": "sports",
-    "latencyMs": 1284
+    "latencyMs": 1072
   },
   {
     "id": "6a08870703ff13c5",
@@ -117,7 +117,7 @@
     "logoUrl": "https://dtil.tmsimg.com/assets/GNLZZGG00260YG8.png?lock=720x540",
     "streamUrl": "http://103.175.73.12:8080/live/271/271_0.m3u8",
     "category": "movies",
-    "latencyMs": 432
+    "latencyMs": 450
   },
   {
     "id": "5eb87ff2e549ae44",
@@ -125,7 +125,7 @@
     "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_ZEE_ANMOL_CINEMA_2/images/LOGO_HD/LOGO_HD_image.png",
     "streamUrl": "http://103.175.73.12:8080/live/257/257_0.m3u8",
     "category": "movies",
-    "latencyMs": 459
+    "latencyMs": 447
   },
   {
     "id": "62d5cb2ec78c81d5",
@@ -133,7 +133,7 @@
     "logoUrl": "https://dtil.tmsimg.com/assets/GNLZZGG00260HWS.png?lock=720x540",
     "streamUrl": "http://103.175.73.12:8080/live/256/256_0.m3u8",
     "category": "entertainment",
-    "latencyMs": 433
+    "latencyMs": 463
   },
   {
     "id": "3ba0b41ae47f77c4",
@@ -141,7 +141,7 @@
     "logoUrl": "https://i.imgur.com/5abTrJU.png",
     "streamUrl": "https://nl1.nghk.ai/ArenaFight/index.m3u8",
     "category": "sports",
-    "latencyMs": 1208
+    "latencyMs": 1221
   },
   {
     "id": "f734ca97a50d7d91",
@@ -149,15 +149,15 @@
     "logoUrl": "https://i.imgur.com/2qf67zW.png",
     "streamUrl": "http://88.212.15.19/live/test_arenasport/playlist.m3u8",
     "category": "sports",
-    "latencyMs": 231
+    "latencyMs": 229
   },
   {
     "id": "e46015965277b517",
     "name": "Arena Sport 1 (1080p)",
     "logoUrl": "https://i.imgur.com/RJrJGbW.png",
-    "streamUrl": "https://nl1.nghk.ai/ArenaSport1HD/index.m3u8",
+    "streamUrl": "https://nl1.nghk.ai/ArenaSport1BH/index.m3u8",
     "category": "sports",
-    "latencyMs": 1224
+    "latencyMs": 1231
   },
   {
     "id": "378a0ca70af9b0cf",
@@ -165,7 +165,7 @@
     "logoUrl": "https://i.imgur.com/RJrJGbW.png",
     "streamUrl": "https://nl1.nghk.ai/AS1HRHD/index.m3u8",
     "category": "sports",
-    "latencyMs": 1221
+    "latencyMs": 1264
   },
   {
     "id": "78a54cfb71a59842",
@@ -173,7 +173,7 @@
     "logoUrl": "https://i.imgur.com/csv6YsL.png",
     "streamUrl": "https://nl1.nghk.ai/ArenaPremium1HD/index.m3u8",
     "category": "sports",
-    "latencyMs": 1443
+    "latencyMs": 1278
   },
   {
     "id": "63f0e543309e2958",
@@ -181,7 +181,7 @@
     "logoUrl": "https://i.imgur.com/oMiS7D3.png",
     "streamUrl": "https://nl1.nghk.ai/AS10HRHD/index.m3u8",
     "category": "sports",
-    "latencyMs": 302
+    "latencyMs": 277
   },
   {
     "id": "c52efe479309a2d4",
@@ -189,15 +189,15 @@
     "logoUrl": "https://i.imgur.com/Yq3Jf19.png",
     "streamUrl": "http://88.212.15.19/live/test_arenasport_dva/playlist.m3u8",
     "category": "sports",
-    "latencyMs": 230
+    "latencyMs": 226
   },
   {
     "id": "9953706056816f22",
     "name": "Arena Sport 2 (1080p)",
     "logoUrl": "https://i.imgur.com/aqlECBj.png",
-    "streamUrl": "https://nl1.nghk.ai/ArenaSport2HD/index.m3u8",
+    "streamUrl": "https://nl1.nghk.ai/ArenaSport2BH/index.m3u8",
     "category": "sports",
-    "latencyMs": 1446
+    "latencyMs": 1301
   },
   {
     "id": "f8a667edf6c4d769",
@@ -205,7 +205,7 @@
     "logoUrl": "https://i.imgur.com/aqlECBj.png",
     "streamUrl": "https://nl1.nghk.ai/AS2HRHD/index.m3u8",
     "category": "sports",
-    "latencyMs": 1462
+    "latencyMs": 1302
   },
   {
     "id": "24fabb5dfab646d8",
@@ -213,7 +213,7 @@
     "logoUrl": "https://i.imgur.com/ztOmQ7P.png",
     "streamUrl": "https://nl1.nghk.ai/ArenaPremium2HD/index.m3u8",
     "category": "sports",
-    "latencyMs": 1447
+    "latencyMs": 1338
   },
   {
     "id": "586483a817188254",
@@ -221,7 +221,7 @@
     "logoUrl": "https://i.imgur.com/3r3burN.png",
     "streamUrl": "https://nl1.nghk.ai/AS3HRHD/index.m3u8",
     "category": "sports",
-    "latencyMs": 1470
+    "latencyMs": 1368
   },
   {
     "id": "240d04bfb509cacf",
@@ -229,7 +229,7 @@
     "logoUrl": "https://i.imgur.com/3r3burN.png",
     "streamUrl": "https://nl1.nghk.ai/ArenaSport3BH/index.m3u8",
     "category": "sports",
-    "latencyMs": 1462
+    "latencyMs": 1369
   },
   {
     "id": "472daaaee75bfd77",
@@ -237,15 +237,15 @@
     "logoUrl": "https://i.imgur.com/gpqemLf.png",
     "streamUrl": "https://nl1.nghk.ai/ArenaPremium3HD/index.m3u8",
     "category": "sports",
-    "latencyMs": 1458
+    "latencyMs": 1394
   },
   {
     "id": "49165bc3bf6289a6",
     "name": "Arena Sport 4 (1080p)",
     "logoUrl": "https://i.imgur.com/h1XhGkz.png",
-    "streamUrl": "https://nl1.nghk.ai/ArenaSport4BH/index.m3u8",
+    "streamUrl": "https://nl1.nghk.ai/AS4HRHD/index.m3u8",
     "category": "sports",
-    "latencyMs": 1455
+    "latencyMs": 1397
   },
   {
     "id": "81c82bda51edf069",
@@ -253,7 +253,7 @@
     "logoUrl": "https://i.imgur.com/036qMgu.png",
     "streamUrl": "https://nl1.nghk.ai/ArenaSport5HD/index.m3u8",
     "category": "sports",
-    "latencyMs": 1514
+    "latencyMs": 1406
   },
   {
     "id": "5c8c1649414d4458",
@@ -261,7 +261,15 @@
     "logoUrl": "https://i.imgur.com/036qMgu.png",
     "streamUrl": "https://nl1.nghk.ai/AS5HRHD/index.m3u8",
     "category": "sports",
-    "latencyMs": 1468
+    "latencyMs": 1404
+  },
+  {
+    "id": "1b34230f4ab9073d",
+    "name": "Arena Sport 5 BH (1080p)",
+    "logoUrl": "https://i.imgur.com/036qMgu.png",
+    "streamUrl": "https://nl1.nghk.ai/ArenaSport5BH/index.m3u8",
+    "category": "sports",
+    "latencyMs": 1407
   },
   {
     "id": "a5c5486903480ac2",
@@ -269,7 +277,7 @@
     "logoUrl": "https://i.imgur.com/Z5PE4vx.png",
     "streamUrl": "https://nl1.nghk.ai/ArenaSport6HD/index.m3u8",
     "category": "sports",
-    "latencyMs": 1549
+    "latencyMs": 1416
   },
   {
     "id": "a345e253673e9823",
@@ -277,7 +285,7 @@
     "logoUrl": "https://i.imgur.com/Z5PE4vx.png",
     "streamUrl": "https://nl1.nghk.ai/AS6HRHD/index.m3u8",
     "category": "sports",
-    "latencyMs": 1526
+    "latencyMs": 1414
   },
   {
     "id": "858a5188211dcff3",
@@ -285,7 +293,7 @@
     "logoUrl": "https://i.imgur.com/0fgvOrR.png",
     "streamUrl": "https://nl1.nghk.ai/ArenaSport7HD/index.m3u8",
     "category": "sports",
-    "latencyMs": 289
+    "latencyMs": 270
   },
   {
     "id": "96f50039e0824ca0",
@@ -293,7 +301,7 @@
     "logoUrl": "https://i.imgur.com/Wk9dr78.png",
     "streamUrl": "https://nl1.nghk.ai/AS8HRHD/index.m3u8",
     "category": "sports",
-    "latencyMs": 273
+    "latencyMs": 271
   },
   {
     "id": "44051aeb409e69aa",
@@ -301,7 +309,7 @@
     "logoUrl": "https://i.imgur.com/Wk9dr78.png",
     "streamUrl": "https://nl1.nghk.ai/ArenaSport8HD/index.m3u8",
     "category": "sports",
-    "latencyMs": 282
+    "latencyMs": 273
   },
   {
     "id": "fd7bae2db79f4259",
@@ -309,7 +317,7 @@
     "logoUrl": "https://i.imgur.com/riMTqTu.png",
     "streamUrl": "https://nl1.nghk.ai/AS9HRHD/index.m3u8",
     "category": "sports",
-    "latencyMs": 284
+    "latencyMs": 273
   },
   {
     "id": "373b5af65b28269d",
@@ -317,7 +325,7 @@
     "logoUrl": "",
     "streamUrl": "https://nl1.nghk.ai/ArenaSport9HD/index.m3u8",
     "category": "sports",
-    "latencyMs": 285
+    "latencyMs": 277
   },
   {
     "id": "92d3649d33a60255",
@@ -325,7 +333,7 @@
     "logoUrl": "",
     "streamUrl": "https://nl1.nghk.ai/SK3SRHD/index.m3u8",
     "category": "sports",
-    "latencyMs": 283
+    "latencyMs": 270
   },
   {
     "id": "56216c86b1748c74",
@@ -333,7 +341,7 @@
     "logoUrl": "https://imgur.com/csv6YsL",
     "streamUrl": "https://nl1.nghk.ai/ArenaPremium1BH/index.m3u8",
     "category": "sports",
-    "latencyMs": 286
+    "latencyMs": 274
   },
   {
     "id": "635756ad14cf670e",
@@ -341,7 +349,7 @@
     "logoUrl": "https://imgur.com/ztOmQ7P",
     "streamUrl": "https://nl1.nghk.ai/ArenaPremium2BH/index.m3u8",
     "category": "sports",
-    "latencyMs": 286
+    "latencyMs": 272
   },
   {
     "id": "a017f0a5a0a4f5dc",
@@ -349,7 +357,7 @@
     "logoUrl": "https://i.imgur.com/gpqemLf.png",
     "streamUrl": "https://nl1.nghk.ai/ArenaPremium3BH/index.m3u8",
     "category": "sports",
-    "latencyMs": 291
+    "latencyMs": 272
   },
   {
     "id": "8258d50a902f7965",
@@ -357,7 +365,7 @@
     "logoUrl": "",
     "streamUrl": "https://nl1.nghk.ai/SK4SRHD/index.m3u8",
     "category": "sports",
-    "latencyMs": 299
+    "latencyMs": 270
   },
   {
     "id": "b209b539f9c78602",
@@ -365,7 +373,7 @@
     "logoUrl": "https://i.imgur.com/XjzK3gZ.png",
     "streamUrl": "https://snrtworker.kharazbelaid.workers.dev/?id=arryadia.m3u8",
     "category": "sports",
-    "latencyMs": 1590
+    "latencyMs": 1429
   },
   {
     "id": "7d175de891816cfc",
@@ -373,7 +381,7 @@
     "logoUrl": "https://i.imgur.com/XjzK3gZ.png",
     "streamUrl": "https://stream-lb.livemediama.com/arryadia/hls/master.m3u8",
     "category": "sports",
-    "latencyMs": 511
+    "latencyMs": 441
   },
   {
     "id": "3410a039c94008ea",
@@ -381,7 +389,7 @@
     "logoUrl": "https://i.ibb.co/fYNx6Fk1/image-removebg-preview-1.png",
     "streamUrl": "https://stream-lb.livemediama.com/arryadia-hd-01/hls/master.m3u8",
     "category": "sports",
-    "latencyMs": 494
+    "latencyMs": 437
   },
   {
     "id": "dccc8c5c837f12d7",
@@ -389,7 +397,7 @@
     "logoUrl": "https://i.ibb.co/jPFCVFNS/image-removebg-preview-3.png",
     "streamUrl": "https://stream-lb.livemediama.com/arryadia-hd-02/hls/master.m3u8",
     "category": "sports",
-    "latencyMs": 535
+    "latencyMs": 459
   },
   {
     "id": "2e74df4826f74c4c",
@@ -397,7 +405,7 @@
     "logoUrl": "https://i.ibb.co/mCnJzvvB/image-removebg-preview-4.png",
     "streamUrl": "https://stream-lb.livemediama.com/arryadia-hd-03/hls/master.m3u8",
     "category": "sports",
-    "latencyMs": 530
+    "latencyMs": 445
   },
   {
     "id": "c8eb807a9926a492",
@@ -405,7 +413,7 @@
     "logoUrl": "https://i.imgur.com/XjzK3gZ.png",
     "streamUrl": "https://stream-lb.livemediama.com/arryadia-tnt/hls/master.m3u8",
     "category": "sports",
-    "latencyMs": 534
+    "latencyMs": 453
   },
   {
     "id": "9d2d1f897a424365",
@@ -413,7 +421,7 @@
     "logoUrl": "https://i.ibb.co/bRmGbsyV/A3-SPORTTV.jpg",
     "streamUrl": "https://streamtv.as3sport.online:3394/hybrid/play.m3u8",
     "category": "sports",
-    "latencyMs": 259
+    "latencyMs": 198
   },
   {
     "id": "6e36a43f3651fd47",
@@ -421,7 +429,7 @@
     "logoUrl": "https://i.imgur.com/bPWFXkL.png",
     "streamUrl": "https://kanal75xto-llhls.akamaized.net/live/Data/atg-kanal-15-02a-rr/HLS-Legacy-HL/atg-kanal-15-02a-rr.m3u8",
     "category": "sports",
-    "latencyMs": 415
+    "latencyMs": 368
   },
   {
     "id": "1181691e157a7ce7",
@@ -429,7 +437,7 @@
     "logoUrl": "https://www.jagobd.com/wp-content/uploads/2015/12/atnmusic.jpg?x50681",
     "streamUrl": "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI/atnmusic.stream/playlist.m3u8",
     "category": "music",
-    "latencyMs": 333
+    "latencyMs": 297
   },
   {
     "id": "3ac2e21dd6177321",
@@ -437,7 +445,7 @@
     "logoUrl": "https://i.imgur.com/4qZQKjo.png",
     "streamUrl": "https://bozztv.com/rongo/rongo-ATNNews/index.m3u8",
     "category": "all",
-    "latencyMs": 159
+    "latencyMs": 129
   },
   {
     "id": "ec8169302d219cf7",
@@ -445,7 +453,7 @@
     "logoUrl": "https://i.imgur.com/fBpLsbC.png",
     "streamUrl": "https://5c7b683162943.streamlock.net/live/ngrp:sportsone_all/playlist.m3u8",
     "category": "sports",
-    "latencyMs": 894
+    "latencyMs": 822
   },
   {
     "id": "bd674c003b620d7b",
@@ -453,7 +461,7 @@
     "logoUrl": "https://i.imgur.com/ZkuZmIo.png",
     "streamUrl": "https://5c7b683162943.streamlock.net/live/ngrp:bahrainsportstwo_all/playlist.m3u8",
     "category": "sports",
-    "latencyMs": 928
+    "latencyMs": 846
   },
   {
     "id": "f4b5a53fff104078",
@@ -461,7 +469,7 @@
     "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/BeIN_Sports_logo_%28vertical_version%29.svg/500px-BeIN_Sports_logo_%28vertical_version%29.svg.png",
     "streamUrl": "http://23.237.104.106:8080/USA_BEIN/index.m3u8",
     "category": "sports",
-    "latencyMs": 96
+    "latencyMs": 130
   },
   {
     "id": "bbbcecd4008e428f",
@@ -469,7 +477,7 @@
     "logoUrl": "https://i.ibb.co/HT49GPmB/XTRA-2.png",
     "streamUrl": "https://bein-xtra-bein.amagi.tv/playlist.m3u8",
     "category": "sports",
-    "latencyMs": 511
+    "latencyMs": 338
   },
   {
     "id": "e2c3fef4287cd947",
@@ -477,7 +485,7 @@
     "logoUrl": "https://i.imgur.com/V562tpO.png",
     "streamUrl": "https://dc1644a9jazgj.cloudfront.net/beIN_Sports_Xtra_Espanol.m3u8",
     "category": "sports",
-    "latencyMs": 469
+    "latencyMs": 458
   },
   {
     "id": "c804a8fa2ff061b1",
@@ -485,7 +493,7 @@
     "logoUrl": "https://i.imgur.com/1l3t5jd.png",
     "streamUrl": "https://cdn3.wowza.com/5/ZWQ1K2NYTmpFbGsr/BEK-WOWZA-1/smil:BEKPRIMEW.smil/playlist.m3u8",
     "category": "sports",
-    "latencyMs": 1068
+    "latencyMs": 917
   },
   {
     "id": "f25bedd3626ed751",
@@ -493,7 +501,7 @@
     "logoUrl": "https://i.imgur.com/BZijfKh.png",
     "streamUrl": "https://1621590671.rsc.cdn77.org/HLS/BILLIARDTV.m3u8",
     "category": "sports",
-    "latencyMs": 596
+    "latencyMs": 472
   },
   {
     "id": "bc4b82be117b44cc",
@@ -501,7 +509,7 @@
     "logoUrl": "https://i.imgur.com/hvpyuek.png",
     "streamUrl": "https://bozztv.com/rongo/rongo-BTVChattagram/index.m3u8",
     "category": "all",
-    "latencyMs": 261
+    "latencyMs": 218
   },
   {
     "id": "a023eb100667efce",
@@ -509,7 +517,7 @@
     "logoUrl": "https://i.imgur.com/EOXnU15.png",
     "streamUrl": "http://151.80.18.177:86/Canal+_sport_HD/index.m3u8",
     "category": "sports",
-    "latencyMs": 201
+    "latencyMs": 186
   },
   {
     "id": "527d33306f1647fb",
@@ -517,7 +525,7 @@
     "logoUrl": "https://upload.wikimedia.org/wikipedia/en/thumb/6/64/Caz%C3%A9TV_logo.svg/1280px-Caz%C3%A9TV_logo.svg.png",
     "streamUrl": "https://dfr80qz435crc.cloudfront.net/MNOP/Amagi/Caze/Caze_TV_BR/Caze_TV.m3u8",
     "category": "sports",
-    "latencyMs": 748
+    "latencyMs": 610
   },
   {
     "id": "a2d113ebbd1e834c",
@@ -525,7 +533,7 @@
     "logoUrl": "https://i.imgur.com/eMjutHS.png",
     "streamUrl": "https://proped3fhg87.airspace-cdn.cbsivideo.com/golazo-live-dai/master/golazo-live-dai.m3u8",
     "category": "sports",
-    "latencyMs": 1045
+    "latencyMs": 849
   },
   {
     "id": "6fa756925d91cc38",
@@ -533,7 +541,7 @@
     "logoUrl": "https://i.imgur.com/q8BENJg.png",
     "streamUrl": "https://propee33f9c2.airspace-cdn.cbsivideo.com/index.m3u8",
     "category": "sports",
-    "latencyMs": 1211
+    "latencyMs": 970
   },
   {
     "id": "ac127ff514a2542d",
@@ -541,7 +549,7 @@
     "logoUrl": "https://i.imgur.com/ZzV6JQp.png",
     "streamUrl": "http://74.91.26.218:82/live/cctv16hd.m3u8",
     "category": "sports",
-    "latencyMs": 606
+    "latencyMs": 683
   },
   {
     "id": "061f0b0d6e21d6ef",
@@ -549,7 +557,7 @@
     "logoUrl": "https://i.imgur.com/WK3keM9.png",
     "streamUrl": "http://38.75.136.137:98/gslb/dsdqpub/ystq.m3u8?auth=testpub",
     "category": "sports",
-    "latencyMs": 205
+    "latencyMs": 209
   },
   {
     "id": "8b8504637d745f05",
@@ -557,7 +565,7 @@
     "logoUrl": "https://i.imgur.com/iqJJTmH.png",
     "streamUrl": "http://38.75.136.137:98/gslb/dsdqpub/gefwq.m3u8?auth=testpub",
     "category": "sports",
-    "latencyMs": 201
+    "latencyMs": 205
   },
   {
     "id": "4d4d969351320f9c",
@@ -565,7 +573,7 @@
     "logoUrl": "https://i.imgur.com/Fy6HkX0.png",
     "streamUrl": "http://38.75.136.137:98/gslb/dsdqpub/fyzq.m3u8?auth=testpub",
     "category": "sports",
-    "latencyMs": 204
+    "latencyMs": 208
   },
   {
     "id": "323de735ac562fc0",
@@ -573,7 +581,7 @@
     "logoUrl": "https://i.imgur.com/4JLkaF7.png",
     "streamUrl": "https://bozztv.com/rongo/rongo-Channel24HD/index.m3u8",
     "category": "all",
-    "latencyMs": 295
+    "latencyMs": 260
   },
   {
     "id": "d12f60697f11f001",
@@ -581,31 +589,7 @@
     "logoUrl": "https://i.imgur.com/hJxFLvF.png",
     "streamUrl": "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI/chsukoff.stream/playlist.m3u8",
     "category": "all",
-    "latencyMs": 484
-  },
-  {
-    "id": "b8be59f00e3484c7",
-    "name": "Chardikla Gurbaani TV (1080p)",
-    "logoUrl": "https://i.imgur.com/NXD8CPq.png",
-    "streamUrl": "https://chardikalatimestv.gigabitcdn.net/in-chardikala/chardikala-gurbani-tv/playlist.m3u8",
-    "category": "all",
-    "latencyMs": 2721
-  },
-  {
-    "id": "f89b37fd6a9adb07",
-    "name": "Chardikla Time TV (1080p)",
-    "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_CHARDIKLA_TIME_TV/images/LOGO_HD/image.png",
-    "streamUrl": "https://chardikalagurbanitv.gigabitcdn.net/in-chardikala/chardikala-timetv/playlist.m3u8",
-    "category": "all",
-    "latencyMs": 2828
-  },
-  {
-    "id": "d8ce9ce7fb432322",
-    "name": "Chardikla Time TV North America (1080p)",
-    "logoUrl": "https://i.imgur.com/IUeMFey.jpg",
-    "streamUrl": "https://chardikalanorthamerica.gigabitcdn.net/in-chardikala/chardikala-north-usa/playlist.m3u8",
-    "category": "all",
-    "latencyMs": 2942
+    "latencyMs": 499
   },
   {
     "id": "440fa03793063f66",
@@ -613,7 +597,7 @@
     "logoUrl": "https://i.imgur.com/ZeUgLCa.png",
     "streamUrl": "https://cnn.livestreaminggroup.info:3132/live/colimdotvlive.m3u8",
     "category": "sports",
-    "latencyMs": 1616
+    "latencyMs": 1371
   },
   {
     "id": "55d335605873fa0e",
@@ -621,7 +605,7 @@
     "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_COLORS_INFINITY/images/LOGO_HD/image.png",
     "streamUrl": "http://103.175.73.12:8080/live/29/29_0.m3u8",
     "category": "entertainment",
-    "latencyMs": 428
+    "latencyMs": 429
   },
   {
     "id": "9ab22e102131e9ff",
@@ -629,7 +613,7 @@
     "logoUrl": "https://resources.cricket-australia.pulselive.com/cricket-australia/photo/2025/07/25/836eddae-4329-4542-ad17-dcd37e9d951a/Cricket-Gold-1920x1080_noBG.png",
     "streamUrl": "https://streams2.sofast.tv/ptnr-yupptv/title-cricketgold/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/b2048bb8-1686-4432-aa50-647245383e0c/manifest.m3u8",
     "category": "sports",
-    "latencyMs": 1359
+    "latencyMs": 1116
   },
   {
     "id": "ff8385f7b17a847d",
@@ -637,119 +621,7 @@
     "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/%C4%8CT_sport_logo.png/960px-%C4%8CT_sport_logo.png",
     "streamUrl": "http://88.212.15.19/live/test_ctsport_25p/playlist.m3u8",
     "category": "sports",
-    "latencyMs": 223
-  },
-  {
-    "id": "dc3a5596cb1320b1",
-    "name": "DAZN Combat (1080p)",
-    "logoUrl": "https://i.postimg.cc/VsW3Jsrz/logo-DAZN-Combat.png",
-    "streamUrl": "https://dazn-combat-rakuten.amagi.tv/hls/amagi_hls_data_rakutenAA-dazn-combat-rakuten/CDN/master.m3u8",
-    "category": "sports",
-    "latencyMs": 1949
-  },
-  {
-    "id": "e72c7e647735b096",
-    "name": "DD Himachal Pradesh (504p)",
-    "logoUrl": "https://dtil.tmsimg.com/assets/s142785_ld_h9_aa.png?lock=720x540",
-    "streamUrl": "https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/afd2e335b0ba40eb9bdf1096118c6ede/index.m3u8",
-    "category": "entertainment",
-    "latencyMs": 589
-  },
-  {
-    "id": "b1b1b272e9984e72",
-    "name": "DD India (1080p)",
-    "logoUrl": "https://dtil.tmsimg.com/assets/s158251_ld_h15_aa.png?lock=720x540",
-    "streamUrl": "https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/ceda14583477426aa162a65392d8ea07/index.m3u8",
-    "category": "entertainment",
-    "latencyMs": 593
-  },
-  {
-    "id": "90a0a09d446695d2",
-    "name": "DD Jharkhand (504p)",
-    "logoUrl": "https://dtil.tmsimg.com/assets/s142787_ld_h15_aa.png?lock=720x540",
-    "streamUrl": "https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/e8c3741f8c154d3185831f4e31777fb2/index.m3u8",
-    "category": "entertainment",
-    "latencyMs": 598
-  },
-  {
-    "id": "12523d7673b5109b",
-    "name": "DD Kisan (720p)",
-    "logoUrl": "https://i.imgur.com/x56WJEa.png",
-    "streamUrl": "https://cdn-6.pishow.tv/live/9/master.m3u8",
-    "category": "all",
-    "latencyMs": 920
-  },
-  {
-    "id": "af35b01e8ad65c73",
-    "name": "DD Madhya Pradesh (720p)",
-    "logoUrl": "https://dtil.tmsimg.com/assets/s142790_ld_h15_aa.png?lock=720x540",
-    "streamUrl": "https://cdn-1.pishow.tv/live/31/master.m3u8",
-    "category": "entertainment",
-    "latencyMs": 938
-  },
-  {
-    "id": "9dab73be2d1c9198",
-    "name": "DD Manipur (504p)",
-    "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_DD_IMPHAL/images/LOGO_HD/image.png",
-    "streamUrl": "https://d2lk5u59tns74c.cloudfront.net/out/v1/8b75afc6576f450e8f554b6c877681d2/index.m3u8",
-    "category": "entertainment",
-    "latencyMs": 564
-  },
-  {
-    "id": "c06609ef1816ba26",
-    "name": "DD Meghalaya (504p)",
-    "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_DD_SHILLONG/images/LOGO_HD/image.png",
-    "streamUrl": "https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/4f81bc8d13dd49b484da35988abb8729/index.m3u8",
-    "category": "entertainment",
-    "latencyMs": 985
-  },
-  {
-    "id": "c0b4acdcdf14f651",
-    "name": "DD Mizoram (504p)",
-    "logoUrl": "https://i.imgur.com/I5zT1DG.png",
-    "streamUrl": "https://d2lk5u59tns74c.cloudfront.net/out/v1/eea48c6b61074052a2fa8532ff795ff1/index.m3u8",
-    "category": "all",
-    "latencyMs": 981
-  },
-  {
-    "id": "bde77e8d8dc15fff",
-    "name": "DD National HD (1080p)",
-    "logoUrl": "https://ltsk-cdn.s3.eu-west-1.amazonaws.com/jumpstart/Temp_Live/cdn/HLS/Channel/transparentImages/DD%20National.png",
-    "streamUrl": "https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/40492a64c1db4a1385ba1a397d357d3a/index.m3u8",
-    "category": "entertainment",
-    "latencyMs": 668
-  },
-  {
-    "id": "f6497882352426c3",
-    "name": "DD National SD (576p)",
-    "logoUrl": "https://ltsk-cdn.s3.eu-west-1.amazonaws.com/jumpstart/Temp_Live/cdn/HLS/Channel/transparentImages/DD%20National.png",
-    "streamUrl": "https://cdn-1.pishow.tv/live/11/master.m3u8",
-    "category": "entertainment",
-    "latencyMs": 1008
-  },
-  {
-    "id": "90ae97b2cc68fe6a",
-    "name": "DD News HD (1080p)",
-    "logoUrl": "https://ltsk-cdn.s3.eu-west-1.amazonaws.com/jumpstart/Temp_Live/cdn/HLS/Channel/transparentImages/DD%20News%20HD.png",
-    "streamUrl": "https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/0811cd8c37ca4c409d5385a6cd2fa18b/index.m3u8",
-    "category": "all",
-    "latencyMs": 1108
-  },
-  {
-    "id": "ceadec85cbffac5d",
-    "name": "DD Punjabi (504p)",
-    "logoUrl": "https://dtil.tmsimg.com/assets/s142800_ld_h15_aa.png?lock=720x540",
-    "streamUrl": "https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/da821c24a59d4e57960497aeaca8fb33/index.m3u8",
-    "category": "all",
-    "latencyMs": 738
-  },
-  {
-    "id": "a6790d7a6346d7ed",
-    "name": "DD Rajasthan (720p)",
-    "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_DD_RAJASTHAN/images/LOGO_HD/image.png",
-    "streamUrl": "https://cdn-1.pishow.tv/live/34/master.m3u8",
-    "category": "entertainment",
-    "latencyMs": 1129
+    "latencyMs": 225
   },
   {
     "id": "586c9efee33cff56",
@@ -757,47 +629,7 @@
     "logoUrl": "https://dtil.tmsimg.com/assets/s158255_ld_h15_aa.png?lock=720x540",
     "streamUrl": "https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/b17adfe543354fdd8d189b110617cddd/index.m3u8",
     "category": "sports",
-    "latencyMs": 375
-  },
-  {
-    "id": "7871a610afb2af73",
-    "name": "DD Tamil (1080p)",
-    "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_DD_TAMIL/images/LOGO_HD/image.png",
-    "streamUrl": "https://d2lk5u59tns74c.cloudfront.net/out/v1/abf46b14847e45499f4a47f3a9afe93d/index.m3u8",
-    "category": "entertainment",
-    "latencyMs": 763
-  },
-  {
-    "id": "45bf1f0db5176730",
-    "name": "DD Urdu (720p)",
-    "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_DD_URDU/images/LOGO_HD/image.png",
-    "streamUrl": "https://cdn-4.pishow.tv/live/8/master.m3u8",
-    "category": "entertainment",
-    "latencyMs": 1217
-  },
-  {
-    "id": "b45e6121a3e3543a",
-    "name": "DD Uttar Pradesh (720p)",
-    "logoUrl": "https://dtil.tmsimg.com/assets/s142807_ld_h9_ab.png?lock=720x540",
-    "streamUrl": "https://cdn-1.pishow.tv/live/36/master.m3u8",
-    "category": "entertainment",
-    "latencyMs": 1208
-  },
-  {
-    "id": "c7474dc2699e82e6",
-    "name": "DD Uttarakhand (720p)",
-    "logoUrl": "https://dtil.tmsimg.com/assets/s142809_ld_h15_aa.png?lock=720x540",
-    "streamUrl": "https://cdn-1.pishow.tv/live/17/master.m3u8",
-    "category": "entertainment",
-    "latencyMs": 1228
-  },
-  {
-    "id": "ea6df386fcd8a455",
-    "name": "DD Yadagiri (576p)",
-    "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_DD_YADAGIRI/images/LOGO_HD/image.png",
-    "streamUrl": "https://cdn-1.pishow.tv/live/21/master.m3u8",
-    "category": "entertainment",
-    "latencyMs": 1239
+    "latencyMs": 273
   },
   {
     "id": "7c61937c8ac9c659",
@@ -805,7 +637,7 @@
     "logoUrl": "https://i.imgur.com/Y1t8xkL.png",
     "streamUrl": "http://162.19.255.233:8080/play/UNbAl57p9hXZClOu56FCTYXmD-MOS3u5IUkeXPpBt80/m3u8",
     "category": "sports",
-    "latencyMs": 210
+    "latencyMs": 204
   },
   {
     "id": "fed3bb488422e7b1",
@@ -813,7 +645,7 @@
     "logoUrl": "https://i.imgur.com/ItrZok1.png",
     "streamUrl": "https://bozztv.com/rongo/rongo-DeshTV/index.m3u8",
     "category": "all",
-    "latencyMs": 373
+    "latencyMs": 340
   },
   {
     "id": "caee87837361df4c",
@@ -821,31 +653,7 @@
     "logoUrl": "https://i.imgur.com/PzqzgMm.png",
     "streamUrl": "https://deshitv.deshitv24.net/live/myStream/playlist.m3u8",
     "category": "entertainment",
-    "latencyMs": 549
-  },
-  {
-    "id": "5cc4d71bed91c47b",
-    "name": "Desi Channel (720p)",
-    "logoUrl": "https://desichannel.in/wp-content/uploads/2025/01/desi-channel.png",
-    "streamUrl": "https://livestream.unlimitedcdn.com/agm-dc/desi-channel/index.m3u8",
-    "category": "entertainment",
-    "latencyMs": 1047
-  },
-  {
-    "id": "8d7ed3e453ef42a8",
-    "name": "Dheeran TV (576p)",
-    "logoUrl": "https://i.imgur.com/jSedjXf.png",
-    "streamUrl": "https://live.we2live.in/dheerantv/dheerantv/playlist.m3u8",
-    "category": "all",
-    "latencyMs": 1351
-  },
-  {
-    "id": "3dc050577c620a04",
-    "name": "Divyavani TV (576p)",
-    "logoUrl": "https://jiotvimages.cdn.jio.com/dare_images/images/Divya_Vani.png",
-    "streamUrl": "https://mumbai-edge.smartplaytv.in/Divyavani/index.m3u8",
-    "category": "all",
-    "latencyMs": 1660
+    "latencyMs": 480
   },
   {
     "id": "5abd66a9a9461359",
@@ -853,31 +661,7 @@
     "logoUrl": "https://i.imgur.com/tNKPSkO.png",
     "streamUrl": "http://118.107.85.4:1935/live/smil:DNTV2.smil/chunklist.m3u8",
     "category": "sports",
-    "latencyMs": 507
-  },
-  {
-    "id": "348058751fa1f246",
-    "name": "E 24 (576p)",
-    "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_E24/images/LOGO_HD/image.png",
-    "streamUrl": "https://live-cf-e24.dailyhunt.in/master.m3u8",
-    "category": "entertainment",
-    "latencyMs": 1008
-  },
-  {
-    "id": "deaed4d837fd0717",
-    "name": "EET TV (1080p) [Not 24/7]",
-    "logoUrl": "https://i.imgur.com/rMldFW8.png",
-    "streamUrl": "https://live.streamjo.com/eetlive/eettv.m3u8",
-    "category": "entertainment",
-    "latencyMs": 352
-  },
-  {
-    "id": "04e0c6609f13ef76",
-    "name": "Enterr 10 Bangla (720p) [Not 24/7]",
-    "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_ENTERR10_BANGLA/images/LOGO_HD/image.png",
-    "streamUrl": "https://live-bangla.akamaized.net/liveabr/playlist.m3u8",
-    "category": "entertainment",
-    "latencyMs": 375
+    "latencyMs": 502
   },
   {
     "id": "51d2f5a73ed86baf",
@@ -885,39 +669,7 @@
     "logoUrl": "https://i.imgur.com/HiBrysh.png",
     "streamUrl": "http://23.237.104.106:8080/USA_ESPNU/index.m3u8",
     "category": "sports",
-    "latencyMs": 104
-  },
-  {
-    "id": "04b079a5d0c28d14",
-    "name": "ETV Comedy (1080p)",
-    "logoUrl": "https://tvpnlogopus.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/IN4900003U3_20251106T195117SQUARE.png",
-    "streamUrl": "https://cc-wie8j8y69d2uy.akamaized.net/WWBI/Amagi/ETV_Comedy_IN/playlist.m3u8",
-    "category": "all",
-    "latencyMs": 1500
-  },
-  {
-    "id": "181cd98d60741821",
-    "name": "ETV Josh (1080p)",
-    "logoUrl": "https://tvpnlogopus.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/IN4900004LP_20250811T033452SQUARE.png",
-    "streamUrl": "https://cc-uyh1ow5zouoio.akamaized.net/WWBI/Amagi/ETV_Josh_IN/playlist.m3u8",
-    "category": "entertainment",
-    "latencyMs": 1444
-  },
-  {
-    "id": "11411fa409349816",
-    "name": "ETV Music (1080p)",
-    "logoUrl": "https://tvpnlogopus.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/IN4900002RV_20250811T033455SQUARE.png",
-    "streamUrl": "https://cc-szivnms4rlah6.akamaized.net/WWBI/Amagi/ETV_Music_IN/playlist.m3u8",
-    "category": "music",
-    "latencyMs": 1007
-  },
-  {
-    "id": "b3d1949526ae4034",
-    "name": "ETV News (1080p)",
-    "logoUrl": "https://tvpnlogopus.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/IN4900001AQ_20250811T033458SQUARE.png",
-    "streamUrl": "https://cc-3448kp65yhc5w.akamaized.net/WWBI/Amagi/ETV_News_IN/playlist.m3u8",
-    "category": "all",
-    "latencyMs": 1335
+    "latencyMs": 102
   },
   {
     "id": "381027c71dfbb6f1",
@@ -925,23 +677,7 @@
     "logoUrl": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f0/Extreme_Sports_Channel.svg/960px-Extreme_Sports_Channel.svg.png",
     "streamUrl": "http://81.15.109.89:8001/play/ExtremeSports",
     "category": "sports",
-    "latencyMs": 218
-  },
-  {
-    "id": "f8f75cab1ec5f44f",
-    "name": "Fakt Marathi (720p) [Not 24/7]",
-    "logoUrl": "https://dtil.tmsimg.com/assets/s143038_ld_h15_aa.png?lock=720x540",
-    "streamUrl": "https://cdn-6.pishow.tv/live/10002/master.m3u8",
-    "category": "entertainment",
-    "latencyMs": 1008
-  },
-  {
-    "id": "9af1b85c7271d00f",
-    "name": "Fateh TV (1080p) [Not 24/7]",
-    "logoUrl": "https://i.imgur.com/c4ItNkB.png",
-    "streamUrl": "https://ott.livelegitpro.in/fatehtv/fatehtv/index.m3u8",
-    "category": "all",
-    "latencyMs": 1248
+    "latencyMs": 235
   },
   {
     "id": "db7dbd18ef9ef5a2",
@@ -949,55 +685,7 @@
     "logoUrl": "https://i.imgur.com/6kaNvZi.png",
     "streamUrl": "http://81.15.109.89:8001/play/Fightklub",
     "category": "sports",
-    "latencyMs": 205
-  },
-  {
-    "id": "edc915093ddbbd00",
-    "name": "Food Food (576p)",
-    "logoUrl": "https://jiotvimages.cdn.jio.com/dare_images/images/Food_Food.png",
-    "streamUrl": "https://mumt03.tangotv.in/Dsly5z3HFOODFOOD/index.m3u8",
-    "category": "all",
-    "latencyMs": 1285
-  },
-  {
-    "id": "6841a711494856f7",
-    "name": "Gangaur TV (1080p)",
-    "logoUrl": "https://jiotvimages.cdn.jio.com/dare_images/images/Gangaur.png",
-    "streamUrl": "https://pbgangaur.wiseplayout.com/Gangaur/master.m3u8",
-    "category": "entertainment",
-    "latencyMs": 1025
-  },
-  {
-    "id": "9d0a01dfd47f7eaa",
-    "name": "Gaunda Punjab TV (720p)",
-    "logoUrl": "https://i.imgur.com/ArRZRM3.png",
-    "streamUrl": "http://cdn6.live247stream.com/gaundapunjab/tv/playlist.m3u8",
-    "category": "entertainment",
-    "latencyMs": 585
-  },
-  {
-    "id": "ace68b30519ab947",
-    "name": "Global Punjab (1080p)",
-    "logoUrl": "https://i.imgur.com/WDLqcWW.png",
-    "streamUrl": "https://server.livelegitpro.in/globalpunjab/globalpunjab/index.m3u8",
-    "category": "all",
-    "latencyMs": 1412
-  },
-  {
-    "id": "f72b4b07d4151595",
-    "name": "Goldmines (576p)",
-    "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_GOLDMINES/images/LOGO_HD/image.png",
-    "streamUrl": "https://cdn-2.pishow.tv/live/1459/master.m3u8",
-    "category": "movies",
-    "latencyMs": 1408
-  },
-  {
-    "id": "98ea9a483ba4c98b",
-    "name": "Goldmines 2 (576p)",
-    "logoUrl": "",
-    "streamUrl": "https://cdn-2.pishow.tv/live/1460/master.m3u8",
-    "category": "movies",
-    "latencyMs": 1364
+    "latencyMs": 224
   },
   {
     "id": "62af3c1e08c4a080",
@@ -1005,151 +693,7 @@
     "logoUrl": "https://i.imgur.com/6mNQ9mM.png",
     "streamUrl": "http://103.175.73.12:8080/live/52/52_0.m3u8",
     "category": "movies",
-    "latencyMs": 435
-  },
-  {
-    "id": "2a10e8bbd48bd22a",
-    "name": "GoodNews TV (720p)",
-    "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_GOODNEWS_TV/images/LOGO_HD/image.png",
-    "streamUrl": "https://bpgdlwwar3ze-hls-live.wmncdn.net/goodnews/live.stream/playlist.m3u8",
-    "category": "all",
-    "latencyMs": 1605
-  },
-  {
-    "id": "1c332aa1eb5dcb7e",
-    "name": "Gospel TV India (720p)",
-    "logoUrl": "https://i.ibb.co/xhbZvzt/cropped-final-logo-300x127.png",
-    "streamUrl": "https://server.livelegitpro.in:9899/gospeltv/index.m3u8",
-    "category": "all",
-    "latencyMs": 1642
-  },
-  {
-    "id": "875b1077c31dbad4",
-    "name": "GTC Punjabi (1080p)",
-    "logoUrl": "https://media.thegtcnetwork.com/uploads/gtc-pujabin-s.jpg",
-    "streamUrl": "https://gtc-yupp.vgcdn.net/vglive-sk-254807/index.m3u8",
-    "category": "entertainment",
-    "latencyMs": 1352
-  },
-  {
-    "id": "55f9f6b0d6277c81",
-    "name": "Guarantee News (1080p)",
-    "logoUrl": "https://media.licdn.com/dms/image/v2/D560BAQHYZzbGJ7ViZA/company-logo_200_200/company-logo_200_200/0/1728031377890?e=2147483647&v=beta&t=bIsZgNUCcg0M_-Zqeu5wKYgBt_1-pI798X9lP5CxhTM",
-    "streamUrl": "https://guaranteenews.in:8443/live/gnews/index.m3u8",
-    "category": "all",
-    "latencyMs": 1605
-  },
-  {
-    "id": "f1d0a8f98d27b701",
-    "name": "Gulistan News (720p) [Not 24/7]",
-    "logoUrl": "https://dtil.tmsimg.com/assets/s143097_ld_h15_aa.png?lock=720x540",
-    "streamUrl": "https://live.gulistannews.in/hls/gul.m3u8",
-    "category": "all",
-    "latencyMs": 1939
-  },
-  {
-    "id": "71fb58118efe8178",
-    "name": "Gyandarshan (720p)",
-    "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_GYANDARSHAN/images/LOGO_HD/image.png",
-    "streamUrl": "https://cdn-6.pishow.tv/live/14/master.m3u8",
-    "category": "all",
-    "latencyMs": 1718
-  },
-  {
-    "id": "c9259b0b8f8dc870",
-    "name": "Hare Krsna TV (1080p)",
-    "logoUrl": "https://dtil.tmsimg.com/assets/s143102_ld_h15_aa.png?lock=720x540",
-    "streamUrl": "https://hktv.harekrsnatv.com/HKTV/HKWebApp/manifest.mpd",
-    "category": "all",
-    "latencyMs": 2159
-  },
-  {
-    "id": "0dd74d5dcaa34eed",
-    "name": "Harvest TV (720p)",
-    "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_HARVEST_TV_24X7/images/LOGO_HD/image.png",
-    "streamUrl": "https://7mbd4ogkr3gx-hls-live.wmncdn.net/harvesttvlive1/bbb19eae240ec100af921d511efc86a0.sdp/index.m3u8",
-    "category": "all",
-    "latencyMs": 2006
-  },
-  {
-    "id": "0a5ec45fd47268a8",
-    "name": "Harvest TV Keralam (720p)",
-    "logoUrl": "https://i.imgur.com/1DyPuIt.png",
-    "streamUrl": "https://7mbd4ogkr3gx-hls-live.wmncdn.net/harvestenglish/d1796a22d24e8696c7d5d0b5c349fdd2.sdp/index.m3u8",
-    "category": "all",
-    "latencyMs": 2161
-  },
-  {
-    "id": "4e7e73c810c3a1fb",
-    "name": "Hebron TV (1080p)",
-    "logoUrl": "https://i0.wp.com/hebrontv.in/wp-content/uploads/2023/11/hebron-.png?w=512",
-    "streamUrl": "https://account20.livebox.co.in/charleshls/live.m3u8",
-    "category": "all",
-    "latencyMs": 932
-  },
-  {
-    "id": "b371401088089527",
-    "name": "Hi Dost! (720p)",
-    "logoUrl": "https://jiotvimages.cdn.jio.com/dare_images/images/Hi_Dost.png",
-    "streamUrl": "https://cdn-1.pishow.tv/live/224/master.m3u8",
-    "category": "entertainment",
-    "latencyMs": 846
-  },
-  {
-    "id": "471360361fc212c4",
-    "name": "High News (480p)",
-    "logoUrl": "https://pbs.twimg.com/profile_images/1104268476858937351/USUT4ykS_400x400.png",
-    "streamUrl": "https://highmedia.livebox.co.in/HIGHNEWShls/LIVE.m3u8",
-    "category": "all",
-    "latencyMs": 690
-  },
-  {
-    "id": "b4be67618a09f06b",
-    "name": "Hindi Khabar (576p)",
-    "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_HINDI_KHABAR/images/LOGO_HD/image.png",
-    "streamUrl": "https://cdn-2.pishow.tv/live/1041/master.m3u8",
-    "category": "all",
-    "latencyMs": 956
-  },
-  {
-    "id": "3171c52f92312599",
-    "name": "Hindu Dharmam (576p)",
-    "logoUrl": "https://dtil.tmsimg.com/assets/s143131_ld_h15_aa.png?lock=720x540",
-    "streamUrl": "https://cdn-1.pishow.tv/live/959/master.m3u8",
-    "category": "all",
-    "latencyMs": 970
-  },
-  {
-    "id": "959b42392066659a",
-    "name": "HMTV (720p)",
-    "logoUrl": "https://dtil.tmsimg.com/assets/s143136_ld_h15_aa.png?lock=720x540",
-    "streamUrl": "https://cdn-1.pishow.tv/live/280/master.m3u8",
-    "category": "all",
-    "latencyMs": 1036
-  },
-  {
-    "id": "b309188be7e48e09",
-    "name": "HNN 24x7 (576p)",
-    "logoUrl": "https://jiotvimages.cdn.jio.com/dare_images/images/HNN24x7.png",
-    "streamUrl": "https://ott.livelegitpro.in:9899/hnnnews/hnnnews/tracks-v1/index.fmp4.m3u8",
-    "category": "all",
-    "latencyMs": 1132
-  },
-  {
-    "id": "84fa3b525cad8280",
-    "name": "Hornbill TV (576p)",
-    "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_HORNBILL/images/LOGO_HD/image.png",
-    "streamUrl": "https://cdn-2.pishow.tv/live/1463/master.m3u8",
-    "category": "all",
-    "latencyMs": 1067
-  },
-  {
-    "id": "16faa5f64e062e4f",
-    "name": "IBC 24 (720p)",
-    "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_IBC24/images/LOGO_HD/image.png",
-    "streamUrl": "https://cdn-3.pishow.tv/live/220/master.m3u8",
-    "category": "all",
-    "latencyMs": 1036
+    "latencyMs": 428
   },
   {
     "id": "17a67d6110e13291",
@@ -1157,47 +701,7 @@
     "logoUrl": "https://i.imgur.com/POXFhGN.png",
     "streamUrl": "https://bozztv.com/rongo/rongo-IndependentTV/index.m3u8",
     "category": "all",
-    "latencyMs": 443
-  },
-  {
-    "id": "adf1ba62f86f5fd6",
-    "name": "India Ahead (576p)",
-    "logoUrl": "https://i.imgur.com/hBkTmf9.png",
-    "streamUrl": "https://mumt05.tangotv.in/87NeALx2INDIAAHEAD/index.m3u8",
-    "category": "all",
-    "latencyMs": 1318
-  },
-  {
-    "id": "352e7412e2ce3728",
-    "name": "India Daily Live (1080p)",
-    "logoUrl": "https://jiotvimages.cdn.jio.com/dare_images/images/India_Daily_24x7.png",
-    "streamUrl": "https://indiadaily.ottlive.co.in/indiadailylive/index.m3u8",
-    "category": "all",
-    "latencyMs": 868
-  },
-  {
-    "id": "bdb8856814141d8c",
-    "name": "India Today (720p)",
-    "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_INDIA_TODAY/images/LOGO_HD/image.png",
-    "streamUrl": "https://d1rc86nwwc9fag.cloudfront.net/vglive-sk-293160/master.m3u8",
-    "category": "all",
-    "latencyMs": 978
-  },
-  {
-    "id": "6afc49a9ec5c941a",
-    "name": "India TV (720p)",
-    "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_INDIA_TV/images/LOGO_HD/image.png",
-    "streamUrl": "https://pl-indiatvnews.akamaized.net/out/v1/db79179b608641ceaa5a4d0dd0dca8da/index.m3u8",
-    "category": "all",
-    "latencyMs": 1229
-  },
-  {
-    "id": "04f835eb46dcbe49",
-    "name": "India TV Aap Ki Adalat (1080p) [Geo-blocked]",
-    "logoUrl": "https://play-lh.googleusercontent.com/2IlBX3IQHna8g4g-56vwGWb14K38spcviIh3i7uJCJ32ydfhcKZdOsacgijPkPeerEA",
-    "streamUrl": "https://amg01550-amg01550c6-samsung-in-4679.playouts.now.amagi.tv/playlist/amg01550-indiatvfast-indiatvakasamsung-samsungin/playlist.m3u8",
-    "category": "documentary",
-    "latencyMs": 1206
+    "latencyMs": 477
   },
   {
     "id": "321ac5aaece6bbca",
@@ -1205,7 +709,7 @@
     "logoUrl": "https://www.jamuna.tv/wp-content/themes/jtv-news/img/logo.png",
     "streamUrl": "https://bozztv.com/rongo/rongo-JamunaTelevision/index.m3u8",
     "category": "all",
-    "latencyMs": 460
+    "latencyMs": 477
   },
   {
     "id": "620fcdf990f50fd7",
@@ -1213,55 +717,7 @@
     "logoUrl": "https://i.imgur.com/2EmrZPQ.png",
     "streamUrl": "http://93.184.10.248/JordanSport/index.m3u8",
     "category": "sports",
-    "latencyMs": 259
-  },
-  {
-    "id": "d8390837c87de3a5",
-    "name": "Kairali News (720p)",
-    "logoUrl": "https://dtil.tmsimg.com/assets/s143246_ld_h15_aa.png?lock=720x540",
-    "streamUrl": "https://cdn-3.pishow.tv/live/1469/master.m3u8",
-    "category": "all",
-    "latencyMs": 2776
-  },
-  {
-    "id": "84cce665b8a2429f",
-    "name": "Kairali TV (576p)",
-    "logoUrl": "https://upload.wikimedia.org/wikipedia/en/thumb/6/6e/Kairali_TV.svg/500px-Kairali_TV.svg.png",
-    "streamUrl": "https://mumt01.tangotv.in/O5aw8Zn3KAIRALI/index.m3u8",
-    "category": "entertainment",
-    "latencyMs": 2984
-  },
-  {
-    "id": "93dbf084dfaee4f1",
-    "name": "Kairali We (576p)",
-    "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_KAIRALI_WE/images/LOGO_HD/image.png",
-    "streamUrl": "https://cdn-3.pishow.tv/live/1530/master.m3u8",
-    "category": "movies",
-    "latencyMs": 2830
-  },
-  {
-    "id": "6ad4e19fa6e60d32",
-    "name": "Kalaignar Seithigal (720p)",
-    "logoUrl": "https://dtil.tmsimg.com/assets/s143769_ld_h15_aa.png?lock=720x540",
-    "streamUrl": "https://live-cf-kalaignarnews.dailyhunt.in/master.m3u8",
-    "category": "all",
-    "latencyMs": 2295
-  },
-  {
-    "id": "72f626f81da8c375",
-    "name": "Kalika TV (576p)",
-    "logoUrl": "https://i.imgur.com/XWXFoJA.png",
-    "streamUrl": "http://server.applelive.in/kalikatv/kalikatv.m3u8",
-    "category": "music",
-    "latencyMs": 2754
-  },
-  {
-    "id": "0f18e0d80fc0dddc",
-    "name": "KCM (1080p) [Geo-blocked]",
-    "logoUrl": "https://jiotvimages.cdn.jio.com/dare_images/images/KCM.png",
-    "streamUrl": "https://amg02159-amg02159c7-samsung-in-4001.playouts.now.amagi.tv/playlist/amg02159-kcglobal-kcm-samsungin/playlist.m3u8",
-    "category": "movies",
-    "latencyMs": 2751
+    "latencyMs": 263
   },
   {
     "id": "9362b763d9e47f42",
@@ -1269,7 +725,7 @@
     "logoUrl": "https://i.imgur.com/RgdHdOV.png",
     "streamUrl": "http://31.148.48.15/KHL_TV/index.m3u8",
     "category": "sports",
-    "latencyMs": 382
+    "latencyMs": 377
   },
   {
     "id": "eaae6d9fed45438f",
@@ -1277,7 +733,7 @@
     "logoUrl": "https://i.imgur.com/pwxT0ON.png",
     "streamUrl": "http://31.148.48.15/KHL_TV_HD/index.m3u8",
     "category": "sports",
-    "latencyMs": 383
+    "latencyMs": 382
   },
   {
     "id": "931e1ec515454021",
@@ -1285,7 +741,7 @@
     "logoUrl": "https://i.imgur.com/ilay5Jr.png",
     "streamUrl": "http://162.19.255.233:8080/play/UNbAl57p9hXZClOu56FCTZID4SFOqZLZ81NguVP-JxM/m3u8",
     "category": "sports",
-    "latencyMs": 188
+    "latencyMs": 186
   },
   {
     "id": "3350657c40d2da70",
@@ -1293,7 +749,7 @@
     "logoUrl": "https://i.imgur.com/vIJTVia.png",
     "streamUrl": "https://streaming.madanichannel.tv/static/streaming-playlists/hls/d3e49b76-ac06-4689-a641-9200445b647f/master.m3u8",
     "category": "all",
-    "latencyMs": 710
+    "latencyMs": 745
   },
   {
     "id": "0a108c8132fb3180",
@@ -1301,7 +757,7 @@
     "logoUrl": "https://i.imgur.com/X02s2UE.png",
     "streamUrl": "http://31.148.48.15/Match_Strana/index.m3u8",
     "category": "sports",
-    "latencyMs": 386
+    "latencyMs": 369
   },
   {
     "id": "278a3c6fb9679a4f",
@@ -1309,7 +765,7 @@
     "logoUrl": "https://i.imgur.com/0ohnpql.png",
     "streamUrl": "http://77.46.130.252:99/maxsport1",
     "category": "sports",
-    "latencyMs": 232
+    "latencyMs": 224
   },
   {
     "id": "d133332ee1509ec1",
@@ -1317,7 +773,7 @@
     "logoUrl": "https://i.imgur.com/33m1wPN.png",
     "streamUrl": "http://77.46.130.252:99/maxsport2",
     "category": "sports",
-    "latencyMs": 229
+    "latencyMs": 227
   },
   {
     "id": "c29591a7b10aaff0",
@@ -1325,7 +781,7 @@
     "logoUrl": "https://i.imgur.com/eGiGgZ2.png",
     "streamUrl": "http://77.46.130.252:99/maxsport3",
     "category": "sports",
-    "latencyMs": 225
+    "latencyMs": 223
   },
   {
     "id": "fa9786379ca5267d",
@@ -1333,7 +789,7 @@
     "logoUrl": "https://i.imgur.com/7IxXX6f.png",
     "streamUrl": "http://213.91.179.28:8000/play/a05n",
     "category": "sports",
-    "latencyMs": 249
+    "latencyMs": 248
   },
   {
     "id": "611319366b7b90aa",
@@ -1349,7 +805,7 @@
     "logoUrl": "https://i.imgur.com/E6doEWH.png",
     "streamUrl": "https://bozztv.com/rongo/rongo-MohonaTV/index.m3u8",
     "category": "entertainment",
-    "latencyMs": 496
+    "latencyMs": 503
   },
   {
     "id": "6c115800c8f0e68f",
@@ -1357,7 +813,7 @@
     "logoUrl": "https://www.jagobd.com/wp-content/uploads/2016/02/moviebangla.jpg?x50681",
     "streamUrl": "http://alvetv.com/moviebanglatv/8080/index.m3u8",
     "category": "movies",
-    "latencyMs": 1028
+    "latencyMs": 945
   },
   {
     "id": "d24d37b108634eef",
@@ -1365,7 +821,7 @@
     "logoUrl": "https://i.imgur.com/SEQFh0P.png",
     "streamUrl": "http://23.237.104.106:8080/USA_MSG/index.m3u8",
     "category": "sports",
-    "latencyMs": 101
+    "latencyMs": 100
   },
   {
     "id": "73372d3cd24c79de",
@@ -1373,7 +829,7 @@
     "logoUrl": "https://i.imgur.com/1ztVXUi.png",
     "streamUrl": "https://dzkyvlfyge.erbvr.com/PeaceTvBangla/index.m3u8",
     "category": "all",
-    "latencyMs": 1251
+    "latencyMs": 1156
   },
   {
     "id": "2d863118323ffcd0",
@@ -1381,23 +837,7 @@
     "logoUrl": "https://dtil.tmsimg.com/assets/s143723_ld_h15_aa.png?lock=720x540",
     "streamUrl": "https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/in/YuppTV/RepublicTV.m3u8",
     "category": "all",
-    "latencyMs": 1927
-  },
-  {
-    "id": "42380af014c4631a",
-    "name": "Roja Movies (1080p)",
-    "logoUrl": "https://jiotvimages.cdn.jio.com/dare_images/images/rojamovies.png",
-    "streamUrl": "https://stream.rojatv.cloud/rojatv/rojatv/index.m3u8",
-    "category": "movies",
-    "latencyMs": 2708
-  },
-  {
-    "id": "1a8e5cc5d93abaf6",
-    "name": "Roja TV (1080p)",
-    "logoUrl": "https://jiotvimages.cdn.jio.com/dare_images/images/rojatv.png",
-    "streamUrl": "https://live.rojatv.cloud/rojatv/rojatv/index.m3u8",
-    "category": "entertainment",
-    "latencyMs": 2696
+    "latencyMs": 2267
   },
   {
     "id": "f1b35ff290602837",
@@ -1405,15 +845,7 @@
     "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_ROMEDY_NOW/images/LOGO_HD/image.png",
     "streamUrl": "http://103.157.248.140:8000/play/a015/index.m3u8",
     "category": "movies",
-    "latencyMs": 439
-  },
-  {
-    "id": "fbdc1ca37331fc76",
-    "name": "Rozana Spokesman (1080p)",
-    "logoUrl": "https://www.rozanaspokesman.in/images/logospokesman.png",
-    "streamUrl": "https://live1.ottlive.co.in/spokesman/spokesman/index.m3u8",
-    "category": "all",
-    "latencyMs": 2839
+    "latencyMs": 407
   },
   {
     "id": "9f4cef5ac0a0f072",
@@ -1429,39 +861,7 @@
     "logoUrl": "https://i.imgur.com/yu8ugqt.png",
     "streamUrl": "https://bozztv.com/rongo/rongo-RTV/index.m3u8",
     "category": "entertainment",
-    "latencyMs": 586
-  },
-  {
-    "id": "205b8356f01236bb",
-    "name": "Saam TV",
-    "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_SAAM_TV/images/LOGO_HD/image.png",
-    "streamUrl": "https://cdn-3.pishow.tv/live/437/master.m3u8",
-    "category": "all",
-    "latencyMs": 2739
-  },
-  {
-    "id": "bb236825b1db2832",
-    "name": "Sada TV (1080p) [Not 24/7]",
-    "logoUrl": "https://i.ibb.co/cXPzpGp/SADA-CHANNEL-HBN-global-Punjabi-Satellite-TV.png",
-    "streamUrl": "http://cdn12.henico.net:8080/live/sadatv/index.m3u8",
-    "category": "entertainment",
-    "latencyMs": 2189
-  },
-  {
-    "id": "09ceb444d8d35e1b",
-    "name": "Safari TV (480p) [Not 24/7]",
-    "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_SAFARI_TV/images/LOGO_HD/image.png",
-    "streamUrl": "https://j78dp346yq5r-hls-live.5centscdn.com/safari/live.stream/playlist.m3u8",
-    "category": "documentary",
-    "latencyMs": 2950
-  },
-  {
-    "id": "d97dab6cab504624",
-    "name": "Salvation TV (1080p)",
-    "logoUrl": "https://content.jdmagicbox.com/comp/bangalore/l5/080pxx80.xx80.150207120517.e4l5/catalogue/salvation-tv-network-pvt-m-g-road-bangalore-religious-organizations-1sabn2d.jpg",
-    "streamUrl": "https://ktismaservers.in:3902/live/salvationtvlive.m3u8",
-    "category": "all",
-    "latencyMs": 2960
+    "latencyMs": 570
   },
   {
     "id": "c0363a19a369cfbf",
@@ -1469,7 +869,7 @@
     "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_SHUBH_TV/images/LOGO_HD/image.png",
     "streamUrl": "https://d2g1vdc6ozl2o8.cloudfront.net/out/v1/0a0dc7d7911b4fddbb4dfc963fdd4b9e/index.m3u8",
     "category": "all",
-    "latencyMs": 1251
+    "latencyMs": 2366
   },
   {
     "id": "599e538772143f4b",
@@ -1477,15 +877,7 @@
     "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_SHUBHSANDESH_TV/images/LOGO_HD/image.png",
     "streamUrl": "https://6284rn2xr7xv-hls-live.wmncdn.net/shubhsandeshtv1/live123.stream/index.m3u8",
     "category": "all",
-    "latencyMs": 1347
-  },
-  {
-    "id": "b673e05fcfbb0da3",
-    "name": "Siri Kannada (576p)",
-    "logoUrl": "https://dtil.tmsimg.com/assets/s143790_ld_h9_aa.png?lock=720x540",
-    "streamUrl": "https://mumt02.tangotv.in/SIRIKANNADAALLTIME/index.m3u8",
-    "category": "entertainment",
-    "latencyMs": 1493
+    "latencyMs": 2991
   },
   {
     "id": "5cc9bcb3ec1af40e",
@@ -1493,7 +885,7 @@
     "logoUrl": "https://dtil.tmsimg.com/assets/s143791_ld_h9_aa.png?lock=720x540",
     "streamUrl": "http://ptuf.ridsys.in/riptv/live/KALAIGNAR_SIRIPOLI/index.m3u8",
     "category": "all",
-    "latencyMs": 1052
+    "latencyMs": 2068
   },
   {
     "id": "39662bfb50650d6e",
@@ -1501,7 +893,7 @@
     "logoUrl": "https://i.imgur.com/i54AQic.png",
     "streamUrl": "https://bozztv.com/rongo/rongo-somoy/index.m3u8",
     "category": "all",
-    "latencyMs": 588
+    "latencyMs": 603
   },
   {
     "id": "25ad08b7a5e74b84",
@@ -1509,7 +901,7 @@
     "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_SONY_MARATHI/images/LOGO_HD/image.png",
     "streamUrl": "https://sl.vodep39240327.workers.dev/channel/SONY+MARATHI.m3u8",
     "category": "entertainment",
-    "latencyMs": 1259
+    "latencyMs": 2779
   },
   {
     "id": "d4f244d7b75d8a41",
@@ -1517,7 +909,7 @@
     "logoUrl": "https://i.postimg.cc/Z5G8j67L/PIX-HD-WHITE.png",
     "streamUrl": "https://sl.vodep39240327.workers.dev/channel/SONY+PIX+HD.m3u8",
     "category": "movies",
-    "latencyMs": 1262
+    "latencyMs": 2766
   },
   {
     "id": "596b669de9f806e8",
@@ -1525,7 +917,7 @@
     "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_SONY_WAH/images/LOGO_HD/image.png",
     "streamUrl": "https://sl.vodep39240327.workers.dev/channel/SONY+WAH.m3u8",
     "category": "movies",
-    "latencyMs": 1269
+    "latencyMs": 2777
   },
   {
     "id": "1e0f7c025da2d079",
@@ -1533,15 +925,7 @@
     "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_SONY_YAY/images/LOGO_HD/image.png",
     "streamUrl": "https://sl.vodep39240327.workers.dev/channel/SONY+YAY.m3u8",
     "category": "kids",
-    "latencyMs": 1264
-  },
-  {
-    "id": "f82bd2030625c10e",
-    "name": "Sooriyan TV (1080p)",
-    "logoUrl": "https://i.ibb.co/LSyydKj/Sooriyan-TV-Tamil.jpg",
-    "streamUrl": "https://live20.bozztv.com/giatv/giatv-Infinittyott/Infinittyott/playlist.m3u8",
-    "category": "entertainment",
-    "latencyMs": 897
+    "latencyMs": 2755
   },
   {
     "id": "e3bc6cb0dc340373",
@@ -1549,7 +933,7 @@
     "logoUrl": "https://i.imgur.com/X5X3tKC.png",
     "streamUrl": "http://46.149.191.217:9005/play/a017",
     "category": "sports",
-    "latencyMs": 247
+    "latencyMs": 241
   },
   {
     "id": "394ff11f0e477c08",
@@ -1557,7 +941,7 @@
     "logoUrl": "https://i.imgur.com/Q8ajPij.png",
     "streamUrl": "http://103.253.18.58:8000/play/a00u",
     "category": "all",
-    "latencyMs": 436
+    "latencyMs": 429
   },
   {
     "id": "7d5826ec03f43fea",
@@ -1565,7 +949,7 @@
     "logoUrl": "https://i.imgur.com/G0ZfzZr.png",
     "streamUrl": "http://103.253.18.58:8000/play/a00r",
     "category": "movies",
-    "latencyMs": 461
+    "latencyMs": 439
   },
   {
     "id": "72316a3a60626f5c",
@@ -1573,7 +957,7 @@
     "logoUrl": "https://i.imgur.com/gSWv9U3.png",
     "streamUrl": "http://103.253.18.58:8000/play/a017",
     "category": "movies",
-    "latencyMs": 441
+    "latencyMs": 444
   },
   {
     "id": "7b3b37c9c074cbbd",
@@ -1581,7 +965,7 @@
     "logoUrl": "https://i.imgur.com/U7eiuqv.png",
     "streamUrl": "http://103.253.18.58:8000/play/a02u",
     "category": "movies",
-    "latencyMs": 433
+    "latencyMs": 406
   },
   {
     "id": "dd82be23bae25af3",
@@ -1589,7 +973,7 @@
     "logoUrl": "https://i.imgur.com/azqtpYh.png",
     "streamUrl": "http://103.157.248.140:8000/play/a00b/index.m3u8",
     "category": "movies",
-    "latencyMs": 450
+    "latencyMs": 401
   },
   {
     "id": "55f479047e53e760",
@@ -1597,7 +981,7 @@
     "logoUrl": "https://i.imgur.com/IlufzR5.png",
     "streamUrl": "https://tvsen4.aynaott.com/n64PH4YL/index.m3u8",
     "category": "entertainment",
-    "latencyMs": 865
+    "latencyMs": 830
   },
   {
     "id": "130b87d0e154f324",
@@ -1605,7 +989,7 @@
     "logoUrl": "https://i.imgur.com/5c9PVS0.png",
     "streamUrl": "http://217.20.112.199:8080/maatv/index.m3u8",
     "category": "entertainment",
-    "latencyMs": 188
+    "latencyMs": 191
   },
   {
     "id": "2d4988ddc23f1188",
@@ -1613,7 +997,7 @@
     "logoUrl": "https://i.imgur.com/E5jjKHI.png",
     "streamUrl": "http://103.253.18.58:8000/play/a00m",
     "category": "sports",
-    "latencyMs": 443
+    "latencyMs": 422
   },
   {
     "id": "7df5d4b0a3bc3f84",
@@ -1621,7 +1005,7 @@
     "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_STAR_SPORTS_1_HINDI/images/LOGO_HD/image.png",
     "streamUrl": "http://103.253.18.58:8000/play/a03o",
     "category": "sports",
-    "latencyMs": 431
+    "latencyMs": 420
   },
   {
     "id": "cc594b679b8a6c88",
@@ -1629,7 +1013,7 @@
     "logoUrl": "https://i.imgur.com/kHerF19.png",
     "streamUrl": "http://103.157.248.140:8000/play/a01m/index.m3u8",
     "category": "sports",
-    "latencyMs": 450
+    "latencyMs": 421
   },
   {
     "id": "b0a26cd8f6cfb41a",
@@ -1637,7 +1021,7 @@
     "logoUrl": "https://i.imgur.com/J3jB7Kr.png",
     "streamUrl": "https://5a1178b42cc03.streamlock.net/8220/8220/playlist.m3u8",
     "category": "entertainment",
-    "latencyMs": 1422
+    "latencyMs": 2794
   },
   {
     "id": "d73b4593bb7be516",
@@ -1645,15 +1029,7 @@
     "logoUrl": "https://i.imgur.com/xWxNy3L.png",
     "streamUrl": "http://41.205.93.154/STAR-PLUS/index.m3u8",
     "category": "entertainment",
-    "latencyMs": 405
-  },
-  {
-    "id": "5bc7de1f85a41a12",
-    "name": "Steelbird Music (720p) [Not 24/7]",
-    "logoUrl": "https://jiotvimages.cdn.jio.com/dare_images/images/Steelbird_Music.png",
-    "streamUrl": "https://cdn2.in/SteelbirdMusicTVhls/live.m3u8",
-    "category": "music",
-    "latencyMs": 1920
+    "latencyMs": 399
   },
   {
     "id": "c6c8ffcdcae88a69",
@@ -1661,7 +1037,7 @@
     "logoUrl": "https://i.imgur.com/FBgu8yB.png",
     "streamUrl": "https://lotus.stingray.com/manifest/ose-101ads-montreal/samsungtvplus/master.m3u8",
     "category": "music",
-    "latencyMs": 923
+    "latencyMs": 2306
   },
   {
     "id": "8f39889c34a212ab",
@@ -1669,7 +1045,7 @@
     "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Stingray_Djazz.png/960px-Stingray_Djazz.png",
     "streamUrl": "https://lotus.stingray.com/manifest/djazz-djaads-montreal/samsungtvplus/master.m3u8",
     "category": "music",
-    "latencyMs": 936
+    "latencyMs": 2312
   },
   {
     "id": "40585959907ee527",
@@ -1677,7 +1053,7 @@
     "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Stingray_Music_logo.svg/960px-Stingray_Music_logo.svg.png",
     "streamUrl": "https://lotus.stingray.com/manifest/ose-137ads-montreal/samsungtvplus/master.m3u8",
     "category": "music",
-    "latencyMs": 927
+    "latencyMs": 2306
   },
   {
     "id": "3dba7c7e630d5b15",
@@ -1685,7 +1061,7 @@
     "logoUrl": "https://i.imgur.com/882kd90.png",
     "streamUrl": "https://lotus.stingray.com/manifest/naturescape-a003-montreal/samsungtvplus/master.m3u8",
     "category": "music",
-    "latencyMs": 929
+    "latencyMs": 2280
   },
   {
     "id": "ca40251e1a1802d4",
@@ -1693,7 +1069,7 @@
     "logoUrl": "https://i.imgur.com/ywAN923.png",
     "streamUrl": "https://lotus.stingray.com/manifest/ose-122ads-montreal/samsungtvplus/master.m3u8",
     "category": "music",
-    "latencyMs": 945
+    "latencyMs": 2282
   },
   {
     "id": "441a618451baafd5",
@@ -1701,7 +1077,7 @@
     "logoUrl": "https://i.imgur.com/mMbntB5.png",
     "streamUrl": "https://lotus.stingray.com/manifest/ose-317ads-montreal/samsungtvplus/master.m3u8",
     "category": "music",
-    "latencyMs": 905
+    "latencyMs": 2309
   },
   {
     "id": "5382a785f14cddb6",
@@ -1709,15 +1085,7 @@
     "logoUrl": "https://i.imgur.com/yOPB7JB.png",
     "streamUrl": "https://cdn-1.pishow.tv/live/276/master.m3u8",
     "category": "movies",
-    "latencyMs": 1599
-  },
-  {
-    "id": "efdb9d955194ec96",
-    "name": "Studio Yuva (576p)",
-    "logoUrl": "https://i.imgur.com/BOhgz2T.png",
-    "streamUrl": "https://mumt01.tangotv.in/O5aw8Zn3STUDIOYUVA/index.m3u8",
-    "category": "entertainment",
-    "latencyMs": 1781
+    "latencyMs": 2935
   },
   {
     "id": "fd21dc1af0afc025",
@@ -1725,7 +1093,7 @@
     "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_SUBHAVAARTHA/images/LOGO_HD/image.png",
     "streamUrl": "https://2mk9qae4rwyb-hls-live.wmncdn.net/shubhavartha/live.stream/playlist.m3u8",
     "category": "all",
-    "latencyMs": 779
+    "latencyMs": 683
   },
   {
     "id": "604a36db0b3cd603",
@@ -1733,7 +1101,7 @@
     "logoUrl": "https://jiotvimages.cdn.jio.com/dare_images/images/subintvtamil.png",
     "streamUrl": "https://stream.galaxyott.live/live/subintv/index.m3u8",
     "category": "entertainment",
-    "latencyMs": 968
+    "latencyMs": 997
   },
   {
     "id": "5483f55b27e31539",
@@ -1741,7 +1109,7 @@
     "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_SUDARSHAN_NEWS/images/LOGO_HD/image.png",
     "streamUrl": "https://ott.livelegitpro.in/sudarshannews/sudarshannews/tracks-v1/index.fmp4.m3u8",
     "category": "all",
-    "latencyMs": 910
+    "latencyMs": 871
   },
   {
     "id": "1c1cee23efd4bde2",
@@ -1749,7 +1117,7 @@
     "logoUrl": "https://jiotvimages.cdn.jio.com/dare_images/images/suryatvtamil.png",
     "streamUrl": "https://stream.ottlive.co.in/suryatvtamil/index.m3u8",
     "category": "entertainment",
-    "latencyMs": 1892
+    "latencyMs": 1807
   },
   {
     "id": "2e2bbff73ec7cb5e",
@@ -1757,7 +1125,7 @@
     "logoUrl": "https://ltsk-cdn.s3.eu-west-1.amazonaws.com/jumpstart/Temp_Live/cdn/HLS/Channel/transparentImages/Suriyan-tv-logo_2000_X_1125_Transpharent.png",
     "streamUrl": "https://stream.sscloud7.com/live/suriyantv/index.m3u8",
     "category": "movies",
-    "latencyMs": 1270
+    "latencyMs": 1225
   },
   {
     "id": "8ffa50659f7ca44a",
@@ -1765,7 +1133,7 @@
     "logoUrl": "https://dtil.tmsimg.com/assets/s143890_ld_h9_aa.png?lock=720x540",
     "streamUrl": "https://player.mslivestream.net/tamil/ac206e74d75b285755ee4924df87d951.sdp/playlist.m3u8",
     "category": "all",
-    "latencyMs": 1179
+    "latencyMs": 1243
   },
   {
     "id": "92667b2929cf5303",
@@ -1773,7 +1141,7 @@
     "logoUrl": "https://jiotvimages.cdn.jio.com/dare_images/images/SVBC3.png",
     "streamUrl": "https://player.mslivestream.net/svbc/2e628d7e1b65d31254fd7705ff7ee64d.sdp/playlist.m3u8",
     "category": "all",
-    "latencyMs": 1220
+    "latencyMs": 963
   },
   {
     "id": "49ea8ef7ff00ca9e",
@@ -1781,7 +1149,7 @@
     "logoUrl": "https://jiotvimages.cdn.jio.com/dare_images/images/SVBC4.png",
     "streamUrl": "https://player.mslivestream.net/mslive/13a2927187b9700ae7ea82d7841d5b68.sdp/playlist.m3u8",
     "category": "all",
-    "latencyMs": 1019
+    "latencyMs": 983
   },
   {
     "id": "e22501263a3be8bb",
@@ -1789,7 +1157,7 @@
     "logoUrl": "https://dtil.tmsimg.com/assets/s143889_ld_h9_ab.png?lock=720x540",
     "streamUrl": "https://player.mslivestream.net/telugu/5d076e5c3d34cb8bb08e54a4bb7e223e.sdp/playlist.m3u8",
     "category": "all",
-    "latencyMs": 1414
+    "latencyMs": 984
   },
   {
     "id": "5e627ac0dc908514",
@@ -1797,7 +1165,7 @@
     "logoUrl": "https://jiotvimages.cdn.jio.com/dare_images/images/Swadesh_News.png",
     "streamUrl": "https://cdn-2.pishow.tv/live/465/master.m3u8",
     "category": "all",
-    "latencyMs": 1134
+    "latencyMs": 943
   },
   {
     "id": "08d2617dde3fd041",
@@ -1805,7 +1173,7 @@
     "logoUrl": "https://i.imgur.com/ye6v4GP.png",
     "streamUrl": "http://cloud.logichost.in:1935/SWANTHAM/live/index.m3u8",
     "category": "entertainment",
-    "latencyMs": 927
+    "latencyMs": 724
   },
   {
     "id": "803bc185da6106ee",
@@ -1813,7 +1181,7 @@
     "logoUrl": "https://jiotvimages.cdn.jio.com/dare_images/images/SMBC_TV.png",
     "streamUrl": "https://cdn-2.pishow.tv/live/477/master.m3u8",
     "category": "all",
-    "latencyMs": 1317
+    "latencyMs": 987
   },
   {
     "id": "8d4a9b43f992805a",
@@ -1821,7 +1189,7 @@
     "logoUrl": "https://jiotvimages.cdn.jio.com/dare_images/images/Swatantra_News.png",
     "streamUrl": "https://mumbai-edge.smartplaytv.in/SwatantraTV/index.m3u8",
     "category": "all",
-    "latencyMs": 1534
+    "latencyMs": 1160
   },
   {
     "id": "cf4d99954f0ab3ba",
@@ -1829,7 +1197,7 @@
     "logoUrl": "https://dtil.tmsimg.com/assets/s143919_ld_h15_aa.png?lock=720x540",
     "streamUrl": "https://cdn-1.pishow.tv/live/385/master.m3u8",
     "category": "all",
-    "latencyMs": 1401
+    "latencyMs": 1044
   },
   {
     "id": "92e117414ac20369",
@@ -1837,7 +1205,7 @@
     "logoUrl": "https://jiotvimages.cdn.jio.com/dare_images/images/Taaza_TV.png",
     "streamUrl": "https://live.we2live.in/taazatv/live/playlist.m3u8",
     "category": "all",
-    "latencyMs": 1246
+    "latencyMs": 905
   },
   {
     "id": "51fb88ee473594e9",
@@ -1845,7 +1213,7 @@
     "logoUrl": "https://jiotvimages.cdn.jio.com/dare_images/images/Tamilan_Television.png",
     "streamUrl": "https://cdn.zionmediait.com/zionmediaitserver2024/97484f5ce6da96e496a9b87c439835d0.sdp/playlist.m3u8",
     "category": "all",
-    "latencyMs": 1710
+    "latencyMs": 1293
   },
   {
     "id": "a854899330f60791",
@@ -1853,7 +1221,7 @@
     "logoUrl": "https://i.imgur.com/oSm8zFD.png",
     "streamUrl": "https://livetv.tarangplus.in/tarangmusic-origin/live/playlist.m3u8",
     "category": "music",
-    "latencyMs": 1036
+    "latencyMs": 1085
   },
   {
     "id": "dd1a6913b8cb0d01",
@@ -1861,7 +1229,7 @@
     "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_TARANG/images/LOGO_HD/image.png",
     "streamUrl": "https://livetv.tarangplus.in/tarangtv-origin/live/playlist.m3u8",
     "category": "entertainment",
-    "latencyMs": 1084
+    "latencyMs": 1131
   },
   {
     "id": "e01a4a4931d4c069",
@@ -1869,7 +1237,7 @@
     "logoUrl": "https://i.imgur.com/PCVOdup.png",
     "streamUrl": "https://cdn-4.pishow.tv/live/239/master.m3u8",
     "category": "all",
-    "latencyMs": 1509
+    "latencyMs": 1477
   },
   {
     "id": "9f25ba3519c65713",
@@ -1877,7 +1245,7 @@
     "logoUrl": "https://dvvlqr1rtlak3.cloudfront.net/TeluguOne/teluguone_logo_resized_400x200.png",
     "streamUrl": "https://teluguone-yupptv.vgcdn.net/v1/019be9e3f04d1ea55784338b5c3e89/019be9e4474415fc60e93459e1e808/teluguone_2500k.m3u8",
     "category": "entertainment",
-    "latencyMs": 1194
+    "latencyMs": 1349
   },
   {
     "id": "7b4c8bb3a7dc1985",
@@ -1885,7 +1253,7 @@
     "logoUrl": "https://d229kpbsb5jevy.cloudfront.net/yuppfast/content/common/channel/logos/thalaa-tv.png",
     "streamUrl": "https://streams2.sofast.tv/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/2069c593-3c07-4d62-9d44-746be5c3a5d6/manifest.m3u8",
     "category": "movies",
-    "latencyMs": 1284
+    "latencyMs": 1253
   },
   {
     "id": "f45a06f16d91bb41",
@@ -1893,7 +1261,7 @@
     "logoUrl": "https://dtil.tmsimg.com/assets/s158791_ld_h15_aa.png?lock=720x540",
     "streamUrl": "https://mumt07.tangotv.in/zHjX9OFlTHANTHIONE/index.m3u8",
     "category": "entertainment",
-    "latencyMs": 1811
+    "latencyMs": 1727
   },
   {
     "id": "b98de16c8099b6f0",
@@ -1901,7 +1269,7 @@
     "logoUrl": "https://dtil.tmsimg.com/assets/s144000_ld_h15_aa.png?lock=720x540",
     "streamUrl": "https://cdn-3.pishow.tv/live/1612/master.m3u8",
     "category": "all",
-    "latencyMs": 1658
+    "latencyMs": 1573
   },
   {
     "id": "5ffc2ae61b3d8284",
@@ -1909,7 +1277,7 @@
     "logoUrl": "https://i.imgur.com/yH7n2dF.png",
     "streamUrl": "https://the-pet-collective-international-in.samsung.wurl.tv/playlist.m3u8",
     "category": "all",
-    "latencyMs": 127
+    "latencyMs": 194
   },
   {
     "id": "ce2974882c5bef23",
@@ -1925,7 +1293,7 @@
     "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Tigo_Sports_2025.png/960px-Tigo_Sports_2025.png",
     "streamUrl": "http://45.170.130.224:8000/play/a04i/index.m3u8",
     "category": "sports",
-    "latencyMs": 304
+    "latencyMs": 306
   },
   {
     "id": "426fe89b42a82c32",
@@ -1933,7 +1301,15 @@
     "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_TIMES_NOW_NAVBHARAT_HD/images/LOGO_HD/image.png",
     "streamUrl": "https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/in/YuppTV/TimesNowNavbharat.m3u8",
     "category": "all",
-    "latencyMs": 145
+    "latencyMs": 208
+  },
+  {
+    "id": "129cca21a41a0b96",
+    "name": "TNP News (1080p)",
+    "logoUrl": "https://jiotvimages.cdn.jio.com/dare_images/images/TNP_News.png",
+    "streamUrl": "https://server.thelegitpro.in/tnpnews/tnpnews/index.m3u8",
+    "category": "all",
+    "latencyMs": 1149
   },
   {
     "id": "b5fce40b1f13c452",
@@ -1941,7 +1317,7 @@
     "logoUrl": "https://d229kpbsb5jevy.cloudfront.net/yuppfast/content/common/channel/logos/aumnrs.png",
     "streamUrl": "https://streams2.sofast.tv/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/13b5735d-52c3-4be0-853d-e0ec0127e708/manifest.m3u8",
     "category": "movies",
-    "latencyMs": 1092
+    "latencyMs": 668
   },
   {
     "id": "875d6895c232a5a8",
@@ -1949,7 +1325,7 @@
     "logoUrl": "https://i.imgur.com/LPwRdmF.png",
     "streamUrl": "https://d34z4embz0hjf6.cloudfront.net/out/v1/d55b3323a9f142638f897378f0b526fe/index.m3u8",
     "category": "all",
-    "latencyMs": 819
+    "latencyMs": 911
   },
   {
     "id": "29af17605dbee7ba",
@@ -1957,15 +1333,7 @@
     "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_TOTAL_TV/images/LOGO_HD/image.png",
     "streamUrl": "https://cdn-2.pishow.tv/live/1522/master.m3u8",
     "category": "all",
-    "latencyMs": 889
-  },
-  {
-    "id": "70b476128cf23964",
-    "name": "Travelxp HD (1080p) [Geo-blocked]",
-    "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_TRAVELXP/images/LOGO_HD/image.png",
-    "streamUrl": "https://amg00416-amg00416c9-samsung-in-4882.playouts.now.amagi.tv/playlist/amg00416-travelxp-travelxphd-samsungin/playlist.m3u8",
-    "category": "all",
-    "latencyMs": 623
+    "latencyMs": 937
   },
   {
     "id": "5b4de41e014c5ae8",
@@ -1973,7 +1341,7 @@
     "logoUrl": "https://jiotvimages.cdn.jio.com/dare_images/images/Tunes_6.png",
     "streamUrl": "https://stream.d6-pro.com/tunes6music/live/video.m3u8",
     "category": "music",
-    "latencyMs": 1615
+    "latencyMs": 1255
   },
   {
     "id": "344d82502f9bf4e7",
@@ -1981,7 +1349,7 @@
     "logoUrl": "https://i.imgur.com/8rKNuS6.png",
     "streamUrl": "https://engbrics.mediacdn.ru/cdn/brics/english/playlist.m3u8",
     "category": "entertainment",
-    "latencyMs": 1922
+    "latencyMs": 2400
   },
   {
     "id": "e0ab4152a341f66d",
@@ -1989,7 +1357,7 @@
     "logoUrl": "https://www.tv13gujarati.com/assets/front/img/footer-logo.jpg",
     "streamUrl": "https://live.wrencdn.in/wrencdn/hls/tv13_web/index.m3u8",
     "category": "all",
-    "latencyMs": 1660
+    "latencyMs": 1658
   },
   {
     "id": "2cbdcc973a677116",
@@ -1997,7 +1365,7 @@
     "logoUrl": "https://dtil.tmsimg.com/assets/s144024_ld_h15_aa.png?lock=720x540",
     "streamUrl": "https://cdn-3.pishow.tv/live/1526/master.m3u8",
     "category": "all",
-    "latencyMs": 994
+    "latencyMs": 1022
   },
   {
     "id": "bad9e8bea77d2467",
@@ -2005,7 +1373,7 @@
     "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_TV9_BANGLA/images/LOGO_HD/image.png",
     "streamUrl": "https://dyjmyiv3bp2ez.cloudfront.net/pub-iotv9banaen8yq/liveabr/playlist.m3u8",
     "category": "all",
-    "latencyMs": 943
+    "latencyMs": 879
   },
   {
     "id": "b1bfba810d5e59a7",
@@ -2013,7 +1381,7 @@
     "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_TV9_BHARATVARSH/images/LOGO_HD/image.png",
     "streamUrl": "https://dyjmyiv3bp2ez.cloudfront.net/pub-iotv9hinjzgtpe/liveabr/playlist.m3u8",
     "category": "all",
-    "latencyMs": 929
+    "latencyMs": 640
   },
   {
     "id": "d353d7584f08715c",
@@ -2021,7 +1389,7 @@
     "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_TV9_GUJARATI/images/LOGO_HD/image.png",
     "streamUrl": "https://dyjmyiv3bp2ez.cloudfront.net/pub-iotv9guj3ki8lu/liveabr/playlist.m3u8",
     "category": "all",
-    "latencyMs": 671
+    "latencyMs": 895
   },
   {
     "id": "2c894b9d1c9aba5b",
@@ -2029,7 +1397,7 @@
     "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_TV9_MARATHI/images/LOGO_HD/image.png",
     "streamUrl": "https://dyjmyiv3bp2ez.cloudfront.net/pub-iotv9marlygv8h/liveabr/playlist.m3u8",
     "category": "all",
-    "latencyMs": 662
+    "latencyMs": 833
   },
   {
     "id": "af76e287ffd02420",
@@ -2037,7 +1405,7 @@
     "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_TV9_TELUGU_NEWS/images/LOGO_HD/image.png",
     "streamUrl": "https://dyjmyiv3bp2ez.cloudfront.net/pub-iotv9telcmjhcs/liveabr/playlist.m3u8",
     "category": "all",
-    "latencyMs": 940
+    "latencyMs": 829
   },
   {
     "id": "741148abc15bec8e",
@@ -2045,15 +1413,7 @@
     "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/TyC_Sports_logo.svg/960px-TyC_Sports_logo.svg.png",
     "streamUrl": "http://45.170.130.224:8000/play/a020/index.m3u8",
     "category": "sports",
-    "latencyMs": 292
-  },
-  {
-    "id": "949e9482974b894e",
-    "name": "Ultimate TV (1080p)",
-    "logoUrl": "https://jiotvimages.cdn.jio.com/dare_images/images/utvtamil.png",
-    "streamUrl": "https://stream.ottlive.co.in/utvtamil/index.m3u8",
-    "category": "music",
-    "latencyMs": 2535
+    "latencyMs": 294
   },
   {
     "id": "f2febac95cd5e045",
@@ -2061,7 +1421,7 @@
     "logoUrl": "https://jiotvimages.cdn.jio.com/dare_images/images/Unique_Tv.png",
     "streamUrl": "https://mumt05.tangotv.in/87NeALx2UNIQUETV/index.m3u8",
     "category": "kids",
-    "latencyMs": 2097
+    "latencyMs": 2795
   },
   {
     "id": "fdb9c957c4d68d11",
@@ -2069,7 +1429,7 @@
     "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/USA_Network_logo_%282016%29.svg/960px-USA_Network_logo_%282016%29.svg.png",
     "streamUrl": "http://185.246.209.113/DISCOVERYHD/index.m3u8",
     "category": "sports",
-    "latencyMs": 45
+    "latencyMs": 44
   },
   {
     "id": "a929feaa09acbd62",
@@ -2077,7 +1437,7 @@
     "logoUrl": "https://jiotvimages.cdn.jio.com/dare_images/images/Vaanavil_TV.png",
     "streamUrl": "https://6n3yope4d9ok-hls-live.5centscdn.com/vaanavil/TV.stream/playlist.m3u8",
     "category": "music",
-    "latencyMs": 1965
+    "latencyMs": 2822
   },
   {
     "id": "d438e5526ba8dbf8",
@@ -2085,7 +1445,7 @@
     "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_VANITHA/images/LOGO_HD/image.png",
     "streamUrl": "https://cdn-1.pishow.tv/live/393/master.m3u8",
     "category": "entertainment",
-    "latencyMs": 2033
+    "latencyMs": 2714
   },
   {
     "id": "7b6f8e930635dc46",
@@ -2093,15 +1453,7 @@
     "logoUrl": "https://dtil.tmsimg.com/assets/s144068_ld_h15_aa.png?lock=720x540",
     "streamUrl": "https://mumt04.tangotv.in/m18aqlK4VASANTHTV/index.m3u8",
     "category": "entertainment",
-    "latencyMs": 2214
-  },
-  {
-    "id": "62a433c5318afb11",
-    "name": "VCV (720p) [Not 24/7]",
-    "logoUrl": "https://i.imgur.com/KbU36xI.png",
-    "streamUrl": "https://5a1178b42cc03.streamlock.net/8210/8210/playlist.m3u8",
-    "category": "entertainment",
-    "latencyMs": 1890
+    "latencyMs": 2826
   },
   {
     "id": "b37b6a5f78adfea3",
@@ -2109,7 +1461,7 @@
     "logoUrl": "https://dtil.tmsimg.com/assets/s144069_ld_h15_aa.png?lock=720x540",
     "streamUrl": "https://aasthaott.akamaized.net/110923/smil:vedic.smil/playlist.m3u8",
     "category": "all",
-    "latencyMs": 1506
+    "latencyMs": 2316
   },
   {
     "id": "4ca203d31936febe",
@@ -2117,7 +1469,7 @@
     "logoUrl": "https://upload.wikimedia.org/wikipedia/en/e/e4/Logo_of_Velicham_TV.png",
     "streamUrl": "https://cdn-3.pishow.tv/live/461/master.m3u8",
     "category": "all",
-    "latencyMs": 2000
+    "latencyMs": 2799
   },
   {
     "id": "ad99b78dbd4f65b3",
@@ -2125,7 +1477,7 @@
     "logoUrl": "https://jiotvimages.cdn.jio.com/dare_images/images/Vendhar_TV.png",
     "streamUrl": "https://cdn-3.pishow.tv/live/1271/master.m3u8",
     "category": "entertainment",
-    "latencyMs": 635
+    "latencyMs": 670
   },
   {
     "id": "940c1b689444b040",
@@ -2133,7 +1485,7 @@
     "logoUrl": "https://i.imgur.com/3MWm9nD.png",
     "streamUrl": "http://202.70.146.135:8000/play/a008/index.m3u8",
     "category": "movies",
-    "latencyMs": 434
+    "latencyMs": 443
   },
   {
     "id": "784572116179a06a",
@@ -2141,7 +1493,7 @@
     "logoUrl": "https://jiotvimages.cdn.jio.com/dare_images/images/VillageTV.png",
     "streamUrl": "https://villagetv.applelive.in/villagetv/villagetv/index.m3u8",
     "category": "all",
-    "latencyMs": 1008
+    "latencyMs": 1035
   },
   {
     "id": "6307ea92673055fa",
@@ -2149,7 +1501,7 @@
     "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_VIP_NEWS/images/LOGO_HD/image.png",
     "streamUrl": "https://live.vipnews24x7.co.in/vipnews24x7/d0dbe915091d400bd8ee7f27f0791303.sdp/playlist.m3u8",
     "category": "all",
-    "latencyMs": 1055
+    "latencyMs": 1029
   },
   {
     "id": "a31b3fd21628b368",
@@ -2157,7 +1509,7 @@
     "logoUrl": "https://www.yupptv.com/seo_img/UGC_GEC_big.jpg",
     "streamUrl": "https://playhls.media.nic.in/hls/live/vyas/vyas.m3u8",
     "category": "all",
-    "latencyMs": 1203
+    "latencyMs": 1340
   },
   {
     "id": "98f2eab68054c770",
@@ -2165,7 +1517,7 @@
     "logoUrl": "https://i.imgur.com/KIEKOt1.png",
     "streamUrl": "https://jukin-weatherspy-2-in.samsung.wurl.tv/playlist.m3u8",
     "category": "all",
-    "latencyMs": 569
+    "latencyMs": 1501
   },
   {
     "id": "a60120cc6beffc8c",
@@ -2173,15 +1525,7 @@
     "logoUrl": "https://jiotvimages.cdn.jio.com/dare_images/images/Win_TV.png",
     "streamUrl": "https://cdn-4.pishow.tv/live/1531/master.m3u8",
     "category": "all",
-    "latencyMs": 1174
-  },
-  {
-    "id": "c868416d1185bc2a",
-    "name": "YRF Music (1080p)",
-    "logoUrl": "https://jiotvimages.cdn.jio.com/dare_images/images/YRF_Music.png",
-    "streamUrl": "https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01412-xiaomiasia-yrfmusic-xiaomi/playlist.m3u8",
-    "category": "music",
-    "latencyMs": 2683
+    "latencyMs": 2117
   },
   {
     "id": "790bfdb1a4a3f844",
@@ -2189,7 +1533,7 @@
     "logoUrl": "",
     "streamUrl": "https://zainabia.livebox.co.in/ZainabiaChannelhls/channel.m3u8",
     "category": "all",
-    "latencyMs": 1595
+    "latencyMs": 2318
   },
   {
     "id": "a3c2163394272522",
@@ -2197,7 +1541,7 @@
     "logoUrl": "https://dtil.tmsimg.com/assets/GNLZZGG00230P1R.png?lock=720x540",
     "streamUrl": "https://vg-zeefta.akamaized.net/ptnr-yupptv/title-zee24kalak/v1/manifest/611d79b11b77e2f571934fd80ca1413453772ac7/497f7199-758d-495d-9d2f-a5489231c428/14b7c8ec-16da-47f2-8d7e-5bbaec67b3e2/3.m3u8",
     "category": "all",
-    "latencyMs": 1105
+    "latencyMs": 2482
   },
   {
     "id": "cbf4fddfaa585fb3",
@@ -2205,7 +1549,7 @@
     "logoUrl": "https://dtil.tmsimg.com/assets/GNLZZGG00230LKE.png?lock=720x540",
     "streamUrl": "https://dgrvlduwztkd4.cloudfront.net/index_5.m3u8",
     "category": "all",
-    "latencyMs": 1491
+    "latencyMs": 2475
   },
   {
     "id": "185fb438de3fbbe4",
@@ -2213,7 +1557,7 @@
     "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_ZEE_BANGLA/images/LOGO_HD/LOGO_HD_image.png",
     "streamUrl": "http://217.20.112.199:8080/maamovies/index.m3u8",
     "category": "entertainment",
-    "latencyMs": 189
+    "latencyMs": 185
   },
   {
     "id": "506bd75ec74a5094",
@@ -2221,7 +1565,7 @@
     "logoUrl": "https://dtil.tmsimg.com/assets/GNLZZGG00230QBL.png?lock=720x540",
     "streamUrl": "https://vg-zeefta.akamaized.net/ptnr-yupptv/title-zeehindustan/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/96bbab12-582e-4540-af70-510ab6824581/main.m3u8",
     "category": "all",
-    "latencyMs": 1234
+    "latencyMs": 2212
   },
   {
     "id": "54fd8de5c703835a",
@@ -2229,7 +1573,7 @@
     "logoUrl": "https://dtil.tmsimg.com/assets/GNLZZGG00230Y44.png?lock=720x540",
     "streamUrl": "https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/in/YuppTV/ZeeBiharJharkhand.m3u8",
     "category": "all",
-    "latencyMs": 913
+    "latencyMs": 1853
   },
   {
     "id": "1c6240a460752f60",
@@ -2237,63 +1581,7 @@
     "logoUrl": "https://dtil.tmsimg.com/assets/GNLZZGG00230YYJ.png?lock=720x540",
     "streamUrl": "https://dwby15d04agvq.cloudfront.net/index_5.m3u8",
     "category": "all",
-    "latencyMs": 1755
-  },
-  {
-    "id": "f89256fd037b04b3",
-    "name": "Zee Delhi NCR Haryana (720p)",
-    "logoUrl": "https://dtil.tmsimg.com/assets/GNLZZGG0023166M.png?lock=720x540",
-    "streamUrl": "https://vg-zeefta.akamaized.net/ptnr-yupptv/title-zeedelhincr/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/cc483a15-1b39-4642-872d-5d08d362ed01/main.m3u8",
-    "category": "all",
-    "latencyMs": 2086
-  },
-  {
-    "id": "31d8a8f155ccae0d",
-    "name": "Zee Kannada News (720p)",
-    "logoUrl": "https://jiotvimages.cdn.jio.com/dare_images/images/Zee_Kannada_News.png",
-    "streamUrl": "https://d3vzwoqcbpfm8p.cloudfront.net/index_4.m3u8",
-    "category": "all",
-    "latencyMs": 2972
-  },
-  {
-    "id": "53936354e8d5c4e4",
-    "name": "Zee Madhya Pradesh Chhattisgarh (720p)",
-    "logoUrl": "https://dtil.tmsimg.com/assets/GNLZZGG002316X5.png?lock=720x540",
-    "streamUrl": "https://vg-zeefta.akamaized.net/ptnr-yupptv/title-zeemadhyachhattisgarh/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/2ab17056-6187-4f0e-a34d-f436ac479d6c/main.m3u8",
-    "category": "all",
-    "latencyMs": 2465
-  },
-  {
-    "id": "85535f051bcd3ea6",
-    "name": "Zee Malayalam News (720p)",
-    "logoUrl": "https://english.cdn.zeenews.com/images/logo/zee-malayalam-17.svg",
-    "streamUrl": "https://d1ty2af03alkwd.cloudfront.net/index_4.m3u8",
-    "category": "all",
-    "latencyMs": 2818
-  },
-  {
-    "id": "241884d4e7a59092",
-    "name": "Zee News (1080p)",
-    "logoUrl": "https://dtil.tmsimg.com/assets/GNLZZGG0023VWYC.png?lock=720x540",
-    "streamUrl": "https://dknttpxmr0dwf.cloudfront.net/index_57.m3u8",
-    "category": "all",
-    "latencyMs": 2898
-  },
-  {
-    "id": "a47c392866a2ea54",
-    "name": "Zee Punjab Haryana Himachal (720p)",
-    "logoUrl": "https://dtil.tmsimg.com/assets/GNLZZGG0022KHKS.png?lock=720x540",
-    "streamUrl": "https://vg-zeefta.akamaized.net/ptnr-yupptv/title-zeepunjabharyanahima/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/65eed269-2f3a-4dd0-ac89-d18959af28e3/main.m3u8",
-    "category": "all",
-    "latencyMs": 2645
-  },
-  {
-    "id": "0bba0cb3d0170e20",
-    "name": "Zee Rajasthan (720p)",
-    "logoUrl": "https://dtil.tmsimg.com/assets/GNLZZGG00231732.png?lock=720x540",
-    "streamUrl": "https://vg-zeefta.akamaized.net/ptnr-yupptv/title-zeerajashthannews/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/8e864b9a-1681-41a0-99a6-387490bc5b24/main.m3u8",
-    "category": "all",
-    "latencyMs": 2642
+    "latencyMs": 2758
   },
   {
     "id": "af30aa939e5e509e",
@@ -2301,7 +1589,7 @@
     "logoUrl": "https://english.cdn.zeenews.com/images/logo/zee-tamil-logo-20.svg",
     "streamUrl": "https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/in/ZMCL/ZeeTamilNews.m3u8",
     "category": "all",
-    "latencyMs": 18
+    "latencyMs": 713
   },
   {
     "id": "99b5ce55ac0a9a64",
@@ -2309,7 +1597,7 @@
     "logoUrl": "https://dtil.tmsimg.com/assets/GNLZZGG0023178R.png?lock=720x540",
     "streamUrl": "https://d116gfrn8orazi.cloudfront.net/index.m3u8?akes=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3NjcxOTc5NzJ9.O4qmdMPbHwKrCg6hFXvD70vjSPWKQd0a7NrjmFdeMB8",
     "category": "all",
-    "latencyMs": 802
+    "latencyMs": 1421
   },
   {
     "id": "978f197304f35be6",
@@ -2317,7 +1605,7 @@
     "logoUrl": "https://dtil.tmsimg.com/assets/GNLZZGG002317GQ.png?lock=720x540",
     "streamUrl": "https://duw35ict5q7th.cloudfront.net/index_3.m3u8",
     "category": "all",
-    "latencyMs": 888
+    "latencyMs": 1756
   },
   {
     "id": "62613956cbddea69",
@@ -2325,7 +1613,7 @@
     "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Ziggo_Sport_logo.svg/960px-Ziggo_Sport_logo.svg.png",
     "streamUrl": "http://86.87.15.10:8004/play/a02d/index.m3u8",
     "category": "sports",
-    "latencyMs": 183
+    "latencyMs": 196
   },
   {
     "id": "b49179c8836ff9be",
@@ -2333,22 +1621,22 @@
     "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Ziggo_Sport_logo.svg/960px-Ziggo_Sport_logo.svg.png",
     "streamUrl": "http://86.87.15.10:8003/play/a02k/index.m3u8",
     "category": "sports",
-    "latencyMs": 197
-  },
-  {
-    "id": "90079c34c769b425",
-    "name": "МАТЧ! Боец (576p)",
-    "logoUrl": "https://i.imgur.com/DogOkA4.png",
-    "streamUrl": "http://31.148.48.15/Match_Boec/index.m3u8",
-    "category": "sports",
-    "latencyMs": 382
+    "latencyMs": 193
   },
   {
     "id": "62bbbdee2d8a977e",
-    "name": "Футбол (720p)",
-    "logoUrl": "https://i.imgur.com/pEuaZVx.png",
-    "streamUrl": "http://31.148.48.15/Futbol_HD/index.m3u8",
+    "name": "Бокс ТВ (720p)",
+    "logoUrl": "https://i.imgur.com/R1UjyfX.png",
+    "streamUrl": "http://31.148.48.15/Boks_TV/index.m3u8",
     "category": "sports",
-    "latencyMs": 370
+    "latencyMs": 378
+  },
+  {
+    "id": "90079c34c769b425",
+    "name": "Русский Экстрим (576p)",
+    "logoUrl": "https://i.imgur.com/hJK7mOW.png",
+    "streamUrl": "http://31.148.48.15/Russkiy_Ekstrim/index.m3u8",
+    "category": "sports",
+    "latencyMs": 392
   }
 ]
