@@ -125,3 +125,28 @@ body {
   0%, 100% { opacity: 0.25; }
   50% { opacity: 0.5; }
 }
+
+/* UILoader (LoadingLines) keyframes — lifted here so the component does not
+   re-inject a <style> block on every buffer event. */
+@keyframes transformAnim {
+  0% { transform: translate(-55%); }
+  100% { transform: translate(55%); }
+}
+
+@keyframes opacityAnim {
+  0%, 100% { opacity: 0; }
+  15% { opacity: 1; }
+  65% { opacity: 0; }
+}
+
+@keyframes letterAnim {
+  0% { opacity: 0; }
+  5% { opacity: 1; text-shadow: 0 0 4px #fff; transform: scale(1.1) translateY(-2px); }
+  20% { opacity: 0.2; }
+  100% { opacity: 0; }
+}
+
+@keyframes pulseBar {
+  0% { transform: scaleY(var(--initial-scale)); }
+  100% { transform: scaleY(calc(var(--initial-scale) * 0.7)); }
+}

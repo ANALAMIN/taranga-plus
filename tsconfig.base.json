@@ -1,0 +1,23 @@
+{
+  // Shared compiler options inherited by every per-environment tsconfig. Split
+  // out so renderer/main/worker configs only declare what differs (their
+  // ambient `types` + `lib`). Previously all environments shared one config that
+  // lumped every ambient type together, causing cross-environment type-bleed.
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "experimentalDecorators": true,
+    "useDefineForClassFields": false,
+    "strict": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "allowJs": true,
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "paths": {
+      "@/*": ["./*"]
+    }
+  }
+}

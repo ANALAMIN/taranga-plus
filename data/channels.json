@@ -338,7 +338,7 @@
   {
     "id": "56216c86b1748c74",
     "name": "Arena Sport Premium 1 BH (1080p)",
-    "logoUrl": "https://imgur.com/csv6YsL",
+    "logoUrl": "i.imgur.com/csv6YsL.png",
     "streamUrl": "https://nl1.nghk.ai/ArenaPremium1BH/index.m3u8",
     "category": "sports",
     "latencyMs": 274
@@ -346,7 +346,7 @@
   {
     "id": "635756ad14cf670e",
     "name": "Arena Sport Premium 2 BH (720p)",
-    "logoUrl": "https://imgur.com/ztOmQ7P",
+    "logoUrl": "i.imgur.com/ztOmQ7P.png",
     "streamUrl": "https://nl1.nghk.ai/ArenaPremium2BH/index.m3u8",
     "category": "sports",
     "latencyMs": 272
@@ -1595,7 +1595,7 @@
     "id": "99b5ce55ac0a9a64",
     "name": "Zee Telugu News (720p)",
     "logoUrl": "https://dtil.tmsimg.com/assets/GNLZZGG0023178R.png?lock=720x540",
-    "streamUrl": "https://d116gfrn8orazi.cloudfront.net/index.m3u8?akes=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3NjcxOTc5NzJ9.O4qmdMPbHwKrCg6hFXvD70vjSPWKQd0a7NrjmFdeMB8",
+    "streamUrl": "https://d116gfrn8orazi.cloudfront.net/index.m3u8",
     "category": "all",
     "latencyMs": 1421
   },

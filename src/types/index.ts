@@ -1,3 +1,6 @@
+// NOTE: This type module mirrors backend/src/types/index.ts. Keep the two in
+// sync (a shared package is the long-term fix; for now they are hand-aligned).
+
 export type Category = 'all' | 'favorites' | 'sports' | 'movies' | 'music' | 'entertainment' | 'kids' | 'documentary';
 
 export interface ChannelRaw {
@@ -15,10 +18,13 @@ export interface ChannelValidated extends ChannelRaw {
 }
 
 export interface ChannelFinal {
-  id: string; // Generated: MD5 of channel name
+  id: string; // Generated: SHA-256 of normalized channel name (first 16 hex chars)
   name: string;
   logoUrl: string;
-  streamUrl: string; // Proxied through Cloudflare
+  // As stored, this is the raw upstream URL. At playback time the renderer
+  // rewrites http:// sources to route through the Worker /proxy/stream endpoint
+  // to avoid mixed-content blocks under webSecurity:true.
+  streamUrl: string;
   category: Category;
   latencyMs: number;
 }

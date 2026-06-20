@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { localDb } from '../services/localDb';
 import { AppSettings } from '../types';
+import { SETTING_KEYS } from '../services/settingsKeys';
 
 export function useSettings() {
   const [theme, setTheme] = useState<AppSettings['theme']>('dark');
@@ -18,12 +19,12 @@ export function useSettings() {
 
   useEffect(() => {
     const loadSettings = async () => {
-      const savedTheme = await localDb.getSetting<AppSettings['theme']>('theme');
+      const savedTheme = await localDb.getSetting(SETTING_KEYS.theme);
       if (savedTheme) {
         setTheme(savedTheme);
       }
-      
-      const savedAccentColor = await localDb.getSetting<AppSettings['accentColor']>('accentColor');
+
+      const savedAccentColor = await localDb.getSetting(SETTING_KEYS.accentColor);
       if (savedAccentColor) {
         setAccentColor(savedAccentColor);
         applyAccentColor(savedAccentColor);
@@ -43,13 +44,13 @@ export function useSettings() {
   const updateTheme = async (newTheme: AppSettings['theme']) => {
     setTheme(newTheme);
     document.documentElement.dataset.theme = newTheme;
-    await localDb.saveSetting('theme', newTheme);
+    await localDb.saveSetting(SETTING_KEYS.theme, newTheme);
   };
 
   const updateAccentColor = async (color: AppSettings['accentColor']) => {
     setAccentColor(color);
     applyAccentColor(color);
-    await localDb.saveSetting('accentColor', color);
+    await localDb.saveSetting(SETTING_KEYS.accentColor, color);
   };
 
   return {

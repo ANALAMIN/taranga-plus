@@ -2,5 +2,5 @@
   "name": "Taranga+",
   "description": "Bangladeshi live TV streaming app with channel grid, favorites, and video player",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": []
 }

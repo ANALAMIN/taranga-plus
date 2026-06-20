@@ -2,11 +2,16 @@ import { Category, ChannelFinal, ChannelValidated } from '../types';
 
 /**
  * Normalizes channel names for deduplication (removes extra spaces, HD tags, etc.)
+ *
+ * Preserve Unicode letters (\p{L}) and numbers (\p{N}) so Bengali / Devanagari
+ * channel names are not collapsed to empty strings and silently dropped. The
+ * previous `[^a-z0-9\s-]` filter stripped every Bangla codepoint, which made
+ * `if (!normalized) continue` discard all Bangla-named channels.
  */
 function normalizeName(name: string): string {
   return name.toLowerCase()
     .replace(/\b(hd|fhd|4k|tv)\b/g, '')
-    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/[^\p{L}\p{N}\s-]/gu, '')
     .replace(/\s+/g, ' ')
     .trim();
 }

@@ -20,7 +20,7 @@ interface ChannelCardProps {
  */
 export const ChannelCard = memo(function ChannelCard({ channel, isActive, index, onClick, layout = 'grid', isFavorite, onToggleFavorite }: ChannelCardProps) {
   
-  const handleRadialSelect = (item: MenuItem) => {
+  const handleContextMenuSelect = (item: MenuItem) => {
     switch (item.id) {
       case 'play':
         onClick(channel);
@@ -56,7 +56,7 @@ export const ChannelCard = memo(function ChannelCard({ channel, isActive, index,
 
   if (layout === 'list') {
     return (
-      <ContextMenu menuItems={menuItems} onSelect={handleRadialSelect}>
+      <ContextMenu menuItems={menuItems} onSelect={handleContextMenuSelect}>
       <motion.div
         onClick={() => onClick(channel)}
         initial={{ opacity: 0, x: 20 }}
@@ -120,13 +120,13 @@ export const ChannelCard = memo(function ChannelCard({ channel, isActive, index,
   }
 
   return (
-    <ContextMenu menuItems={menuItems} onSelect={handleRadialSelect}>
+    <ContextMenu menuItems={menuItems} onSelect={handleContextMenuSelect}>
     <motion.div
       onClick={() => onClick(channel)}
       initial={{ opacity: 0, scale: 0.95, y: 10 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       whileTap={{ scale: 0.96 }}
-      className={`group relative p-[2px] rounded-[16px] cursor-pointer transition-all duration-500 w-full aspect-[16/10] mx-auto ${
+      className={`group relative p-[2px] rounded-[16px] cursor-pointer w-full aspect-[16/10] mx-auto ${
         isActive ? 'scale-[1.05] z-10' : ''
       }`}
       style={{

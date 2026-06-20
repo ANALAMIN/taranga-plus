@@ -1,28 +1,14 @@
 {
-  "compilerOptions": {
-    "target": "ES2022",
-    "experimentalDecorators": true,
-    "useDefineForClassFields": false,
-    "module": "ESNext",
-    "lib": [
-      "ES2022",
-      "DOM",
-      "DOM.Iterable"
-    ],
-    "strict": true,
-    "skipLibCheck": true,
-    "moduleResolution": "bundler",
-    "isolatedModules": true,
-    "moduleDetection": "force",
-    "allowJs": true,
-    "jsx": "react-jsx",
-    "paths": {
-      "@/*": [
-        "./*"
-      ]
-    },
-    "allowImportingTsExtensions": true,
-    "noEmit": true,
-    "types": ["@cloudflare/workers-types", "electron", "node", "vite/client"]
-  }
+  // Root config: a no-op aggregator. `npm run lint` type-checks each
+  // environment directly (tsc --noEmit -p tsconfig.<env>.json) so a single run
+  // covers all of them WITHOUT cross-pollinating ambient globals. The old
+  // single-config lumped Cloudflare's `KVNamespace`, Electron globals and Node
+  // globals together, causing type-bleed into the renderer (e.g. apiClient had
+  // to redeclare Window.electronAPI). The per-env configs below fix that.
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.renderer.json" },
+    { "path": "./tsconfig.main.json" },
+    { "path": "./tsconfig.worker.json" }
+  ]
 }

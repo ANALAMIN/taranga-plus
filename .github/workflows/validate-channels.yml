@@ -2,21 +2,29 @@ name: Validate Channels (Hourly)
 
 on:
   schedule:
-    - cron: '*/15 * * * *'  # Every 15 minutes
-  workflow_dispatch:       # Manual trigger
+    # Hourly is plenty — the previous 15-minute cadence pushed to master 96×/day,
+    # a high-value CI-compromise target and a noisy history.
+    - cron: '0 * * * *'
+  workflow_dispatch:        # Manual trigger
 
+# Minimal permissions. `contents: write` + `pull-requests: write` let the bot
+# open a PR (not push to master). Actions are pinned to commit SHAs so a
+# compromised action release cannot ship code into the Electron app's data
+# pipeline.
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        # Pinned to the v4 release tag's commit SHA (actions/checkout@v4.2.2).
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc487 # v4.3.0
         with:
           node-version: '22'
 
@@ -26,14 +34,37 @@ jobs:
       - name: Run channel validation
         run: node .github/scripts/validate-channels.mjs
 
-      - name: Commit updated channels
+      # Push to an auto-managed branch and open/update a PR rather than pushing
+      # directly to master. A maintainer merge is the only thing that lands on
+      # the default branch.
+      - name: Create / update validation PR
         run: |
+          set -euo pipefail
+          BRANCH="auto/channel-validation"
           git config user.name "Taranga+ Bot"
           git config user.email "bot@taranga-plus.dev"
           git add data/channels.json
           if git diff --cached --quiet; then
             echo "No changes to commit"
+            exit 0
+          fi
+          git checkout -B "$BRANCH"
+          git commit -m "chore: auto-validate channels $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push --force-with-lease origin "$BRANCH"
+
+      - name: Open or update pull request
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          BRANCH="auto/channel-validation"
+          PR_EXISTS=$(gh pr list --head "$BRANCH" --state open --json number --jq 'length')
+          if [ "$PR_EXISTS" = "0" ]; then
+            gh pr create \
+              --head "$BRANCH" \
+              --base master \
+              --title "chore: auto-validated channel lineup" \
+              --body "Automated hourly channel re-validation. Review the diff to \`data/channels.json\` before merging — this is the only path by which validated upstream URLs reach the default branch and the packaged Electron app."
           else
-            git commit -m "chore: auto-validate channels $(date -u +'%Y-%m-%d %H:%M UTC')"
-            git push
+            echo "PR already open; branch force-updated."
           fi

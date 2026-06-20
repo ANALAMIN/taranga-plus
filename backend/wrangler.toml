@@ -5,7 +5,15 @@ compatibility_date = "2024-03-20"
 [triggers]
 crons = ["0 * * * *"] # Run every hour
 
+# KV namespace binding. The namespace *id* is not itself a credential, but it is
+# operationally sensitive: paired with a leaked CLOUDFLARE_API_TOKEN it grants
+# read/write access to the live channel catalog. Keep it in version control but
+# treat the API token as a secret.
+#
+# `preview_id` MUST point at a *different* namespace than `id`, otherwise
+# `wrangler dev` writes to production KV and can corrupt live data. Create one
+# with `wrangler kv namespace create TARANGA_KV_PREVIEW` and paste its id below.
 [[kv_namespaces]]
 binding = "TARANGA_KV"
 id = "b0b98e15f22c4be8a25226df118b752e"
-preview_id = "b0b98e15f22c4be8a25226df118b752e"
+preview_id = "TARANGA_KV_PREVIEW_PLACEHOLDER_REPLACE_ME"

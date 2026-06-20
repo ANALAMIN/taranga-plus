@@ -16,26 +16,23 @@ export const GradientBars: React.FC<GradientBarsProps> = ({
   className = '',
 }) => {
   const calculateHeight = (index: number, total: number) => {
+    // Guard against the single-bar / zero-divisor case: with total <= 1 the
+    // original `index / (total - 1)` produced NaN, which then propagated into
+    // the scaleY transform. Fall back to a flat full-height bar instead.
+    if (total <= 1) return 100;
     const position = index / (total - 1);
     const maxHeight = 100;
     const minHeight = 30;
-    
+
     const center = 0.5;
     const distanceFromCenter = Math.abs(position - center);
     const heightPercentage = Math.pow(distanceFromCenter * 2, 1.2);
-    
+
     return minHeight + (maxHeight - minHeight) * heightPercentage;
   };
 
   return (
     <>
-      <style>{`
-        @keyframes pulseBar {
-          0% { transform: scaleY(var(--initial-scale)); }
-          100% { transform: scaleY(calc(var(--initial-scale) * 0.7)); }
-        }
-      `}</style>
-      
       <div className={`absolute inset-0 z-0 overflow-hidden ${className}`}>
         <div 
           className="flex h-full"
@@ -48,25 +45,25 @@ export const GradientBars: React.FC<GradientBarsProps> = ({
         >
           {Array.from({ length: numBars }).map((_, index) => {
             const height = calculateHeight(index, numBars);
+            // Build the style object including the custom property, then cast
+            // once. This replaces the previous `@ts-ignore`, which suppressed
+            // ALL errors on the line (not just the custom-property one).
+            const style: React.CSSProperties & Record<string, string | number> = {
+              flex: `1 0 calc(100% / ${numBars})`,
+              maxWidth: `calc(100% / ${numBars})`,
+              height: '100%',
+              background: `linear-gradient(to top, ${gradientFrom}, ${gradientTo})`,
+              transform: `scaleY(${height / 100})`,
+              transformOrigin: 'bottom',
+              transition: 'transform 0.5s ease-in-out',
+              animation: `pulseBar ${animationDuration}s ease-in-out infinite alternate`,
+              animationDelay: `${index * 0.1}s`,
+              outline: '1px solid rgba(0, 0, 0, 0)',
+              boxSizing: 'border-box',
+              '--initial-scale': height / 100,
+            };
             return (
-              <div
-                key={index}
-                style={{
-                  flex: `1 0 calc(100% / ${numBars})`,
-                  maxWidth: `calc(100% / ${numBars})`,
-                  height: '100%',
-                  background: `linear-gradient(to top, ${gradientFrom}, ${gradientTo})`,
-                  transform: `scaleY(${height / 100})`,
-                  transformOrigin: 'bottom',
-                  transition: 'transform 0.5s ease-in-out',
-                  animation: `pulseBar ${animationDuration}s ease-in-out infinite alternate`,
-                  animationDelay: `${index * 0.1}s`,
-                  outline: '1px solid rgba(0, 0, 0, 0)',
-                  boxSizing: 'border-box',
-                  // @ts-ignore
-                  '--initial-scale': height / 100,
-                }}
-              />
+              <div key={index} style={style as React.CSSProperties} />
             );
           })}
         </div>

@@ -4,11 +4,17 @@ const CHANNELS_KEY = 'channels_bd';
 
 /**
  * Saves the final validated JSON array to KV storage.
+ *
+ * We store the payload as plain JSON text. A previous version called
+ * `new TextEncoder().encode()` (a UTF-8 string→bytes conversion, NOT
+ * compression) and tagged the result with `metadata: { compressed: true }`,
+ * which was a misleading no-op. If the catalog ever grows enough to warrant
+ * real gzip, implement it symmetrically here with CompressionStream on write
+ * and DecompressionStream on read.
  */
 export async function saveChannels(env: Env, channels: ChannelFinal[]): Promise<void> {
   const jsonString = JSON.stringify(channels);
-  const compressed = new TextEncoder().encode(jsonString);
-  await env.TARANGA_KV.put(CHANNELS_KEY, compressed, { metadata: { compressed: true } });
+  await env.TARANGA_KV.put(CHANNELS_KEY, jsonString);
 }
 
 /**

@@ -51,6 +51,42 @@ function parseM3U(content, sourceId) {
   return channels;
 }
 
+/**
+ * Reject URLs that carry committed secrets in the query string. Catches the
+ * `?akes=eyJ...` (JWT bearer) pattern and JWT-shaped query values generally,
+ * so a leaked signed token can never be baked back into the catalog by the
+ * auto-merge bot. Never silently strip — reject, so the source of the leak
+ * surfaces during validation.
+ */
+function looksLikeSecretUrl(url) {
+  try {
+    const u = new URL(url);
+    for (const [key, value] of u.searchParams.entries()) {
+      const lk = key.toLowerCase();
+      if (lk === 'akes' || lk.includes('token') || lk.includes('key') || lk.includes('sig')) {
+        return true;
+      }
+      // Three base64url chunks separated by dots = JWT (eyJ...).eyJ....
+      if (/^eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/.test(value)) {
+        return true;
+      }
+    }
+    return false;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Rewrite a bare imgur.com page URL (the HTML page) to the direct image URL,
+ * so logos render instead of downloading an HTML document. Only rewrites the
+ * page form; already-direct `i.imgur.com/...` URLs are left alone.
+ */
+function normalizeLogoUrl(logo) {
+  if (!logo) return '';
+  return logo.replace(/^https?:\/\/imgur\.com\/([A-Za-z0-9]+)\/?$/, 'https://i.imgur.com/$1.png');
+}
+
 // ── Fetch All Sources ────────────────────────────────────
 async function fetchAllSources() {
   const results = await Promise.all(
@@ -76,58 +112,81 @@ async function fetchAllSources() {
 }
 
 // ── Validate Channels (Smart Check) ─────────────────────
+// A channel is "alive" only if it returns a 2xx/206 *and* serves a real media
+// signature: either a HLS/MPEG-DASH manifest (body starts with `#EXTM3U` or an
+// XML doctype) or a recognized binary media content-type. Previously, matching
+// `application/*` and short-circuiting on `|| ok` let "channel offline" HTML
+// pages served as 200 through as alive — the root cause of dead catalog entries.
 async function testStream(channel) {
   const start = Date.now();
-  // Try HEAD first, fall back to GET with Range: bytes=0-0 if HEAD returns 405
-  for (const method of ['HEAD', 'GET']) {
-    try {
-      const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), TIMEOUT_MS);
-      
-      const res = await fetch(channel.url, {
-        method,
-        signal: controller.signal,
-        headers: {
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-          ...(method === 'GET' ? { 'Range': 'bytes=0-0' } : {}),
-        },
-      });
-      clearTimeout(timeout);
-      
-      const ok = res.ok || res.status === 206;
-      if (!ok) {
-        if (method === 'HEAD' && res.status === 405) continue;
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), TIMEOUT_MS);
+
+    // Partial GET avoids 405/403 from CDNs that reject HEAD, and gives us body
+    // bytes to inspect without downloading the whole segment.
+    const res = await fetch(channel.url, {
+      method: 'GET',
+      signal: controller.signal,
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Range': 'bytes=0-1023',
+      },
+    });
+    clearTimeout(timeout);
+
+    const okStatus = res.ok || res.status === 206;
+    if (!okStatus) {
+      return { ...channel, isAlive: false, latencyMs: Date.now() - start };
+    }
+
+    const contentType = (res.headers.get('content-type') || '').toLowerCase();
+    const isMediaContentType =
+      contentType.includes('mpegurl') ||
+      contentType.includes('x-mpegurl') ||
+      contentType.includes('apple') ||
+      contentType.includes('video/') ||
+      contentType.includes('octet-stream') ||
+      contentType.includes('dash') ||
+      contentType.includes('xml');
+
+    if (!isMediaContentType) {
+      // Not a recognized media type — e.g. a 200 HTML "channel offline" page.
+      return { ...channel, isAlive: false, latencyMs: Date.now() - start };
+    }
+
+    // For HLS specifically, require the manifest magic header in the body so a
+    // content-type lie can't smuggle through an error page.
+    if (contentType.includes('mpegurl') || contentType.includes('x-mpegurl') || channel.url.includes('.m3u8')) {
+      const sample = await res.text();
+      const head = sample.trimStart().slice(0, 7).toUpperCase();
+      if (!head.startsWith('#EXTM3U')) {
         return { ...channel, isAlive: false, latencyMs: Date.now() - start };
       }
-      
-      const contentType = (res.headers.get('content-type') || '').toLowerCase();
-      const isVideo = contentType.includes('video') ||
-                      contentType.includes('mpegurl') ||
-                      contentType.includes('octet-stream') ||
-                      contentType.includes('x-mpegurl') ||
-                      contentType.includes('apple') ||
-                      contentType.includes('application');
-      
-      if (isVideo || ok) {
-        return { ...channel, isAlive: true, latencyMs: Date.now() - start };
-      }
-      
-      return { ...channel, isAlive: false, latencyMs: Date.now() - start };
-      
-    } catch (err) {
-      if (method === 'HEAD') continue;
-      console.warn(`  Test failed for ${channel.name}: ${err.message}`);
-      return { ...channel, isAlive: false, latencyMs: TIMEOUT_MS };
     }
+
+    return { ...channel, isAlive: true, latencyMs: Date.now() - start };
+  } catch (err) {
+    console.warn(`  Test failed for ${channel.name}: ${err.message}`);
+    return { ...channel, isAlive: false, latencyMs: TIMEOUT_MS };
   }
-  return { ...channel, isAlive: false, latencyMs: TIMEOUT_MS };
 }
 
 async function validateChannels(channels) {
+  // Drop any stream URL that carries a committed secret (JWT bearer / `?akes=`).
+  // Reject loudly so a leaked credential can never re-enter the catalog.
+  const safe = channels.filter((c) => {
+    if (looksLikeSecretUrl(c.url)) {
+      console.warn(`  ✗ Rejected secret-bearing URL for ${c.name}: ${c.url}`);
+      return false;
+    }
+    return true;
+  });
+
   const valid = [];
-  for (let i = 0; i < channels.length; i += BATCH_SIZE) {
-    const batch = channels.slice(i, i + BATCH_SIZE);
-    console.log(`  Testing batch ${Math.floor(i / BATCH_SIZE) + 1}/${Math.ceil(channels.length / BATCH_SIZE)} (${batch.length} channels)...`);
+  for (let i = 0; i < safe.length; i += BATCH_SIZE) {
+    const batch = safe.slice(i, i + BATCH_SIZE);
+    console.log(`  Testing batch ${Math.floor(i / BATCH_SIZE) + 1}/${Math.ceil(safe.length / BATCH_SIZE)} (${batch.length} channels)...`);
     const results = await Promise.all(batch.map(testStream));
     valid.push(...results.filter((c) => c.isAlive));
     console.log(`  ✓ ${valid.length} alive so far`);
@@ -136,11 +195,14 @@ async function validateChannels(channels) {
 }
 
 // ── Deduplicate & Pick Best Route ────────────────────────
+// Preserve Unicode letters (\p{L}) and numbers (\p{N}) so Bengali/Devanagari
+// channel names are not collapsed to empty strings and silently dropped. The
+// previous `[^a-z0-9\s-]` filter stripped every Bangla codepoint.
 function normalizeName(name) {
   return name
     .toLowerCase()
     .replace(/\b(hd|fhd|4k|tv)\b/g, '')
-    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/[^\p{L}\p{N}\s-]/gu, '')
     .replace(/\s+/g, ' ')
     .trim();
 }
@@ -185,7 +247,7 @@ async function pickBestRoutes(validated) {
     final.push({
       id,
       name: ch.name,
-      logoUrl: ch.logo || '',
+      logoUrl: normalizeLogoUrl(ch.logo || ''),
       streamUrl: ch.url,
       category: mapCategory(ch.category, ch.sourceId),
       latencyMs: ch.latencyMs,

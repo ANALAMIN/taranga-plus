@@ -9,8 +9,7 @@ export function useLenis(): void {
       easing: (t: number) => 1 - Math.pow(1 - t, 4),
       orientation: 'vertical',
       smoothWheel: true,
-      touchMultiplier: 0,
-      prevent: (node: Element) => node.id === 'video-player-container',
+      touchMultiplier: 1.5,
     });
 
     function raf(time: number): void {

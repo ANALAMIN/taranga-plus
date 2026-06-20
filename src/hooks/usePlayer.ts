@@ -3,28 +3,54 @@ import shaka from 'shaka-player/dist/shaka-player.ui';
 import { initShakaPlayer } from '../player-engine/shakaCore';
 import { setupAutoRecovery } from '../player-engine/autoRecover';
 
-export function usePlayer(videoElement: HTMLVideoElement | null, containerElement?: HTMLElement | null) {
+/**
+ * Player hook.
+ *
+ * Accepts the ref *objects* (not `.current`) so initialization always sees the
+ * populated DOM node regardless of render order, and so the effect's identity
+ * is stable across renders instead of changing on every commit.
+ *
+ * `playerReady` is a boolean that flips true once Shaka has initialized; callers
+ * can key a load effect on it so a `streamUrl` present on mount is reliably
+ * loaded (the original race fired `setStream` before the player existed).
+ */
+export function usePlayer(
+  videoRef: React.RefObject<HTMLVideoElement | null>,
+  containerRef?: React.RefObject<HTMLElement | null>
+) {
   const [player, setPlayer] = useState<shaka.Player | null>(null);
+  const [playerReady, setPlayerReady] = useState<boolean>(false);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [isBuffering, setIsBuffering] = useState<boolean>(false);
   const [currentQuality, setCurrentQuality] = useState<string>('Auto');
   const [bufferHealth, setBufferHealth] = useState<number>(0);
-  
+
   const cleanupRecoveryRef = useRef<(() => void) | null>(null);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  // Mirror player in a ref so setStream/load can run before React re-renders.
+  const playerRef = useRef<shaka.Player | null>(null);
 
   useEffect(() => {
+    const videoElement = videoRef.current;
     if (!videoElement) return;
 
+    let cancelled = false;
     let shakaPlayer: shaka.Player | null = null;
-    
-    initShakaPlayer(videoElement, containerElement || undefined)
-      .then((p) => {
-        shakaPlayer = p;
-        setPlayer(p);
 
-        p.addEventListener('buffering', (event: any) => {
-          setIsBuffering(event.buffering);
+    initShakaPlayer(videoElement, containerRef?.current || undefined)
+      .then((p) => {
+        // Component unmounted (or effect re-ran) before init resolved.
+        if (cancelled) {
+          p.destroy();
+          return;
+        }
+        shakaPlayer = p;
+        playerRef.current = p;
+        setPlayer(p);
+        setPlayerReady(true);
+
+        p.addEventListener('buffering', (event: Event & { buffering?: boolean }) => {
+          setIsBuffering(Boolean(event.buffering));
         });
 
         p.addEventListener('adaptation', () => {
@@ -49,6 +75,7 @@ export function usePlayer(videoElement: HTMLVideoElement | null, containerElemen
       });
 
     return () => {
+      cancelled = true;
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
         intervalRef.current = null;
@@ -59,11 +86,15 @@ export function usePlayer(videoElement: HTMLVideoElement | null, containerElemen
       if (cleanupRecoveryRef.current) {
         cleanupRecoveryRef.current();
       }
+      playerRef.current = null;
     };
-  }, [videoElement, containerElement]);
+  }, [videoRef, containerRef]);
 
   const setStream = useCallback(async (url: string) => {
-    if (!player) return;
+    // Prefer the ref so setStream works immediately after init resolves,
+    // before the `player` state has propagated through a re-render.
+    const activePlayer = playerRef.current ?? player;
+    if (!activePlayer) return;
 
     try {
       if (cleanupRecoveryRef.current) {
@@ -71,30 +102,34 @@ export function usePlayer(videoElement: HTMLVideoElement | null, containerElemen
         cleanupRecoveryRef.current = null;
       }
 
-      await player.load(url);
+      await activePlayer.load(url);
       setIsPlaying(true);
-      
-      cleanupRecoveryRef.current = setupAutoRecovery(player, url);
+
+      cleanupRecoveryRef.current = setupAutoRecovery(activePlayer, url);
     } catch (err) {
       console.error('Failed to load stream:', err);
     }
   }, [player]);
 
   const play = useCallback(() => {
-    if (videoElement && player) {
-      videoElement.play();
+    const v = videoRef.current;
+    if (v && (playerRef.current ?? player)) {
+      v.play();
       setIsPlaying(true);
     }
-  }, [videoElement, player]);
+  }, [videoRef, player]);
 
   const pause = useCallback(() => {
-    if (videoElement && player) {
-      videoElement.pause();
+    const v = videoRef.current;
+    if (v && (playerRef.current ?? player)) {
+      v.pause();
       setIsPlaying(false);
     }
-  }, [videoElement, player]);
+  }, [videoRef, player]);
 
   return {
+    player,
+    playerReady,
     isPlaying,
     isBuffering,
     currentQuality,

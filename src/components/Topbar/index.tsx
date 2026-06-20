@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { Search, ArrowLeft, X } from 'lucide-react';
 import ThemeSwitch from '../ThemeSwitch';
 import { AppSettings } from '../../types';
@@ -23,6 +23,30 @@ export const Topbar: React.FC<TopbarProps> = ({
   onThemeChange,
 }) => {
   const searchRef = useRef<HTMLDivElement>(null);
+  // Local value keeps the input responsive while we debounce the value we
+  // propagate up. Without this, `ChannelGrid`'s filter memo re-runs over the
+  // full channel array on every keystroke — wasteful for a ~170-entry catalog.
+  const [localQuery, setLocalQuery] = useState(searchQuery);
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Stay in sync if the parent resets the query (e.g. the clear button, which
+  // calls onSearchChange('') directly).
+  useEffect(() => {
+    setLocalQuery(searchQuery);
+  }, [searchQuery]);
+
+  const handleChange = (value: string) => {
+    setLocalQuery(value);
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => onSearchChange(value), 200);
+  };
+
+  // Don't leak a pending timer on unmount.
+  useEffect(() => {
+    return () => {
+      if (debounceRef.current) clearTimeout(debounceRef.current);
+    };
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (e: PointerEvent) => {
@@ -33,6 +57,21 @@ export const Topbar: React.FC<TopbarProps> = ({
     };
     document.addEventListener('pointerdown', handleClickOutside, true);
     return () => document.removeEventListener('pointerdown', handleClickOutside, true);
+  }, []);
+
+  // Wire up the ⌘K / Ctrl+K hint the search field advertises. Without this
+  // the hint taught a shortcut that did nothing.
+  useEffect(() => {
+    const handleShortcut = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')) {
+        e.preventDefault();
+        const input = searchRef.current?.querySelector('input');
+        input?.focus();
+        input?.select();
+      }
+    };
+    window.addEventListener('keydown', handleShortcut);
+    return () => window.removeEventListener('keydown', handleShortcut);
   }, []);
   return (
     <header
@@ -71,19 +110,20 @@ export const Topbar: React.FC<TopbarProps> = ({
             <Search className="absolute left-4 text-white/40 group-focus-within:text-[var(--color-accent)] transition-colors duration-300 z-10" size={16} strokeWidth={2} />
             <input
               type="text"
+              aria-label="Search channels"
               placeholder="Discover something new..."
-              value={searchQuery}
-              onChange={(e) => onSearchChange(e.target.value)}
+              value={localQuery}
+              onChange={(e) => handleChange(e.target.value)}
               className="w-full relative z-10 bg-transparent border border-white/5 text-white text-[13px] sm:text-sm rounded-xl py-2 pl-10 pr-12 outline-none focus:border-[var(--color-accent)]/30 transition-all duration-300 placeholder:text-white/30 font-ui"
             />
-            {!searchQuery && (
+            {!localQuery && (
               <div className="absolute right-4 z-10 text-[10px] font-mono text-white/30 bg-white/5 border border-white/10 px-1.5 py-0.5 rounded-md opacity-100 group-focus-within:opacity-0 transition-opacity duration-300 pointer-events-none">
                 ⌘K
               </div>
             )}
-            {searchQuery && (
+            {localQuery && (
               <button
-                onClick={() => onSearchChange('')}
+                onClick={() => handleChange('')}
                 className="absolute right-3.5 z-10 p-1 rounded-md text-white/40 hover:text-white hover:bg-white/20 transition-colors"
                 aria-label="Clear search"
               >

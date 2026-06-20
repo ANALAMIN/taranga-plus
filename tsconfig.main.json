@@ -1,0 +1,14 @@
+{
+  // Electron main + preload (src-electron/): Node + Electron types ONLY.
+  // Excludes DOM globals so main-process code can't lean on browser APIs.
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ES2022"],
+    "types": ["electron", "node"]
+  },
+  "include": [
+    "src-electron/**/*.ts",
+    "src-electron/**/*.d.ts"
+  ],
+  "exclude": ["src", "backend"]
+}

@@ -40,8 +40,8 @@ async function getLogoFromCache(request) {
           try {
             const params = new URLSearchParams(url.search);
             params.delete('channelId');
-            const queryString = params.toString();
-            const fetchUrl = url.origin + url.pathname + (queryString ? '?' + queryString : '');
+            const cleanedSearch = params.toString();
+            const fetchUrl = new URL(url.pathname + (cleanedSearch ? '?' + cleanedSearch : '') + url.hash, url.origin).href;
             const response = await fetch(fetchUrl);
             if (response.ok) {
               const blob = await response.clone().blob();
@@ -71,7 +71,7 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', (event) => {
   // Intecept image fetch requests if they have our channelId marker
-  if (event.request.url.includes('channelId=')) {
+  if (event.request.destination === 'image' && new URL(event.request.url).searchParams.has('channelId')) {
     event.respondWith(getLogoFromCache(event.request));
   }
 });

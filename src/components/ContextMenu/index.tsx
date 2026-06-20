@@ -33,7 +33,7 @@ export const ContextMenu = ({
         {children}
       </BaseContextMenu.Trigger>
 
-      <BaseContextMenu.Portal keepMounted>
+      <BaseContextMenu.Portal>
         <BaseContextMenu.Positioner
           align="start"
           sideOffset={2}
@@ -54,7 +54,15 @@ export const ContextMenu = ({
               return (
                 <BaseContextMenu.Item
                   key={item.id}
-                  onClick={() => onSelect?.(item)}
+                  onClick={() => { onSelect?.(item); setOpen(false); }}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      onSelect?.(item);
+                      setOpen(false);
+                    }
+                  }}
+                  aria-label={item.label}
                   className="flex items-center justify-between w-full px-3 py-2 text-[13px] text-white/90 cursor-default select-none outline-none transition-colors rounded-[8px] hover:bg-white/10 hover:text-white data-[highlighted]:bg-white/10 data-[highlighted]:text-white"
                 >
                   <span className="font-medium tracking-wide truncate">{item.label}</span>

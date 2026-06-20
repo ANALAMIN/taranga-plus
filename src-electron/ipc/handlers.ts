@@ -1,7 +1,28 @@
 import { ipcMain, BrowserWindow, screen } from 'electron';
-import axios from 'axios';
 
+// Canonical casing matches `git remote -v` (ANALAMIN/taranga-plus).
 const GITHUB_RAW_URL = process.env.GITHUB_RAW_URL || 'https://raw.githubusercontent.com/ANALAMIN/taranga-plus/master/data/channels.json';
+
+/**
+ * Native fetch with an abort-based timeout. Avoids pulling a third-party HTTP
+ * library into the privileged Electron main process.
+ */
+async function fetchJson(url: string, timeoutMs: number): Promise<unknown> {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const res = await fetch(url, {
+      signal: controller.signal,
+      headers: { Accept: 'application/json' },
+    });
+    if (!res.ok) {
+      throw new Error(`Request failed with status ${res.status}`);
+    }
+    return await res.json();
+  } finally {
+    clearTimeout(timer);
+  }
+}
 
 function snapWindowToPosition(win: BrowserWindow, position: string): void {
   const bounds = win.getBounds();
@@ -73,11 +94,7 @@ function snapWindowToPosition(win: BrowserWindow, position: string): void {
 export function registerIpcHandlers(): void {
   ipcMain.handle('fetch-channels', async () => {
     try {
-      const response = await axios.get(GITHUB_RAW_URL, {
-        timeout: 5000,
-        headers: { 'Accept': 'application/json' }
-      });
-      return response.data;
+      return await fetchJson(GITHUB_RAW_URL, 5000);
     } catch (error) {
       console.error('Failed to fetch channels from GitHub:', error);
       throw new Error('Could not retrieve channels.');
@@ -86,11 +103,8 @@ export function registerIpcHandlers(): void {
 
   ipcMain.handle('get-cache-status', async () => {
     try {
-      const response = await axios.get(GITHUB_RAW_URL, {
-        timeout: 3000,
-        headers: { 'Accept': 'application/json' }
-      });
-      const healthy = response.status === 200 && Array.isArray(response.data);
+      const data = await fetchJson(GITHUB_RAW_URL, 3000);
+      const healthy = Array.isArray(data);
       return { status: healthy ? 'healthy' : 'degraded' };
     } catch {
       return { status: 'unhealthy' };

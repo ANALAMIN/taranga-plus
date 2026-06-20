@@ -2,23 +2,24 @@ import shaka from 'shaka-player/dist/shaka-player.ui';
 
 /**
  * Shaka Player network request/response filters.
- * Used to dynamically inject HTTP headers before each
- * stream request (e.g., User-Agent spoofing, Referer headers,
- * auth tokens for premium channels).
+ *
+ * A previous version spoofed the User-Agent here and referenced an
+ * `webSecurity: false` Electron mode that has since been correctly removed.
+ * Same-origin / CORS is now enforced, so UA spoofing would not bypass origin
+ * checks anyway — it would only mask the true client identity from origin
+ * servers (breaking analytics/geo and tripping bot-detection WAFs). We let
+ * Shaka / Electron send the real User-Agent.
+ *
+ * The request filter is kept as a no-op seam so per-channel header injection
+ * (e.g. a Referer a specific origin requires) can be added explicitly and
+ * auditably in the future, rather than blanket-spoofed.
  */
 export function registerNetworkFilters(player: shaka.Player): void {
   const netEngine = player.getNetworkingEngine();
   if (!netEngine) return;
 
-  netEngine.registerRequestFilter((type, request) => {
-    // Inject custom headers on every manifest and segment request
-    if (type === shaka.net.NetworkingEngine.RequestType.MANIFEST || 
-        type === shaka.net.NetworkingEngine.RequestType.SEGMENT) {
-      
-      // In a raw Electron environment (webSecurity: false), this User-Agent spoofing works perfectly
-      // and helps bypass basic restrictions from raw m3u8 hosts.
-      request.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
-      
-    }
+  netEngine.registerRequestFilter((_type, _request) => {
+    // Intentional no-op for now. Add per-channel header overrides here when
+    // a concrete upstream requirement is documented.
   });
 }

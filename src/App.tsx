@@ -41,7 +41,7 @@ export default function App() {
       <Topbar
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
-        inPlayerState={false}
+        inPlayerState={inPlayerState}
         onBackClick={() => setActiveChannel(null)}
         channelName={activeChannel?.name}
         theme={theme}
