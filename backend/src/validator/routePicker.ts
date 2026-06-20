@@ -74,7 +74,16 @@ export async function pickBestRoutes(validatedChannels: ChannelValidated[]): Pro
       logoUrl: channel.logo || '',
       streamUrl: channel.url,
       category: mapCategory(channel.category, channel.sourceId),
-      latencyMs: channel.latencyMs
+      latencyMs: channel.latencyMs,
+      // Back-filled defaults for the new schema fields. The Worker validator
+      // is a cold path; the canonical catalog is produced by the GitHub
+      // Actions validator (validate-channels.mjs) which populates these
+      // properly. Defaulting here keeps the Worker type-checking and serving
+      // without over-investing in the legacy code path.
+      language: 'en',
+      tier: 'global',
+      sources: [channel.url],
+      lastValidated: new Date().toISOString(),
     });
   }
 
