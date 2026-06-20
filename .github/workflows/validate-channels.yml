@@ -2,9 +2,8 @@ name: Validate Channels (Hourly)
 
 on:
   schedule:
-    # Hourly is plenty — the previous 15-minute cadence pushed to master 96×/day,
-    # a high-value CI-compromise target and a noisy history.
-    - cron: '0 * * * *'
+    # Twice hourly. A single run may take several minutes — quality over speed.
+    - cron: '*/30 * * * *'
   workflow_dispatch:        # Manual trigger
 
 # Minimal permissions. `contents: write` + `pull-requests: write` let the bot
@@ -30,6 +29,9 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Run unit tests
+        run: npm test
 
       - name: Run channel validation
         run: node .github/scripts/validate-channels.mjs

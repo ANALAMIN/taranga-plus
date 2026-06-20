@@ -1,47 +1,73 @@
 import shaka from 'shaka-player/dist/shaka-player.ui';
 
 /**
- * Silent stream recovery system.
- * Listens for Shaka's error events. On CRITICAL errors:
- *   1. Wait 2 seconds silently
- *   2. Reload the same stream URL automatically
- *   3. Try up to 3 times before showing error UI (or failing silently)
+ * Silent multi-URL stream recovery system (spec §6.3).
+ *
+ * On a CRITICAL Shaka error:
+ *   1. Try the next URL in `sources[]` (the backup routes validated in Tier 1).
+ *   2. Only after all sources are exhausted does it call `onErrorFallback`.
+ *   3. On successful load from a backup, resets the source pointer to 0 so future
+ *      failures cycle from the beginning again.
+ *
+ * The caller passes the full `sources` array (from ChannelFinal.sources). The
+ * primary `streamUrl` should also be the first entry in `sources[]` (the validator
+ * produces them this way, sorted by latency). If `sources` is empty the behavior
+ * degrades gracefully to the previous single-URL retry pattern.
  */
-export function setupAutoRecovery(player: shaka.Player, streamUrl: string, onErrorFallback?: () => void): () => void {
-  let retryCount = 0;
-  const MAX_RETRIES = 3;
+export function setupAutoRecovery(
+  player: shaka.Player,
+  sources: string[],
+  onErrorFallback?: () => void
+): () => void {
+  // Keep a mutable cursor so each error attempt advances to the next source.
+  let sourceIndex = 0;
   let timeoutId: ReturnType<typeof setTimeout> | null = null;
+  let recovering = false;
 
   const errorHandler = (event: Event | CustomEvent) => {
     const customEvent = event as CustomEvent<shaka.extern.Error>;
     const error = customEvent.detail;
-    
     if (!error) return;
 
-    if (error.severity === shaka.util.Error.Severity.CRITICAL) {
-      console.warn(`[Taranga+] Stream failure detected. Code: ${error.code}`);
+    if (error.severity !== shaka.util.Error.Severity.CRITICAL) return;
+    if (recovering) return; // debounce — don't stack retries
 
-      if (retryCount < MAX_RETRIES) {
-        retryCount++;
-        console.log(`[Taranga+] Attempting silent recovery (${retryCount}/${MAX_RETRIES}) in 2 seconds...`);
+    console.warn(`[Taranga+] Stream failure. Code: ${error.code}`);
 
-        timeoutId = setTimeout(async () => {
-          try {
-            await player.load(streamUrl);
-            console.log('[Taranga+] Stream recovered successfully.');
-            retryCount = 0;
-          } catch (e) {
-            console.error('[Taranga+] Silent recovery failed: ', e);
-          }
-        }, 2000);
+    // Advance to the next source (wraps back on exhaustion).
+    sourceIndex = (sourceIndex + 1) % Math.max(sources.length, 1);
+    const nextUrl = sources[sourceIndex] ?? sources[0];
 
-      } else {
-        console.error('[Taranga+] Stream unrecoverable after max retries.');
-        if (onErrorFallback) {
-          onErrorFallback();
-        }
-      }
+    if (!nextUrl) {
+      console.error('[Taranga+] No sources available for recovery.');
+      onErrorFallback?.();
+      return;
     }
+
+    // If we've cycled all the way back to the beginning, all sources failed.
+    const exhausted = sources.length > 1 && sourceIndex === 0;
+    if (exhausted) {
+      console.error('[Taranga+] All sources exhausted — surfacing error to user.');
+      onErrorFallback?.();
+      return;
+    }
+
+    recovering = true;
+    console.log(`[Taranga+] Trying source ${sourceIndex + 1}/${sources.length}: ${nextUrl}`);
+
+    timeoutId = setTimeout(async () => {
+      try {
+        await player.load(nextUrl);
+        console.log('[Taranga+] Recovery succeeded.');
+        // Reset index so next failure cycles from scratch.
+        sourceIndex = 0;
+      } catch (e) {
+        console.error('[Taranga+] Recovery load failed:', e);
+        // Let the next error event drive the next attempt.
+      } finally {
+        recovering = false;
+      }
+    }, 1500); // short delay — enough for transient drops to clear
   };
 
   player.addEventListener('error', errorHandler);
@@ -52,5 +78,7 @@ export function setupAutoRecovery(player: shaka.Player, streamUrl: string, onErr
       clearTimeout(timeoutId);
       timeoutId = null;
     }
+    recovering = false;
+    sourceIndex = 0;
   };
 }

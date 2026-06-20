@@ -5,6 +5,8 @@ import 'shaka-player/dist/controls.css';
 
 interface VideoFrameProps {
   streamUrl: string;
+  /** All validated backup URLs for this channel (from ChannelFinal.sources[]). */
+  sources?: string[];
 }
 
 /**
@@ -15,15 +17,23 @@ interface VideoFrameProps {
  * loaded by an effect keyed on `[streamUrl, playerReady]`, which reliably fires
  * both when the URL arrives late and when the URL is already present on mount
  * but the player has not yet initialized.
+ *
+ * `sources` is passed through to `usePlayer` so `autoRecover` can cycle through
+ * backup URLs on failure instead of retrying the same dead stream.
  */
-export const VideoFrame: React.FC<VideoFrameProps> = ({ streamUrl }) => {
+export const VideoFrame: React.FC<VideoFrameProps> = ({ streamUrl, sources }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const { isBuffering, setStream, playerReady } = usePlayer(videoRef, containerRef);
+  // Build the full source list: primary URL first, then backups (deduplicated).
+  const allSources = sources && sources.length > 0
+    ? [streamUrl, ...sources.filter(u => u !== streamUrl)]
+    : [streamUrl];
+
+  const { isBuffering, setStream, playerReady } = usePlayer(videoRef, containerRef, allSources);
 
   // Load the stream when the URL changes OR when the player finishes
-  // initializing for an URL that was already present.
+  // initializing for a URL that was already present.
   useEffect(() => {
     if (streamUrl && playerReady) {
       setStream(streamUrl);

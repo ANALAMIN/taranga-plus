@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import shaka from 'shaka-player/dist/shaka-player.ui';
 import { initShakaPlayer } from '../player-engine/shakaCore';
 import { setupAutoRecovery } from '../player-engine/autoRecover';
+import { watchNetworkChanges } from '../player-engine/abrManager';
 
 /**
  * Player hook.
@@ -10,13 +11,19 @@ import { setupAutoRecovery } from '../player-engine/autoRecover';
  * populated DOM node regardless of render order, and so the effect's identity
  * is stable across renders instead of changing on every commit.
  *
+ * `sources` is the full list of validated backup URLs for the active channel
+ * (from ChannelFinal.sources[]). It is forwarded to `setupAutoRecovery` so
+ * that on a CRITICAL error the player cycles through alternates instead of
+ * repeatedly reloading the same dead URL.
+ *
  * `playerReady` is a boolean that flips true once Shaka has initialized; callers
  * can key a load effect on it so a `streamUrl` present on mount is reliably
  * loaded (the original race fired `setStream` before the player existed).
  */
 export function usePlayer(
   videoRef: React.RefObject<HTMLVideoElement | null>,
-  containerRef?: React.RefObject<HTMLElement | null>
+  containerRef?: React.RefObject<HTMLElement | null>,
+  sources: string[] = []
 ) {
   const [player, setPlayer] = useState<shaka.Player | null>(null);
   const [playerReady, setPlayerReady] = useState<boolean>(false);
@@ -26,9 +33,14 @@ export function usePlayer(
   const [bufferHealth, setBufferHealth] = useState<number>(0);
 
   const cleanupRecoveryRef = useRef<(() => void) | null>(null);
+  const cleanupNetworkRef = useRef<(() => void) | null>(null);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   // Mirror player in a ref so setStream/load can run before React re-renders.
   const playerRef = useRef<shaka.Player | null>(null);
+  // Keep sources in a ref so the recovery callback always has the latest list
+  // without needing to be re-registered on every sources prop change.
+  const sourcesRef = useRef<string[]>(sources);
+  useEffect(() => { sourcesRef.current = sources; }, [sources]);
 
   useEffect(() => {
     const videoElement = videoRef.current;
@@ -48,6 +60,10 @@ export function usePlayer(
         playerRef.current = p;
         setPlayer(p);
         setPlayerReady(true);
+
+        // Start watching for network-type changes (2G/3G/4G/WiFi) and
+        // re-seed ABR estimate so quality re-selects immediately.
+        cleanupNetworkRef.current = watchNetworkChanges(p);
 
         p.addEventListener('buffering', (event: Event & { buffering?: boolean }) => {
           setIsBuffering(Boolean(event.buffering));
@@ -80,6 +96,10 @@ export function usePlayer(
         clearInterval(intervalRef.current);
         intervalRef.current = null;
       }
+      if (cleanupNetworkRef.current) {
+        cleanupNetworkRef.current();
+        cleanupNetworkRef.current = null;
+      }
       if (shakaPlayer) {
         shakaPlayer.destroy();
       }
@@ -105,7 +125,10 @@ export function usePlayer(
       await activePlayer.load(url);
       setIsPlaying(true);
 
-      cleanupRecoveryRef.current = setupAutoRecovery(activePlayer, url);
+      // Register multi-URL recovery using the current sources list.
+      // Use sourcesRef so the closure always reflects the latest sources
+      // even if the prop updates between renders.
+      cleanupRecoveryRef.current = setupAutoRecovery(activePlayer, sourcesRef.current);
     } catch (err) {
       console.error('Failed to load stream:', err);
     }

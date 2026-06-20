@@ -91,7 +91,7 @@ export default function App() {
                         borderColor: 'rgba(var(--color-accent-rgb), 0.4)'
                       }}
                     />
-                    <VideoFrame streamUrl={activeChannel.streamUrl} />
+                    <VideoFrame streamUrl={activeChannel.streamUrl} sources={activeChannel.sources} />
                   </div>
 
                   {/* Channel Info Below Video */}
