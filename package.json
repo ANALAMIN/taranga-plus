@@ -11,7 +11,8 @@
     "dist": "npm run build && electron-builder",
     "dist:win": "npm run build && electron-builder --win",
     "clean": "node -e \"const fs=require('fs');['dist','dist-electron','server.js'].forEach(d=>fs.rmSync(d,{recursive:true,force:true}))\"",
-    "lint": "tsc --noEmit -p tsconfig.renderer.json && tsc --noEmit -p tsconfig.main.json && tsc --noEmit -p tsconfig.worker.json"
+    "lint": "tsc --noEmit -p tsconfig.renderer.json && tsc --noEmit -p tsconfig.main.json && tsc --noEmit -p tsconfig.worker.json",
+    "test": "node --test .github/scripts/lib/__tests__/*.test.mjs"
   },
   "build": {
     "appId": "com.tarangaplus.app",
