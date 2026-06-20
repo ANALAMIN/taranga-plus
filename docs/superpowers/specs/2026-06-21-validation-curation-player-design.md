@@ -38,17 +38,20 @@ Because BDIX is BD-only and GitHub is US-only, no single validator can cover eve
 │  Output:  data/channels.json → PR → master (manual merge)         │
 │  Guarantees: every international channel in the catalog plays.    │
 ├───────────────────────────────────────────────────────────────────┤
-│  TIER 2 — Electron app (BD IP) · silent, on startup               │
+│  TIER 2 — Electron app (BD IP) · integrated into prefetch         │
 │  ─────────────────────────────────────────────────────────────    │
 │  Sources: BDIX BD-only subset (digijadoo + raw BD IPs)            │
-│  Test:    lightweight manifest HEAD check (non-blocking)          │
-│  Output:  merged into local cache on top of Tier-1 catalog        │
+│  Test:    no separate step — liveness is a byproduct of the       │
+│           preload pipeline (same prefetch used for instant        │
+│           channel switching). Runs off-thread, on-demand.         │
+│  Output:  dead BDIX channels silently removed; alternates from    │
+│           sources[] used as fallback. User never sees validation. │
 │  Guarantees: BDIX channels that work from BD show up; dead ones   │
-│              never reach the UI. User sees no loading wheel.      │
+│              never reach a click. Catalog renders instantly.      │
 └───────────────────────────────────────────────────────────────────┘
 ```
 
-**Why this does not violate "no app validation":** what the user rejected is *blocking, UX-destroying* validation (freeze, spinners, slow start). Tier 2 is a **non-blocking background fetch** — the Tier-1 catalog renders instantly on launch; BDIX channels merge in silently within ~3 s. The user never waits.
+**Why this honors "no app validation":** the user rejected UX-destroying validation (blocking spinners, "validating 1000 channels" waits, freezes). Tier 2 has **none** of that — it is structurally identical to prefetch-for-instant-switching, a premium feature, not a tax. See §7 for the full design.
 
 ---
 
@@ -214,9 +217,11 @@ Also: cap initial variant by `connection.effectiveType` — never start above 48
 
 `autoRecover.ts` rewrite: on CRITICAL error, instead of reloading the same URL, try the **next** entry in `channel.sources[]`. Only after all sources are exhausted does it surface the error UI. Silent to the user.
 
-### 6.4 Channel preload pipeline
+### 6.4 Channel preload pipeline (also drives BDIX health — see §7)
 
-New `preloadManager.ts`: when a channel is focused/hovered or is next in the list, warm its manifest into Shaka's prefetch cache so the actual switch is near-instant. Bounded to **2 concurrent preloads** to protect bandwidth.
+New `preloadManager.ts`: when a channel is focused/hovered or is near the viewport, warm its manifest into Shaka's prefetch cache so the actual switch is near-instant. Bounded to **2 concurrent preloads** to protect bandwidth.
+
+For BDIX channels (`tier:'bdix'`), the prefetch result doubles as the silent liveness check described in §7 — a single fetch serves both purposes (instant-switch + health). No separate probe loop exists.
 
 ### 6.5 Network-change adaptation
 
@@ -228,17 +233,51 @@ Per user instruction: the existing theme and the day/night toggle are **untouche
 
 ---
 
-## 7. Tier-2 App Probe (Phase 2.5)
+## 7. BDIX Handling — Prefetch-Integrated Health Check (Phase 2.5)
 
-New module in the renderer: `src/services/bdixProbe.ts` (+ a thin IPC handler in `src-electron`).
+BDIX channels cannot be validated by the US GitHub runner (BD-only servers). Instead of a separate, visible "validation" step (which the user rejected as janky UX), BDIX liveness is handled as a **byproduct of the preload pipeline** — the same mechanism premium apps (Netflix, YouTube) use for instant seek. There is no separate validation code path the user ever encounters.
 
-- On app launch, **after** the Tier-1 catalog has rendered, fetch the BDIX playlist(s) in a Web Worker.
-- For each BD-only URL, do a lightweight HEAD/manifest check (no segment download — speed matters here).
-- Passing channels are stamped `tier:'bdix'`, `lastValidated: now`, merged with the Tier-1 catalog, and deduped by normalized name. A BDIX URL is only added for a name if that name has **no** Tier-1 entry — Tier-2 augments, never re-tests or overrides Tier-1. (This keeps Tier-1 authoritative and avoids the app duplicating GitHub's work.)
-- Result cached in `localDb` for 30 min; re-probed on refresh.
-- **Strictly non-blocking:** never awaits on the UI thread; the catalog shows Tier-1 instantly and BDIX rows appear as they pass.
+### 7.1 Architecture
 
-Per-channel request filter for BDIX channels injects the required `Host` header where needed (digijadoo). This is the per-channel header-injection seam already stubbed in `customFilters.ts` — now it has a concrete use.
+```
+GitHub (Tier 1) → data/channels.json:  global channels  (validated, guaranteed)
+                                       + BDIX channels   (included unvalidated,
+                                                          tagged tier:'bdix')
+
+App launch:
+  1. Catalog renders INSTANTLY with all channels (global + bdix).
+     No spinner, no waiting.
+  2. preloadManager runs in a Web Worker, off the main thread.
+  3. As the user scrolls/hovers, each BDIX channel's manifest is prefetched
+     (this already happens for instant switching — §6.4).
+  4. The prefetch result doubles as a silent health check:
+        - 2xx + #EXTM3U  → healthy (stays in catalog)
+        - fail / dead    → silently removed from the visible list,
+                           OR demoted behind a working source[] alternate
+  5. The user never observes this — only ever sees channels that respond.
+```
+
+### 7.2 Why this satisfies "no app validation"
+
+The user's objection was to UX-destroying validation: blocking spinners, "validating 1000 channels... 30s" waits, freezes. This design has **none of that**:
+- Catalog shows instantly on launch (Tier-1 channels render immediately).
+- Health checks happen **off-thread** (Web Worker) and **on-demand** (only for channels near the viewport), never as a bulk upfront pass.
+- No channel is ever blocked from display pending a check; BDIX channels appear immediately and are *removed* only if proven dead during prefetch.
+- This is structurally identical to prefetch-for-instant-switching — a feature, not a tax.
+
+### 7.3 Failure handling (graceful, multi-layered)
+
+Even if a BDIX channel slips through dead (e.g. user clicks before prefetch completes), the player degrades gracefully instead of showing a hard error:
+1. **Multi-URL fallback** (§6.3): try the next URL in `channel.sources[]`. digijadoo channels usually have alternates.
+2. Only if *all* sources fail: a soft "channel temporarily unavailable" state with a one-tap retry — never a crash or a blank frozen screen.
+
+### 7.4 Per-channel Host header
+
+BDIX channels on digijadoo may require a `Host` header to resolve correctly. The request-filter seam already stubbed in `customFilters.ts` now has its first concrete use: inject `Host` (and only `Host`) for known BDIX hosts. No UA spoofing, no other header games.
+
+### 7.5 Local cache
+
+Prefetch/health results cached in `localDb` keyed by channel id, TTL 30 min, so re-scrolling doesn't re-hit the network. Refresh invalidates.
 
 ---
 
@@ -268,10 +307,11 @@ Phase 2 — Tier-1 Validation Engine
   2.5 30-min cadence
   2.6 Reporting summary in workflow
 
-Phase 2.5 — Tier-2 App Probe
-  2.7 bdixProbe module + Web Worker
-  2.8 Merge logic + local cache
+Phase 2.5 — BDIX Health via Prefetch (no separate probe)
+  2.7 preloadManager drives BDIX liveness (merged into §6.4, not a loop)
+  2.8 Silent removal of dead BDIX channels from the visible list
   2.9 Per-channel Host-header injection for digijadoo
+  2.10 localDb cache of health results (30 min TTL)
 
 Phase 3 — Player Engine
   3.1 Buffer/ABR retune
@@ -302,7 +342,7 @@ Build order is deliberate: curation → validation → app probe → player → 
 1. Every channel in the rendered catalog plays a real video segment on first click (segment-level validation).
 2. Catalog grows from 205 toward **300–500 reliably-working** channels across all categories, with a non-empty `documentary` set.
 3. Language filter excludes Tamil/Telugu/Malayalam; catalog is bn/hi/en/ur only.
-4. Tier-2 probe adds BDIX channels that work from BD, silently, with no UI blocking.
+4. BDIX channels that work from BD appear; dead ones are silently removed during prefetch (no user-visible validation, no spinners, catalog renders instantly).
 5. Measurable buffering reduction on channel switch and on network spikes (preload + ABR retune + multi-URL fallback).
 6. Validation cadence is 30 min; delivery remains PR-based, never direct master push.
 7. Zero recurring cost.
