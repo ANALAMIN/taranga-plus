@@ -3,6 +3,9 @@
 
 export type Category = 'all' | 'favorites' | 'sports' | 'movies' | 'music' | 'entertainment' | 'kids' | 'documentary';
 
+export type Language = 'bn' | 'hi' | 'en' | 'ur' | 'other';
+export type Tier = 'global' | 'bdix';   // which validation tier owns it
+
 export interface ChannelRaw {
   name: string;
   url: string;
@@ -18,7 +21,7 @@ export interface ChannelValidated extends ChannelRaw {
 }
 
 export interface ChannelFinal {
-  id: string; // Generated: SHA-256 of normalized channel name (first 16 hex chars)
+  id: string;             // Generated: SHA-256 of normalized channel name (first 16 hex chars)
   name: string;
   logoUrl: string;
   // As stored, this is the raw upstream URL. At playback time the renderer
@@ -27,6 +30,10 @@ export interface ChannelFinal {
   streamUrl: string;
   category: Category;
   latencyMs: number;
+  language: Language;     // drives language filter (bn/hi/en/ur)
+  tier: Tier;             // 'global' = Tier-1 validated, 'bdix' = app-side
+  sources: string[];      // alternate working URLs (multi-URL fallback)
+  lastValidated: string;  // ISO timestamp of last passing test
 }
 
 export interface AppSettings {
