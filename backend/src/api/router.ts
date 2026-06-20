@@ -10,10 +10,18 @@ export default {
     const url = new URL(request.url);
     const path = url.pathname;
 
-    // CORS headers - intentionally restrictive for security
-    // Normally you'd restrict this to your Electron app's origin or require an auth token
+    // CORS headers - restricted to known origins
+    const allowedOrigins = [
+      'https://analamin.github.io',
+      'https://taranga-plus.pages.dev',
+      'http://localhost:3000',
+      'http://localhost:5173',
+      'app://.',
+    ];
+    const origin = request.headers.get('Origin') || '';
+    const corsOrigin = allowedOrigins.includes(origin) ? origin : 'https://analamin.github.io';
     const corsHeaders = {
-      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Origin': corsOrigin,
       'Access-Control-Allow-Methods': 'GET, OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type',
     };

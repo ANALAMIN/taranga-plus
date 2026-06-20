@@ -19,8 +19,6 @@ export function registerNetworkFilters(player: shaka.Player): void {
       // and helps bypass basic restrictions from raw m3u8 hosts.
       request.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
       
-      // We can also inject Referer tokens here if required by specific streams
-      // request.headers['Referer'] = 'https://trusted-source.com/';
     }
   });
 }

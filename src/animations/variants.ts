@@ -3,7 +3,7 @@
  * This ensures consistent animations across all components.
  */
 
-import type { Variants } from 'framer-motion';
+import type { Variants } from 'motion';
 
 export const DURATION = {
   micro:   0.12,

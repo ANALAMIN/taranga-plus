@@ -1,7 +1,6 @@
 import axios, { InternalAxiosRequestConfig } from 'axios';
 import { ChannelFinal, HealthStatus } from '../types';
 
-// Extend Axios config to support custom retry params
 declare module 'axios' {
   export interface InternalAxiosRequestConfig {
     retryCount?: number;
@@ -9,10 +8,8 @@ declare module 'axios' {
   }
 }
 
-// GitHub raw URL (primary) — channels.json updated hourly by GitHub Actions
 const GITHUB_RAW_URL = 'https://raw.githubusercontent.com/ANALAMIN/taranga-plus/master/data/channels.json';
 
-// Cloudflare fallback (if GitHub is unreachable)
 const CLOUDFLARE_URL = import.meta.env.VITE_CLOUDFLARE_URL || 'http://localhost:8787';
 
 export const apiClient = axios.create({
@@ -20,7 +17,6 @@ export const apiClient = axios.create({
   timeout: 3000,
 });
 
-// Axios Interceptor for automated retries with exponential backoff
 apiClient.interceptors.response.use(undefined, async (error) => {
   const config = error.config as InternalAxiosRequestConfig;
   
@@ -33,12 +29,12 @@ apiClient.interceptors.response.use(undefined, async (error) => {
     config.retryCount = 0;
   }
   
-  config.retryCount += 1;
-  
-  if (config.retryCount <= config.retry) {
-    console.warn(`Request failed. Retrying attempt ${config.retryCount}...`);
-    // Exponential backoff
-    const backoff = new Promise((resolve) => setTimeout(resolve, 1000 * config.retryCount!));
+  const retryCount = (config.retryCount ?? 0) + 1;
+  config.retryCount = retryCount;
+  const retryMax = config.retry ?? 0;
+  if (retryCount <= retryMax) {
+    console.warn(`Request failed. Retrying attempt ${retryCount}...`);
+    const backoff = new Promise((resolve) => setTimeout(resolve, 1000 * retryCount));
     await backoff;
     return apiClient(config);
   }
@@ -46,8 +42,29 @@ apiClient.interceptors.response.use(undefined, async (error) => {
   return Promise.reject(error);
 });
 
+declare global {
+  interface Window {
+    electronAPI?: {
+      fetchChannels: () => Promise<ChannelFinal[]>;
+    };
+  }
+}
+
 export async function getChannels(): Promise<ChannelFinal[]> {
-  // Primary: Fetch from GitHub raw (validated channels.json)
+  // Primary: Use Electron IPC if available (bypasses CORS for GitHub raw)
+  if (window.electronAPI?.fetchChannels) {
+    try {
+      const data = await window.electronAPI.fetchChannels();
+      if (data && data.length > 0) {
+        console.log(`Loaded ${data.length} channels via IPC`);
+        return data;
+      }
+    } catch (error) {
+      console.warn('IPC fetch failed, trying direct fetch...', error);
+    }
+  }
+
+  // Fallback 1: Direct fetch from GitHub raw (works in browser if CORS allows)
   try {
     const response = await axios.get<ChannelFinal[]>(GITHUB_RAW_URL, {
       timeout: 5000,
@@ -61,57 +78,15 @@ export async function getChannels(): Promise<ChannelFinal[]> {
     console.warn('GitHub fetch failed, trying Cloudflare...', error);
   }
 
-  // Fallback: Try Cloudflare Worker
+  // Fallback 2: Try Cloudflare Worker
   try {
     const response = await apiClient.get<ChannelFinal[]>('/channels');
     return response.data;
   } catch (error) {
-    console.warn('Cloudflare fetch failed. Using mock data for preview...', error);
+    console.warn('Cloudflare fetch failed.', error);
   }
 
-  // Last resort: Mock data for preview
-  return [
-    {
-      id: 'mock-1',
-      name: 'Gazi TV (GTV)',
-      logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/GTV_Logo.png/1200px-GTV_Logo.png',
-      streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
-      category: 'sports',
-      latencyMs: 45
-    },
-    {
-      id: 'mock-2',
-      name: 'Sony Sports Network',
-      logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Sony_Sports_Network_logo.svg/1200px-Sony_Sports_Network_logo.svg.png',
-      streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
-      category: 'sports',
-      latencyMs: 120
-    },
-    {
-      id: 'mock-3',
-      name: 'Cartoon Network',
-      logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Cartoon_Network_2010_logo.svg/1200px-Cartoon_Network_2010_logo.svg.png',
-      streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
-      category: 'kids',
-      latencyMs: 90
-    },
-    {
-      id: 'mock-4',
-      name: 'National Geographic',
-      logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/NatGeo_logo.svg/1200px-NatGeo_logo.svg.png',
-      streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
-      category: 'documentary',
-      latencyMs: 150
-    },
-    {
-      id: 'mock-5',
-      name: 'BTV National',
-      logoUrl: '',
-      streamUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
-      category: 'all',
-      latencyMs: 30
-    }
-  ];
+  return [];
 }
 
 export async function checkStatus(): Promise<HealthStatus> {

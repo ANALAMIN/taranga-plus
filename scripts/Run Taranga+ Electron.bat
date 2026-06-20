@@ -50,24 +50,12 @@ if not exist "node_modules" (
   echo.
 )
 
-echo [INFO] Building Electron app...
-echo.
-call npm run build:electron
-if errorlevel 1 (
-  echo.
-  echo [ERROR] Electron build failed.
-  pause
-  exit /b 1
-)
-
-echo [SUCCESS] Build complete!
-echo.
 echo [INFO] Starting Taranga+ in Electron window...
 echo [INFO] App will open in a new window.
 echo [INFO] Close the window to stop the app.
 echo.
 
-call npm run dev:electron
+call npm run dev
 
 echo.
 echo [INFO] Taranga+ stopped.

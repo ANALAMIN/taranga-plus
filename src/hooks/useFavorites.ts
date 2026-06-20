@@ -1,20 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import { localDb } from '../services/localDb';
 
 export function useFavorites() {
   const [favorites, setFavorites] = useState<string[]>([]);
 
   useEffect(() => {
-    const saved = localStorage.getItem('btv_favorites');
-    if (saved) {
-      try {
-        setFavorites(JSON.parse(saved));
-      } catch (e) {
-        console.error(e);
+    localDb.getSetting<string[]>('favorites').then(saved => {
+      if (saved) {
+        setFavorites(saved);
       }
-    }
+    });
   }, []);
 
-  const toggleFavorite = (channelId: string) => {
+  const toggleFavorite = useCallback(async (channelId: string) => {
     setFavorites(prev => {
       let newFavs;
       if (prev.includes(channelId)) {
@@ -22,10 +20,10 @@ export function useFavorites() {
       } else {
         newFavs = [...prev, channelId];
       }
-      localStorage.setItem('btv_favorites', JSON.stringify(newFavs));
+      localDb.saveSetting('favorites', newFavs);
       return newFavs;
     });
-  };
+  }, []);
 
   return { favorites, toggleFavorite };
 }

@@ -7,7 +7,10 @@ export function useSettings() {
   const [accentColor, setAccentColor] = useState<AppSettings['accentColor']>('#e50914');
 
   const hexToRgb = (hex: string) => {
-    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    let h = hex.replace('#', '');
+    if (h.length === 3) h = h[0] + h[0] + h[1] + h[1] + h[2] + h[2];
+    if (h.length === 8) h = h.slice(0, 6);
+    const result = /^([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(h);
     return result
       ? `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}`
       : "229, 9, 20";
@@ -39,6 +42,7 @@ export function useSettings() {
 
   const updateTheme = async (newTheme: AppSettings['theme']) => {
     setTheme(newTheme);
+    document.documentElement.dataset.theme = newTheme;
     await localDb.saveSetting('theme', newTheme);
   };
 

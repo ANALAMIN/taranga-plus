@@ -11,6 +11,7 @@ export function usePlayer(videoElement: HTMLVideoElement | null, containerElemen
   const [bufferHealth, setBufferHealth] = useState<number>(0);
   
   const cleanupRecoveryRef = useRef<(() => void) | null>(null);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
     if (!videoElement) return;
@@ -34,24 +35,24 @@ export function usePlayer(videoElement: HTMLVideoElement | null, containerElemen
           }
         });
 
-        // Simple loop to poll buffer health (for UI purely)
-        const intervalId = setInterval(() => {
+        intervalRef.current = setInterval(() => {
            if (videoElement.buffered.length > 0) {
               const current = videoElement.currentTime;
               const end = videoElement.buffered.end(videoElement.buffered.length - 1);
-              // Calculate buffer in seconds
               const queued = end - current;
               setBufferHealth(queued);
            }
         }, 1000);
-
-        return () => clearInterval(intervalId);
       })
       .catch(err => {
         console.error('Failed to init Shaka: ', err);
       });
 
     return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
       if (shakaPlayer) {
         shakaPlayer.destroy();
       }

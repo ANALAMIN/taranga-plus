@@ -38,8 +38,11 @@ async function getLogoFromCache(request) {
         } else {
           // Fallback to fetch and cache
           try {
-            const fetchReq = new Request(url.origin + url.pathname); // Strip the param for actual fetch
-            const response = await fetch(fetchReq);
+            const params = new URLSearchParams(url.search);
+            params.delete('channelId');
+            const queryString = params.toString();
+            const fetchUrl = url.origin + url.pathname + (queryString ? '?' + queryString : '');
+            const response = await fetch(fetchUrl);
             if (response.ok) {
               const blob = await response.clone().blob();
               const writeTx = db.transaction(STORE_NAME, 'readwrite');

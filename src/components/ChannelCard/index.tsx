@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { motion } from 'motion/react';
 import { Play, Heart, Share2 } from 'lucide-react';
 import { ChannelFinal } from '../../types';
-import { RadialMenu, MenuItem } from '../RadialMenu';
+import { ContextMenu, MenuItem } from '../ContextMenu';
 
 interface ChannelCardProps {
   channel: ChannelFinal;
@@ -32,11 +32,17 @@ export const ChannelCard = memo(function ChannelCard({ channel, isActive, index,
         if (navigator.share) {
           navigator.share({
             title: channel.name,
-            text: `Watch ${channel.name} on Proxima TV!`,
+            text: `Watch ${channel.name.replace(/\s*\(\d+p\)/gi, '')} on Taranga+!`,
             url: window.location.href,
-          }).catch(console.error);
+          }).catch(() => {
+            alert('Sharing failed. Please try again.');
+          });
         } else {
-          navigator.clipboard.writeText(window.location.href);
+          navigator.clipboard.writeText(window.location.href).then(() => {
+            alert('Link copied to clipboard!');
+          }).catch(() => {
+            alert('Failed to copy link.');
+          });
         }
         break;
     }
@@ -50,7 +56,7 @@ export const ChannelCard = memo(function ChannelCard({ channel, isActive, index,
 
   if (layout === 'list') {
     return (
-      <RadialMenu menuItems={menuItems} onSelect={handleRadialSelect}>
+      <ContextMenu menuItems={menuItems} onSelect={handleRadialSelect}>
       <motion.div
         onClick={() => onClick(channel)}
         initial={{ opacity: 0, x: 20 }}
@@ -62,12 +68,31 @@ export const ChannelCard = memo(function ChannelCard({ channel, isActive, index,
             : 'bg-white/5 ring-1 ring-white/10 hover:bg-white/10'
         }`}
       >
+        {isActive && (
+          <>
+            <div className="absolute inset-0 rounded-[12px] z-0 pointer-events-none"
+              style={{
+                background: 'linear-gradient(135deg, #ff0000, #ffffff, #ff0000)',
+                backgroundSize: '200% 200%',
+                animation: 'glowMove 2s ease-in-out infinite',
+                opacity: 0.3,
+              }}
+            />
+            <div className="absolute -inset-[3px] rounded-[15px] z-0 pointer-events-none"
+              style={{
+                background: 'rgba(255, 0, 0, 0.1)',
+                filter: 'blur(8px)',
+                animation: 'glowPulse 2s ease-in-out infinite',
+              }}
+            />
+          </>
+        )}
         {/* Thumbnail Area */}
         <div className="w-[100px] aspect-[16/10] shrink-0 rounded-[8px] bg-[radial-gradient(circle_at_center,_#333,_#111)] flex items-center justify-center p-2 border border-white/5 shadow-inner overflow-hidden relative">
            {channel.logoUrl ? (
              <img 
                src={channel.logoUrl} 
-               alt="" 
+               alt={`${channel.name} logo`}
                className="w-full h-full object-contain shrink-0 drop-shadow-md z-10"
                loading="lazy"
                decoding="async"
@@ -82,24 +107,20 @@ export const ChannelCard = memo(function ChannelCard({ channel, isActive, index,
         {/* Text Area */}
         <div className="flex-1 min-w-0 pr-2">
           <h3 className={`font-bengali text-sm font-semibold truncate ${isActive ? 'text-white' : 'text-white/80 group-hover:text-white transition-colors'}`}>
-            {channel.name}
+            {channel.name.replace(/\s*\(\d+p\)/gi, '')}
           </h3>
           <p className="text-[10px] text-white/40 uppercase tracking-widest mt-1 truncate">
             {channel.category}
           </p>
         </div>
         
-        {isActive && (
-           <div className="w-1.5 h-1.5 shrink-0 rounded-full bg-[var(--color-accent)] mr-2" style={{ boxShadow: '0 0 10px var(--color-accent)' }} />
-        )}
-
       </motion.div>
-      </RadialMenu>
+      </ContextMenu>
     );
   }
 
   return (
-    <RadialMenu menuItems={menuItems} onSelect={handleRadialSelect}>
+    <ContextMenu menuItems={menuItems} onSelect={handleRadialSelect}>
     <motion.div
       onClick={() => onClick(channel)}
       initial={{ opacity: 0, scale: 0.95, y: 10 }}
@@ -127,18 +148,29 @@ export const ChannelCard = memo(function ChannelCard({ channel, isActive, index,
       {/* Inner content (Card Canvas) */}
       <div className={`relative w-full h-full flex flex-col items-center justify-center rounded-[14px] text-white bg-[radial-gradient(circle_120px_at_80%_-50%,_#777777,_#0f1111)] z-10 transition-transform duration-500 ${isActive ? 'scale-105' : 'group-hover:scale-105'} overflow-hidden`}>
         
+        {isActive && (
+          <div className="absolute inset-0 rounded-[14px] z-0 pointer-events-none"
+            style={{
+              background: 'linear-gradient(135deg, #ff0000, #ffffff, #ff0000)',
+              backgroundSize: '200% 200%',
+              animation: 'glowMove 2s ease-in-out infinite',
+              opacity: 0.15,
+            }}
+          />
+        )}
+
         {/* Channel Logo */}
         {channel.logoUrl ? (
           <img 
             src={channel.logoUrl} 
-            alt="Channel Logo" 
+            alt={`${channel.name} logo`}
             className={`w-[65%] h-[65%] object-contain transition-all duration-500 ${isActive ? 'drop-shadow-[0_0_15px_rgba(255,255,255,0.6)] scale-110' : 'opacity-90 group-hover:opacity-100 group-hover:scale-110 drop-shadow-lg'} z-20`}
             loading={index < 20 ? 'eager' : 'lazy'}
             decoding="async"
           />
         ) : (
           <div className="text-center font-bengali text-sm font-medium text-white/80 px-2 line-clamp-2 z-20 drop-shadow-md">
-            {channel.name}
+            {channel.name.replace(/\s*\(\d+p\)/gi, '')}
           </div>
         )}
 
@@ -156,7 +188,7 @@ export const ChannelCard = memo(function ChannelCard({ channel, isActive, index,
       </div>
 
     </motion.div>
-    </RadialMenu>
+    </ContextMenu>
   );
 });
 

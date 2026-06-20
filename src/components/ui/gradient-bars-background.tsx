@@ -105,7 +105,7 @@ export const Component = ({
       />
       
       {children && (
-        <div className="relative z-10 w-full h-full flex items-center justify-center">
+        <div className="relative z-10 w-full h-full flex flex-col">
           {children}
         </div>
       )}

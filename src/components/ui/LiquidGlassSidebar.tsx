@@ -117,7 +117,7 @@ export const LiquidGlassSidebar: React.FC<LiquidGlassSidebarProps> = ({ activeCa
     <aside className="flex-none w-[120px] h-full bg-[#050505] border-r border-[#151515] flex flex-col z-30 shadow-[8px_0_32px_rgba(0,0,0,0.6)] relative isolate">
       <GlassFilter />
 
-      <div className="flex-1 flex flex-col items-center justify-start w-full h-full px-5 py-6 gap-6 overflow-y-auto overflow-x-hidden">
+      <div data-lenis-prevent="true" className="flex-1 flex flex-col items-center justify-between w-full h-full px-5 py-8 overflow-y-auto overflow-x-hidden no-scrollbar">
          {CATEGORIES.map(cat => (
             <RealismButton 
               key={cat.id} 

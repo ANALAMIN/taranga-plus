@@ -5,8 +5,10 @@ import { Category, ChannelFinal, ChannelValidated } from '../types';
  */
 function normalizeName(name: string): string {
   return name.toLowerCase()
-    .replace(/\b(hd|fhd|4k|tv)\b/g, '') // Remove common suffixes
-    .replace(/[^a-z0-9]/g, '');         // Remove non-alphanumeric chars
+    .replace(/\b(hd|fhd|4k|tv)\b/g, '')
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
 }
 
 /**
@@ -14,7 +16,7 @@ function normalizeName(name: string): string {
  */
 async function generateId(normalizedName: string): Promise<string> {
   const msgUint8 = new TextEncoder().encode(normalizedName);
-  const hashBuffer = await crypto.subtle.digest('SHA-1', msgUint8);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);
   const hashArray = Array.from(new Uint8Array(hashBuffer));
   return hashArray.map(b => b.toString(16).padStart(2, '0')).join('').substring(0, 16);
 }

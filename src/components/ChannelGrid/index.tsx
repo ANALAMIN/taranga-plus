@@ -54,16 +54,29 @@ export const ChannelGrid: React.FC<ChannelGridProps> = ({
         variants={fadeIn}
         initial="hidden"
         animate="visible"
-        className="flex flex-col items-center justify-center h-full text-[var(--color-muted)] font-bengali p-6"
+        className="flex flex-col items-center justify-center h-full text-[var(--color-muted)] font-bengali p-6 text-center"
       >
-        <p className="text-lg">No channels found for the selected category or search query.</p>
+        {channels.length === 0 ? (
+          <>
+            <p className="text-lg mb-2">Unable to load channels</p>
+            <p className="text-sm text-white/40 mb-4">Could not fetch channel list. Check your connection and try again.</p>
+            <button
+              onClick={() => window.location.reload()}
+              className="px-5 py-2 bg-white/10 hover:bg-white/20 border border-white/10 text-white rounded-xl transition-all duration-300 text-sm"
+            >
+              Retry
+            </button>
+          </>
+        ) : (
+          <p className="text-lg">No channels found for the selected category or search query.</p>
+        )}
       </motion.div>
     );
   }
 
   return (
     <InteractiveGradientBackground>
-      <div className={`p-4 md:p-6 h-full overflow-y-auto channel-grid-container relative z-10 w-full`}>
+      <div data-lenis-prevent="true" className={`p-4 md:p-6 h-full overflow-y-auto channel-grid-container relative z-10 w-full`}>
         <motion.div 
           variants={staggerContainer}
           initial="hidden"

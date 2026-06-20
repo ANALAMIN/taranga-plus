@@ -16,9 +16,9 @@ export function useChannels() {
       // directly if it isn't deployed yet. In production, this contacts the backend.
       const data = await getChannels();
       setChannels(data);
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error(err);
-      setError(err.message || 'Failed to fetch channels');
+      setError(err instanceof Error ? err.message : 'Failed to fetch channels');
     } finally {
       setLoading(false);
     }

@@ -7,7 +7,8 @@ const CHANNELS_KEY = 'channels_bd';
  */
 export async function saveChannels(env: Env, channels: ChannelFinal[]): Promise<void> {
   const jsonString = JSON.stringify(channels);
-  await env.TARANGA_KV.put(CHANNELS_KEY, jsonString);
+  const compressed = new TextEncoder().encode(jsonString);
+  await env.TARANGA_KV.put(CHANNELS_KEY, compressed, { metadata: { compressed: true } });
 }
 
 /**
@@ -15,7 +16,7 @@ export async function saveChannels(env: Env, channels: ChannelFinal[]): Promise<
  * Used by the client API.
  */
 export async function getChannels(env: Env): Promise<ChannelFinal[]> {
-  const data = await env.TARANGA_KV.get(CHANNELS_KEY);
+  const data = await env.TARANGA_KV.get(CHANNELS_KEY, 'text');
   if (!data) return [];
   
   try {

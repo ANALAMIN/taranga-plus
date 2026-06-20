@@ -12,3 +12,4 @@ coverage/
 *.iso
 thumbs.db
 server.js
+opencode.json

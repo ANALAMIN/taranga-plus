@@ -7,9 +7,13 @@ import { registerNetworkFilters } from './customFilters';
  * Initializes and configures the Google Shaka Player instance.
  * Attaches it to the <video> HTML element.
  */
+let polyfillsInstalled = false;
+
 export async function initShakaPlayer(videoElement: HTMLVideoElement, videoContainer?: HTMLElement): Promise<shaka.Player> {
-  // Always call installAll() first to polyfill browser support
-  shaka.polyfill.installAll();
+  if (!polyfillsInstalled) {
+    shaka.polyfill.installAll();
+    polyfillsInstalled = true;
+  }
 
   if (!shaka.Player.isBrowserSupported()) {
     console.error('Browser not supported!');

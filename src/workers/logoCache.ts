@@ -35,7 +35,7 @@ export async function prefetchLogos(channels: { id: string; logoUrl: string }[])
         await localDb.cacheLogo(channel.id, blob);
       }
     } catch (e) {
-      // Silently fail logo prefetches, fall back to normal loading later
+      console.warn(`[Taranga+] Logo prefetch failed for ${channel.id}:`, e);
     }
   }
 }

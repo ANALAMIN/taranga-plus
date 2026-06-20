@@ -1,8 +1,8 @@
 import shaka from 'shaka-player/dist/shaka-player.ui';
 
 /**
- * THE MOST CRITICAL FILE IN THE PROJECT.
- * Contains the Time-Shifted Buffer Cushion config.
+ * Time-shifted buffer cushion configuration for live stream stability.
+ * Ensures smooth playback near the live edge with configurable thresholds.
  */
 export function applyTimeShiftBuffer(player: shaka.Player): void {
   player.configure({

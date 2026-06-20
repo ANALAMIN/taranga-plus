@@ -16,19 +16,19 @@ async function testStream(channel: ChannelRaw): Promise<ChannelValidated> {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), TIMEOUT_MS);
 
-    // We use HEAD method because it's faster and doesn't download actual video data
+    // Use partial GET with Range header to avoid 405/403 from CDNs that reject HEAD
     const response = await fetch(channel.url, {
-      method: 'HEAD',
+      method: 'GET',
       signal: controller.signal,
       headers: {
-        // User-Agent spoofing to bypass basic protections
+        'Range': 'bytes=0-0',
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
       }
     });
 
     clearTimeout(timeoutId);
 
-    if (response.ok) {
+    if (response.ok || response.status === 206) {
       isAlive = true;
       latencyMs = Date.now() - start;
     }

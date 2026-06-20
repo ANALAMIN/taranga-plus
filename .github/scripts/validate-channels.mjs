@@ -78,40 +78,48 @@ async function fetchAllSources() {
 // ── Validate Channels (Smart Check) ─────────────────────
 async function testStream(channel) {
   const start = Date.now();
-  try {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), TIMEOUT_MS);
-    
-    const res = await fetch(channel.url, {
-      method: 'HEAD',
-      signal: controller.signal,
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-      },
-    });
-    clearTimeout(timeout);
-    
-    if (!res.ok) {
+  // Try HEAD first, fall back to GET with Range: bytes=0-0 if HEAD returns 405
+  for (const method of ['HEAD', 'GET']) {
+    try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), TIMEOUT_MS);
+      
+      const res = await fetch(channel.url, {
+        method,
+        signal: controller.signal,
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+          ...(method === 'GET' ? { 'Range': 'bytes=0-0' } : {}),
+        },
+      });
+      clearTimeout(timeout);
+      
+      const ok = res.ok || res.status === 206;
+      if (!ok) {
+        if (method === 'HEAD' && res.status === 405) continue;
+        return { ...channel, isAlive: false, latencyMs: Date.now() - start };
+      }
+      
+      const contentType = (res.headers.get('content-type') || '').toLowerCase();
+      const isVideo = contentType.includes('video') ||
+                      contentType.includes('mpegurl') ||
+                      contentType.includes('octet-stream') ||
+                      contentType.includes('x-mpegurl') ||
+                      contentType.includes('apple') ||
+                      contentType.includes('application');
+      
+      if (isVideo || ok) {
+        return { ...channel, isAlive: true, latencyMs: Date.now() - start };
+      }
+      
       return { ...channel, isAlive: false, latencyMs: Date.now() - start };
+      
+    } catch (err) {
+      if (method === 'HEAD') continue;
+      console.warn(`  Test failed for ${channel.name}: ${err.message}`);
+      return { ...channel, isAlive: false, latencyMs: TIMEOUT_MS };
     }
-    
-    // Check content-type to verify it's video/HLS
-    const contentType = (res.headers.get('content-type') || '').toLowerCase();
-    const isVideo = contentType.includes('video') || 
-                    contentType.includes('mpegurl') || 
-                    contentType.includes('octet-stream') ||
-                    contentType.includes('x-mpegurl') ||
-                    contentType.includes('apple') ||
-                    contentType.includes('application');
-    
-    // If HEAD ok and content-type suggests video, consider alive
-    if (isVideo || res.ok) {
-      return { ...channel, isAlive: true, latencyMs: Date.now() - start };
-    }
-    
-    return { ...channel, isAlive: false, latencyMs: Date.now() - start };
-    
-  } catch {}
+  }
   return { ...channel, isAlive: false, latencyMs: TIMEOUT_MS };
 }
 
@@ -132,12 +140,14 @@ function normalizeName(name) {
   return name
     .toLowerCase()
     .replace(/\b(hd|fhd|4k|tv)\b/g, '')
-    .replace(/[^a-z0-9]/g, '');
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
 }
 
 async function generateId(normalizedName) {
   const msgUint8 = new TextEncoder().encode(normalizedName);
-  const hashBuffer = await crypto.subtle.digest('SHA-1', msgUint8);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);
   return Array.from(new Uint8Array(hashBuffer))
     .map((b) => b.toString(16).padStart(2, '0'))
     .join('')
