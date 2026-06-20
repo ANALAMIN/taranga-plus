@@ -4,6 +4,9 @@
 
 export type Category = 'all' | 'favorites' | 'sports' | 'movies' | 'music' | 'entertainment' | 'kids' | 'documentary';
 
+export type Language = 'bn' | 'hi' | 'en' | 'ur' | 'other';
+export type Tier = 'global' | 'bdix';
+
 export interface ChannelRaw {
   name: string;
   url: string;
@@ -27,6 +30,10 @@ export interface ChannelFinal {
   streamUrl: string;
   category: Category;
   latencyMs: number;
+  language: Language;     // drives language filter (bn/hi/en/ur)
+  tier: Tier;             // 'global' = Tier-1 validated, 'bdix' = app-side
+  sources: string[];      // alternate working URLs (multi-URL fallback)
+  lastValidated: string;  // ISO timestamp of last passing test
 }
 
 export interface Env {
