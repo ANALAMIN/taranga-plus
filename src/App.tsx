@@ -93,7 +93,7 @@ function AppShell() {
                       borderColor: 'rgba(var(--color-accent-rgb), 0.4)'
                     }}
                   />
-                  <VideoFrame streamUrl={activeChannel.streamUrl} sources={activeChannel.sources} />
+                  <VideoFrame streamUrl={activeChannel.streamUrl} sources={activeChannel.sources} channelName={activeChannel.name} channelLogo={activeChannel.logoUrl} />
                 </div>
 
                 {/* Channel Info Below Video */}
