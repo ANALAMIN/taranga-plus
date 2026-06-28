@@ -67,7 +67,7 @@ jobs:
       - run: |
           git config user.name "Taranga+ Bot"
           git config user.email "bot@taranga-plus.dev"
-          git add data/channels.json
+          git add -f data/channels.json
           if ! git diff --cached --quiet; then
             git commit -m "chore: auto-validate channels $(date -u +'%Y-%m-%d %H:%M UTC')"
             git push
