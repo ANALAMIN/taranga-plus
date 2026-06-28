@@ -71,9 +71,12 @@ function resolveUrl(ref, base) {
   try { return new URL(ref, base).href; } catch { return ref; }
 }
 
-async function fetchText(url, timeoutMs = 15000) {
+const FETCH_TIMEOUT = 8000;
+const SEGMENT_SIZE = 8192;
+
+async function fetchText(url) {
   const ctrl = new AbortController();
-  const t = setTimeout(() => ctrl.abort(), timeoutMs);
+  const t = setTimeout(() => ctrl.abort(), FETCH_TIMEOUT);
   try {
     const res = await fetch(url, { signal: ctrl.signal, headers: { 'User-Agent': 'TarangaPlus/2.0' } });
     if (!res.ok) return null;
@@ -109,7 +112,7 @@ async function checkStream(url) {
       if (mapMatch) {
         const initUrl = resolveUrl(mapMatch[1], mediaUrl);
         if (initUrl) {
-          const init = await fetchBytes(initUrl, 65536);
+          const init = await fetchBytes(initUrl, SEGMENT_SIZE);
           if (!init || init.length < 32) return { ok: false, latency: 0, reason: 'empty init' };
         }
       }
@@ -121,34 +124,35 @@ async function checkStream(url) {
     const segUrl = segUrlLine ? resolveUrl(segUrlLine.trim(), mediaUrl) : null;
     if (!segUrl) return { ok: false, latency: 0, reason: 'no segment' };
 
-    const seg = await fetchBytes(segUrl, 65536);
+    const seg = await fetchBytes(segUrl, SEGMENT_SIZE);
     if (!seg) return { ok: false, latency: 0, reason: 'segment unreachable' };
-
-    // Verify it's real video data (not HTML, not empty)
-    if (seg.length < 256) return { ok: false, latency: 0, reason: 'segment too small' };
-    const text = new TextDecoder().decode(seg.slice(0, 64));
-    if (text.includes('<!DOCTYPE') || text.includes('<html') || text.includes('{') || text.includes('"error"') || text.includes('Access Denied')) {
-      return { ok: false, latency: 0, reason: 'non-video response' };
-    }
+    if (!isVideoContent(seg)) return { ok: false, latency: 0, reason: 'non-video' };
 
     return { ok: true, latency: Math.round(performance.now() - start) };
   }
 
-  // Non-HLS stream — download first 64KB and verify content
-  const seg = await fetchBytes(url, 65536);
-  if (!seg) return { ok: false, latency: 0, reason: 'unreachable' };
-  if (seg.length < 256) return { ok: false, latency: 0, reason: 'too small' };
-  const text = new TextDecoder().decode(seg.slice(0, 64));
-  if (text.includes('<!DOCTYPE') || text.includes('<html') || text.includes('{') || text.includes('"error"') || text.includes('Access Denied')) {
-    return { ok: false, latency: 0, reason: 'non-video response' };
-  }
+  // Non-HLS stream — download first chunk and verify
+  const chunk = await fetchBytes(url, SEGMENT_SIZE);
+  if (!chunk) return { ok: false, latency: 0, reason: 'unreachable' };
+  if (!isVideoContent(chunk)) return { ok: false, latency: 0, reason: 'non-video' };
 
   return { ok: true, latency: Math.round(performance.now() - start) };
 }
 
+function isVideoContent(buf) {
+  if (buf.length < 64) return false;
+  const head = new TextDecoder().decode(buf.slice(0, Math.min(256, buf.length))).toLowerCase();
+  if (head.includes('<!doctype') || head.includes('<html') || head.includes('{"error"') || head.includes('"status":') || head.includes('access denied') || head.includes('404 not found')) return false;
+  // MPEG-TS starts with 0x47 sync byte
+  if (buf[0] === 0x47) return true;
+  // fMP4 starts with 'ftyp'
+  if (head.includes('ftyp') || head.includes('moov') || head.includes('mdat')) return true;
+  return true; // assume binary content is valid
+}
+
 async function fetchBytes(url, maxBytes) {
   const ctrl = new AbortController();
-  const t = setTimeout(() => ctrl.abort(), 15000);
+  const t = setTimeout(() => ctrl.abort(), FETCH_TIMEOUT);
   try {
     const res = await fetch(url, {
       signal: ctrl.signal,
