@@ -59,6 +59,16 @@ export function usePlayer(
   // Keep sources in a ref so the recovery callback always has the latest list
   // without needing to be re-registered on every sources prop change.
   const sourcesRef = useRef<string[]>(sources);
+
+  // When an error occurs, always clear buffering state so the loading
+  // spinner doesn't stay stuck on screen forever.
+  const setStreamError = useCallback((msg: string | null) => {
+    setError(msg);
+    if (msg !== null) {
+      setIsBuffering(false);
+      setBufferHealth(0);
+    }
+  }, []);
   useEffect(() => { sourcesRef.current = sources; }, [sources]);
 
   useEffect(() => {
@@ -133,7 +143,7 @@ export function usePlayer(
     const activePlayer = playerRef.current ?? player;
     if (!activePlayer) return;
 
-    setError(null);
+    setStreamError(null);
 
     try {
       if (cleanupRecoveryRef.current) {
@@ -147,11 +157,11 @@ export function usePlayer(
       cleanupRecoveryRef.current = setupAutoRecovery(
         activePlayer,
         sourcesRef.current,
-        (reason) => setError(reason ?? null)
+        (reason) => setStreamError(reason ?? null)
       );
     } catch (err) {
       console.error('Failed to load stream:', err);
-      setError(friendlyShakaError(err));
+      setStreamError(friendlyShakaError(err));
     }
   }, [player]);
 
