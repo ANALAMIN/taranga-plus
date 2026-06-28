@@ -18,6 +18,7 @@ const SOURCES = [
   { id: 'free-tv',              url: 'https://raw.githubusercontent.com/Free-TV/IPTV/master/playlists/playlist.m3u8' },
   { id: 'mrgify-bd',            url: 'https://raw.githubusercontent.com/abusaeeidx/Mrgify-BDIX-IPTV/main/playlist.m3u' },
   { id: 'imshakil-tvlink',      url: 'https://raw.githubusercontent.com/imShakil/tvlink/refs/heads/main/iptv.m3u8' },
+  { id: 'toffee',               url: 'https://raw.githubusercontent.com/johirxofficial/Toffee-Auto-Playlist/main/toffee_playlist.m3u' },
 ];
 
 const CATEGORY_MAP = {
