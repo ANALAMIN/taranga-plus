@@ -245,6 +245,19 @@ async function checkChunk() {
   console.log(`Saved valid-chunk-${CHUNK_INDEX}.json`);
 }
 
+async function logoToDataUri(url, maxBytes = 32768) {
+  if (!url) return null;
+  try {
+    const resp = await fetch(url, { signal: AbortSignal.timeout(5000) });
+    if (!resp.ok) return null;
+    const contentType = resp.headers.get('content-type') || 'image/png';
+    const buf = await resp.arrayBuffer();
+    if (buf.byteLength > maxBytes || buf.byteLength === 0) return null;
+    const b64 = Buffer.from(buf).toString('base64');
+    return `data:${contentType};base64,${b64}`;
+  } catch { return null; }
+}
+
 async function mergeChunks() {
   console.log('=== Merge Chunks ===\n');
   const valid = [];
@@ -267,7 +280,7 @@ async function mergeChunks() {
     groups[key].push(ch);
   }
 
-  const final = Object.values(groups)
+  let final = Object.values(groups)
     .map(group => {
       group.sort((a, b) => a.latencyMs - b.latencyMs);
       const best = group[0];
@@ -285,7 +298,20 @@ async function mergeChunks() {
     })
     .sort((a, b) => a.name.localeCompare(b.name));
 
-  console.log(`Final unique: ${final.length}`);
+  console.log(`\nDownloading logos as data URIs...`);
+  let cached = 0;
+  const BATCH = 50;
+  for (let i = 0; i < final.length; i += BATCH) {
+    const batch = final.slice(i, i + BATCH);
+    const dataUris = await Promise.all(batch.map(ch => logoToDataUri(ch.logoUrl)));
+    for (let j = 0; j < batch.length; j++) {
+      if (dataUris[j]) { batch[j].logoUrl = dataUris[j]; cached++; }
+    }
+    console.log(`  Logos: ${cached}/${Math.min(i + BATCH, final.length)} cached`);
+  }
+  console.log(`  Total: ${cached}/${final.length} logos embedded`);
+
+  console.log(`\nFinal unique: ${final.length}`);
   const outPath = join(ROOT, 'data', 'channels.json');
   writeFileSync(outPath, JSON.stringify(final, null, 2));
   console.log(`Saved ${outPath}`);
