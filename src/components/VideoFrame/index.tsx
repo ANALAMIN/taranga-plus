@@ -8,67 +8,7 @@ interface VideoFrameProps {
   sources?: string[];
 }
 
-function supportsNativeHls(): boolean {
-  try {
-    const v = document.createElement('video');
-    return ['application/vnd.apple.mpegurl', 'application/x-mpegURL', 'vnd.apple.mpegURL']
-      .some(t => v.canPlayType(t) === 'probably' || v.canPlayType(t) === 'maybe');
-  } catch { return false; }
-}
-
 export const VideoFrame: React.FC<VideoFrameProps> = ({ streamUrl, sources }) => {
-  const [useNative, setUseNative] = useState(false);
-
-  useEffect(() => {
-    setUseNative(supportsNativeHls());
-  }, []);
-
-  if (useNative) {
-    return <NativeHlsPlayer streamUrl={streamUrl} />;
-  }
-
-  return <ShakaPlayer streamUrl={streamUrl} sources={sources} />;
-};
-
-function NativeHlsPlayer({ streamUrl }: { streamUrl: string }) {
-  const [showBuffering, setShowBuffering] = useState(false);
-  const bufferingTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  useEffect(() => {
-    setShowBuffering(false);
-  }, [streamUrl]);
-
-  const handleWaiting = () => {
-    bufferingTimer.current = setTimeout(() => setShowBuffering(true), 2000);
-  };
-  const handleCanPlay = () => {
-    if (bufferingTimer.current) clearTimeout(bufferingTimer.current);
-    setShowBuffering(false);
-  };
-
-  return (
-    <div className="relative w-full h-full bg-black">
-      <video
-        key={streamUrl}
-        src={streamUrl}
-        autoPlay
-        controls={false}
-        playsInline
-        className="w-full h-full"
-        onWaiting={handleWaiting}
-        onCanPlay={handleCanPlay}
-        onPlaying={handleCanPlay}
-      />
-      {showBuffering && (
-        <div className="absolute inset-0 flex items-center justify-center bg-black/40 pointer-events-none z-[100]">
-          <LoadingLines />
-        </div>
-      )}
-    </div>
-  );
-}
-
-function ShakaPlayer({ streamUrl, sources }: { streamUrl: string; sources?: string[] }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -127,4 +67,4 @@ function ShakaPlayer({ streamUrl, sources }: { streamUrl: string; sources?: stri
       )}
     </div>
   );
-}
+};
