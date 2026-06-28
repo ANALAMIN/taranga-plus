@@ -160,12 +160,20 @@ async function checkStream(url) {
 function isVideoContent(buf) {
   if (buf.length < 64) return false;
   const head = new TextDecoder().decode(buf.slice(0, Math.min(256, buf.length))).toLowerCase();
-  if (head.includes('<!doctype') || head.includes('<html') || head.includes('{"error"') || head.includes('"status":') || head.includes('access denied') || head.includes('404 not found')) return false;
-  // MPEG-TS starts with 0x47 sync byte
-  if (buf[0] === 0x47) return true;
-  // fMP4 starts with 'ftyp'
-  if (head.includes('ftyp') || head.includes('moov') || head.includes('mdat')) return true;
-  return true; // assume binary content is valid
+  if (head.includes('<!doctype') || head.includes('<html') || head.includes('{"error"') || head.includes('"status":') || head.includes('access denied') || head.includes('404 not found') || head.includes('<error') || head.includes('not found')) return false;
+
+  // Known video container signatures
+  if (buf[0] === 0x47) return true;                         // MPEG-TS
+  if (buf[0] === 0x1a && buf[1] === 0x45) return true;      // WebM/Matroska
+  if (head.includes('ftyp') || head.includes('moov')) return true;  // fMP4/MP4
+
+  // Binary content check: at least 15% non-printable bytes
+  let binary = 0;
+  for (let i = 0; i < buf.length; i++) {
+    const b = buf[i];
+    if (b < 32 && b !== 9 && b !== 10 && b !== 13) binary++;
+  }
+  return binary / buf.length > 0.15;
 }
 
 async function fetchBytes(url, maxBytes) {
