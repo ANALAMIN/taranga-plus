@@ -3,11 +3,16 @@ import shaka from 'shaka-player/dist/shaka-player.ui';
 export function applyTimeShiftBuffer(player: shaka.Player): void {
   player.configure({
     streaming: {
-      bufferingGoal: 60,
+      bufferingGoal: 15,
       rebufferingGoal: 2,
-      bufferBehind: 120,
+      bufferBehind: 60,
       stallEnabled: true,
-      stallThreshold: 3,
+      stallThreshold: 2,
+      stallSkip: 0.1,
+      liveSync: true,
+      liveSyncPlaybackRate: 0.95,
+      liveSyncMinPlaybackRate: 0.9,
+      liveSyncMaxPlaybackRate: 1.1,
       retryParameters: {
         maxAttempts: 3,
         baseDelay: 500,

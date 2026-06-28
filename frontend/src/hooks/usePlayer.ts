@@ -5,6 +5,42 @@ import { setupAutoRecovery } from '../player-engine/autoRecover';
 import { watchNetworkChanges } from '../player-engine/abrManager';
 import { friendlyShakaError } from '../utils/shakaErrors';
 
+function supportsNativeHls(video: HTMLVideoElement): boolean {
+  const r = video.canPlayType('application/vnd.apple.mpegurl');
+  return r === 'probably' || r === 'maybe';
+}
+
+function tryNativePlayback(
+  video: HTMLVideoElement,
+  url: string,
+  signal: AbortSignal
+): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const onError = () => { cleanup(); reject(new Error('Native HLS error')); };
+    const onPlaying = () => { cleanup(); resolve(); };
+    const cleanup = () => {
+      video.removeEventListener('error', onError);
+      video.removeEventListener('playing', onPlaying);
+    };
+
+    video.addEventListener('error', onError);
+    video.addEventListener('playing', onPlaying);
+
+    if (signal.aborted) {
+      cleanup();
+      reject(new DOMException('Aborted', 'AbortError'));
+      return;
+    }
+    signal.addEventListener('abort', () => {
+      cleanup();
+      reject(new DOMException('Aborted', 'AbortError'));
+    });
+
+    video.src = url;
+    video.play().catch(reject);
+  });
+}
+
 /**
  * Player hook.
  *
@@ -123,13 +159,21 @@ export function usePlayer(
   }, [videoRef, containerRef]);
 
   const loadingRef = useRef(false);
+  const nativeAbortRef = useRef<AbortController | null>(null);
 
   const setStream = useCallback(async (url: string) => {
-    const activePlayer = playerRef.current;
-    if (!activePlayer || loadingRef.current) return;
+    if (loadingRef.current) return;
 
     loadingRef.current = true;
     setStreamError(null);
+
+    if (nativeAbortRef.current) {
+      nativeAbortRef.current.abort();
+      nativeAbortRef.current = null;
+    }
+
+    const v = videoRef.current;
+    if (!v) { loadingRef.current = false; return; }
 
     try {
       if (cleanupRecoveryRef.current) {
@@ -137,8 +181,40 @@ export function usePlayer(
         cleanupRecoveryRef.current = null;
       }
 
+      // Try native HLS first for max speed
+      if (supportsNativeHls(v)) {
+        const ac = new AbortController();
+        nativeAbortRef.current = ac;
+
+        try {
+          await tryNativePlayback(v, url, ac.signal);
+          setIsBuffering(false);
+          setIsPlaying(true);
+          return;
+        } catch {
+          // Native failed — fall through to Shaka
+          nativeAbortRef.current = null;
+        }
+      }
+
+      // Fallback: use Shaka Player
+      const activePlayer = playerRef.current;
+      if (!activePlayer) {
+        setStreamError('Player not ready');
+        return;
+      }
+
+      // Detach any native source before Shaka takes over
+      v.removeAttribute('src');
+      v.load();
+
       await activePlayer.load(url);
+      setIsBuffering(false);
       setIsPlaying(true);
+
+      if (v.paused) {
+        v.play().catch(() => {});
+      }
 
       cleanupRecoveryRef.current = setupAutoRecovery(
         activePlayer,

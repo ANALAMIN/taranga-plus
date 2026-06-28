@@ -46,6 +46,8 @@ export const VideoFrame: React.FC<VideoFrameProps> = ({ streamUrl, sources }) =>
       <video
         ref={videoRef}
         autoPlay
+        muted
+        playsInline
         controls={false}
         disablePictureInPicture={false}
         crossOrigin="anonymous"
