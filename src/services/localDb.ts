@@ -1,5 +1,6 @@
 import { openDB, DBSchema, IDBPDatabase } from 'idb';
 import { AppSettingsKeyMap } from './settingsKeys';
+import { ChannelFinal } from '../types';
 
 /**
  * IndexedDB schema for Taranga+.
@@ -90,6 +91,9 @@ export interface LocalDb {
 
   cacheLogo(channelId: string, blob: Blob): Promise<void>;
   getCachedLogo(channelId: string): Promise<Blob | undefined>;
+
+  cacheChannels(channels: ChannelFinal[]): Promise<void>;
+  getCachedChannels(): Promise<ChannelFinal[] | null>;
 }
 
 export const localDb: LocalDb = {
@@ -117,5 +121,17 @@ export const localDb: LocalDb = {
   async getCachedLogo(channelId: string) {
     const db = await initDB();
     return db.get('logo_cache', `logo_${channelId}`);
+  },
+
+  async cacheChannels(channels: ChannelFinal[]) {
+    const db = await initDB();
+    await db.put('app_settings', JSON.stringify(channels), 'channels_cache');
+  },
+
+  async getCachedChannels(): Promise<ChannelFinal[] | null> {
+    const db = await initDB();
+    const raw = await db.get('app_settings', 'channels_cache');
+    if (!raw) return null;
+    try { return JSON.parse(raw as string) as ChannelFinal[]; } catch { return null; }
   },
 };
