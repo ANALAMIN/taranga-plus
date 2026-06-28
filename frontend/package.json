@@ -6,11 +6,11 @@
   "main": "./dist/index.html",
   "scripts": {
     "dev:web": "vite",
-    "dev:desktop": "start powershell \"npm run dev:web\" && dotnet run --project backend",
+    "dev:desktop": "start powershell \"npm run dev:web\" && dotnet run --project ../backend",
     "build:web": "vite build",
-    "build:desktop": "npm run build:web && dotnet publish backend -c Release",
+    "build:desktop": "npm run build:web && dotnet publish ../backend -c Release",
     "preview": "vite preview",
-    "clean": "node -e \"const fs=require('fs');['dist','backend/bin','backend/obj','src-tauri/target'].forEach(d=>fs.rmSync(d,{recursive:true,force:true}))\"",
+    "clean": "node -e \"const fs=require('fs');['dist','../backend/bin','../backend/obj'].forEach(d=>fs.rmSync(d,{recursive:true,force:true}))\"",
     "lint": "tsc --noEmit -p tsconfig.renderer.json",
     "test": "echo \"No test specified\" && exit 0"
   },

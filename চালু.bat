@@ -3,7 +3,7 @@ cd /d "%~dp0"
 title Taranga+
 
 echo Starting Vite...
-start /b npm run dev:web >nul 2>&1
+start /b npm run dev:web --prefix frontend >nul 2>&1
 
 :wait
 timeout /t 1 /nobreak >nul

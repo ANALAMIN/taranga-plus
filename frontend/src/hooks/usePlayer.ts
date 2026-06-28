@@ -3,6 +3,7 @@ import shaka from 'shaka-player/dist/shaka-player.ui';
 import { initShakaPlayer } from '../player-engine/shakaCore';
 import { setupAutoRecovery } from '../player-engine/autoRecover';
 import { watchNetworkChanges } from '../player-engine/abrManager';
+import { friendlyShakaError } from '../utils/shakaErrors';
 
 /**
  * Player hook.
@@ -20,24 +21,6 @@ import { watchNetworkChanges } from '../player-engine/abrManager';
  * can key a load effect on it so a `streamUrl` present on mount is reliably
  * loaded (the original race fired `setStream` before the player existed).
  */
-function friendlyShakaError(err: unknown): string {
-  const e = err as { code?: number; category?: number; message?: string } | undefined;
-  const code = e?.code ?? 0;
-  const cat = e?.category ?? 0;
-  if (cat === 1) {
-    if (code === 1002) return 'Channel unavailable';
-    if (code === 1006) return 'Connection lost';
-    if (code === 1001) return 'Network error';
-    return 'Cannot reach server';
-  }
-  if (cat === 4) {
-    if (code === 4053) return 'Format not supported by player';
-    if (code === 4012) return 'Content not playable (DRM)';
-    return 'Stream error';
-  }
-  return 'Stream unavailable';
-}
-
 export function usePlayer(
   videoRef: React.RefObject<HTMLVideoElement | null>,
   containerRef?: React.RefObject<HTMLElement | null>,
@@ -139,10 +122,13 @@ export function usePlayer(
     };
   }, [videoRef, containerRef]);
 
-  const setStream = useCallback(async (url: string) => {
-    const activePlayer = playerRef.current ?? player;
-    if (!activePlayer) return;
+  const loadingRef = useRef(false);
 
+  const setStream = useCallback(async (url: string) => {
+    const activePlayer = playerRef.current;
+    if (!activePlayer || loadingRef.current) return;
+
+    loadingRef.current = true;
     setStreamError(null);
 
     try {
@@ -162,24 +148,26 @@ export function usePlayer(
     } catch (err) {
       console.error('Failed to load stream:', err);
       setStreamError(friendlyShakaError(err));
+    } finally {
+      loadingRef.current = false;
     }
-  }, [player]);
+  }, []);
 
   const play = useCallback(() => {
     const v = videoRef.current;
-    if (v && (playerRef.current ?? player)) {
+    if (v && playerRef.current) {
       v.play();
       setIsPlaying(true);
     }
-  }, [videoRef, player]);
+  }, [videoRef]);
 
   const pause = useCallback(() => {
     const v = videoRef.current;
-    if (v && (playerRef.current ?? player)) {
+    if (v && playerRef.current) {
       v.pause();
       setIsPlaying(false);
     }
-  }, [videoRef, player]);
+  }, [videoRef]);
 
   return {
     player,

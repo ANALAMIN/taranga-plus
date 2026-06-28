@@ -62,7 +62,7 @@ public partial class MainWindow : Window
         webView.CoreWebView2.Navigate("http://localhost:1420");
 #else
         var path = Path.GetFullPath(Path.Combine(
-            AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "dist", "index.html"));
+            AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "..", "frontend", "dist", "index.html"));
         webView.CoreWebView2.Navigate($"file:///{path.Replace('\\', '/')}");
 #endif
     }

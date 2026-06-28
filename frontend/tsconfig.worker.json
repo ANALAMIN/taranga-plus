@@ -7,8 +7,8 @@
     "types": ["@cloudflare/workers-types", "node"]
   },
   "include": [
-    "backend/**/*.ts",
-    "backend/**/*.d.ts"
+    "**/*.ts",
+    "**/*.d.ts"
   ],
   "exclude": ["src", "src-electron"]
 }
