@@ -67,24 +67,97 @@ function parseM3U(text, sourceId) {
   return entries;
 }
 
-async function checkStream(url) {
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 10000);
+function resolveUrl(ref, base) {
+  try { return new URL(ref, base).href; } catch { return ref; }
+}
+
+async function fetchText(url, timeoutMs = 15000) {
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), timeoutMs);
   try {
-    const start = performance.now();
-    const res = await fetch(url, {
-      method: 'HEAD',
-      signal: controller.signal,
-      headers: { 'User-Agent': 'TarangaPlus/2.0' },
-    });
-    const latency = Math.round(performance.now() - start);
-    clearTimeout(timeout);
-    if (res.ok || res.status === 206) return { ok: true, latency };
-    return { ok: false, latency, reason: `HTTP ${res.status}` };
-  } catch (e) {
-    clearTimeout(timeout);
-    return { ok: false, latency: 0, reason: e.message };
+    const res = await fetch(url, { signal: ctrl.signal, headers: { 'User-Agent': 'TarangaPlus/2.0' } });
+    if (!res.ok) return null;
+    return await res.text();
+  } catch { return null; } finally { clearTimeout(t); }
+}
+
+async function checkStream(url) {
+  const start = performance.now();
+
+  // HLS (.m3u8) — download a real segment and verify content
+  if (url.includes('.m3u8')) {
+    const master = await fetchText(url);
+    if (!master) return { ok: false, latency: 0, reason: 'unreachable' };
+
+    // Find the highest-bandwidth variant
+    const bwRe = /#EXT-X-STREAM-INF[^]*?BANDWIDTH=(\d+)[\s\S]*?\n([^\n]+)/g;
+    let match, bestUrl = null;
+    while ((match = bwRe.exec(master)) !== null) {
+      const variantUrl = resolveUrl(match[2].trim(), url);
+      if (variantUrl) bestUrl = variantUrl;
+    }
+
+    // Fallback: treat the URL itself as a media playlist
+    const mediaUrl = bestUrl || url;
+
+    // Fetch media playlist to get segment URLs
+    const media = await fetchText(mediaUrl);
+    if (!media) return { ok: false, latency: 0, reason: 'media unreachable' };
+    if (media.includes('#EXT-X-MAP')) {
+      // fMP4 — GET the init segment
+      const mapMatch = media.match(/EXT-X-MAP:URI="([^"]+)"/);
+      if (mapMatch) {
+        const initUrl = resolveUrl(mapMatch[1], mediaUrl);
+        if (initUrl) {
+          const init = await fetchBytes(initUrl, 65536);
+          if (!init || init.length < 32) return { ok: false, latency: 0, reason: 'empty init' };
+        }
+      }
+    }
+
+    // Get the first .ts or .m4s segment URL
+    const segLine = media.split('\n').find(l => l.trim() && !l.startsWith('#') && !l.startsWith('http'));
+    const segUrlLine = media.split('\n').find(l => l.trim() && !l.startsWith('#'));
+    const segUrl = segUrlLine ? resolveUrl(segUrlLine.trim(), mediaUrl) : null;
+    if (!segUrl) return { ok: false, latency: 0, reason: 'no segment' };
+
+    const seg = await fetchBytes(segUrl, 65536);
+    if (!seg) return { ok: false, latency: 0, reason: 'segment unreachable' };
+
+    // Verify it's real video data (not HTML, not empty)
+    if (seg.length < 256) return { ok: false, latency: 0, reason: 'segment too small' };
+    const text = new TextDecoder().decode(seg.slice(0, 64));
+    if (text.includes('<!DOCTYPE') || text.includes('<html') || text.includes('{') || text.includes('"error"') || text.includes('Access Denied')) {
+      return { ok: false, latency: 0, reason: 'non-video response' };
+    }
+
+    return { ok: true, latency: Math.round(performance.now() - start) };
   }
+
+  // Non-HLS stream — download first 64KB and verify content
+  const seg = await fetchBytes(url, 65536);
+  if (!seg) return { ok: false, latency: 0, reason: 'unreachable' };
+  if (seg.length < 256) return { ok: false, latency: 0, reason: 'too small' };
+  const text = new TextDecoder().decode(seg.slice(0, 64));
+  if (text.includes('<!DOCTYPE') || text.includes('<html') || text.includes('{') || text.includes('"error"') || text.includes('Access Denied')) {
+    return { ok: false, latency: 0, reason: 'non-video response' };
+  }
+
+  return { ok: true, latency: Math.round(performance.now() - start) };
+}
+
+async function fetchBytes(url, maxBytes) {
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), 15000);
+  try {
+    const res = await fetch(url, {
+      signal: ctrl.signal,
+      headers: { 'User-Agent': 'TarangaPlus/2.0', Range: `bytes=0-${maxBytes - 1}` },
+    });
+    if (!res.ok && res.status !== 206) return null;
+    const buf = await res.arrayBuffer();
+    return new Uint8Array(buf);
+  } catch { return null; } finally { clearTimeout(t); }
 }
 
 function normalizeName(name) {
