@@ -1,0 +1,14 @@
+{
+  // Cloudflare Worker (backend/): Worker + Node types ONLY. Excludes DOM and
+  // Electron globals so worker code can't reference browser or desktop APIs.
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ES2022"],
+    "types": ["@cloudflare/workers-types", "node"]
+  },
+  "include": [
+    "backend/**/*.ts",
+    "backend/**/*.d.ts"
+  ],
+  "exclude": ["src", "src-electron"]
+}

@@ -1,0 +1,10 @@
+{
+  // Root config: a no-op aggregator. `npm run lint` type-checks each
+  // environment directly (tsc --noEmit -p tsconfig.<env>.json) so a single run
+  // covers all of them WITHOUT cross-pollinating ambient globals.
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.renderer.json" },
+    { "path": "./tsconfig.worker.json" }
+  ]
+}

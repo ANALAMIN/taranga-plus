@@ -1,0 +1,127 @@
+@import "tailwindcss";
+@import "./fonts.css";
+
+:root {
+  --color-accent: #E50914; /* Default */
+  --color-accent-rgb: 229, 9, 20; /* Default */
+}
+
+@theme {
+  --color-bg-base: #080808;
+  --color-bg-surface: #111111;
+  --color-bg-elevated: #1A1A1A;
+  --color-bg-overlay: #222222;
+  
+  --color-border: rgba(255, 255, 255, 0.06);
+  --color-border-hover: rgba(255, 255, 255, 0.12);
+  --color-border-active: rgba(255, 255, 255, 0.20);
+  
+  --color-accent: var(--color-accent);
+  --color-accent-muted: rgba(var(--color-accent-rgb), 0.15);
+  --color-accent-hover: var(--color-accent); /* Need a lighter shade maybe, but for now fallback to accent */
+  
+  --color-text-primary: #F5F5F5;
+  --color-text-secondary: #A0A0A0;
+  --color-text-muted: #555555;
+  --color-text-inverse: #080808;
+  
+  --color-success: #22C55E;
+  --color-warning: #F59E0B;
+  --color-error: #EF4444;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-bengali: "Hind Siliguri", "Inter", sans-serif;
+
+  --glow-accent: 0 0 20px rgba(var(--color-accent-rgb), 0.25);
+  --glow-card: 0 8px 32px rgba(0, 0, 0, 0.6);
+}
+
+[data-theme="light"] {
+  --color-bg-base: #F8F8F8;
+  --color-bg-surface: #FFFFFF;
+  --color-bg-elevated: #EBEBEB;
+  --color-bg-overlay: #E0E0E0;
+  --color-border: rgba(0, 0, 0, 0.08);
+  --color-border-hover: rgba(0, 0, 0, 0.15);
+  --color-border-active: rgba(0, 0, 0, 0.25);
+  --color-text-primary: #111111;
+  --color-text-secondary: #555555;
+  --color-text-muted: #AAAAAA;
+  --glow-card: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  background-color: var(--color-bg-base);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-surface) 25%,
+    var(--color-bg-elevated) 50%,
+    var(--color-bg-surface) 75%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+  border-radius: 12px;
+}
+
+@keyframes live-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+.live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #fff;
+  animation: live-pulse 1.5s ease-in-out infinite;
+}
+
+/* Hide default Shaka Player buffering spinner to use custom UILoader */
+.shaka-spinner-svg {
+  display: none !important;
+}
+.shaka-spinner-container {
+  display: none !important;
+}
+
+/* UILoader (LoadingLines) keyframes — lifted here so the component does not
+   re-inject a <style> block on every buffer event. */
+@keyframes transformAnim {
+  0% { transform: translate(-55%); }
+  100% { transform: translate(55%); }
+}
+
+@keyframes opacityAnim {
+  0%, 100% { opacity: 0; }
+  15% { opacity: 1; }
+  65% { opacity: 0; }
+}
+
+@keyframes letterAnim {
+  0% { opacity: 0; }
+  5% { opacity: 1; text-shadow: 0 0 4px #fff; transform: scale(1.1) translateY(-2px); }
+  20% { opacity: 0.2; }
+  100% { opacity: 0; }
+}

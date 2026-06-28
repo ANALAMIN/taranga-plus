@@ -1,0 +1,17 @@
+{
+  // Renderer (src/): React + browser + Vite client types ONLY. Deliberately
+  // excludes Node and Cloudflare Worker globals so renderer code cannot
+  // accidentally rely on main-process or worker ambient declarations.
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "jsx": "react-jsx",
+    "types": ["vite/client"]
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.d.ts"
+  ],
+  "exclude": ["src-electron", "backend"]
+}

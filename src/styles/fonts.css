@@ -1,0 +1,9 @@
+/*
+ * Fonts are now loaded via <link> tags in index.html (preconnect + the same
+ * stylesheet) instead of a render-blocking CSS @import here. That fixes both
+ * problems the audit flagged: the @import was render-blocking (a SPOF on
+ * Google's CDN, plus a privacy leak in the Electron build) and it sat AFTER
+ * `@import "tailwindcss"` in globals.css, which is invalid CSS ordering (all
+ * @import rules must precede other rules). This file is intentionally empty of
+ * external fetches; keep only local @font-face declarations here if/when added.
+ */
