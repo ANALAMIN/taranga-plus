@@ -15,13 +15,8 @@ public partial class MainWindow : Window
 
     private async void OnLoaded(object sender, RoutedEventArgs e)
     {
-        var options = new CoreWebView2EnvironmentOptions
-        {
-            AdditionalBrowserArguments = "--enable-tcp-fast-open --enable-quic"
-        };
         var env = await CoreWebView2Environment.CreateAsync(
-            userDataFolder: Path.Combine(Path.GetTempPath(), "TarangaPlus-WebView2"),
-            options: options);
+            userDataFolder: Path.Combine(Path.GetTempPath(), "TarangaPlus-WebView2"));
         await webView.EnsureCoreWebView2Async(env);
         webView.CoreWebView2.Settings.AreDevToolsEnabled = true;
         webView.CoreWebView2.AddHostObjectToScript("backend", new Backend());
