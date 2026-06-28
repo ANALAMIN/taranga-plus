@@ -1,39 +1,85 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { usePlayer } from '../../hooks/usePlayer';
 import LoadingLines from '../UILoader';
 import 'shaka-player/dist/controls.css';
 
 interface VideoFrameProps {
   streamUrl: string;
-  /** All validated backup URLs for this channel (from ChannelFinal.sources[]). */
   sources?: string[];
+  onClose?: () => void;
 }
 
-/**
- * Video frame.
- *
- * The player hook receives the ref *objects* (not `.current`), so initialization
- * is decoupled from render order and synthetic `isReady` flags. The stream is
- * loaded by an effect keyed on `[streamUrl, playerReady]`, which reliably fires
- * both when the URL arrives late and when the URL is already present on mount
- * but the player has not yet initialized.
- *
- * `sources` is passed through to `usePlayer` so `autoRecover` can cycle through
- * backup URLs on failure instead of retrying the same dead stream.
- */
-export const VideoFrame: React.FC<VideoFrameProps> = ({ streamUrl, sources }) => {
+interface BackendApi {
+  PlayStream: (url: string) => void;
+  StopPlayback: () => void;
+  PausePlayback: () => void;
+  ResumePlayback: () => void;
+  SetVolume: (level: number) => void;
+}
+
+function getBackend(): BackendApi | undefined {
+  try {
+    return (window as any).chrome?.webview?.hostObjects?.backend;
+  } catch { return undefined; }
+}
+
+export const VideoFrame: React.FC<VideoFrameProps> = ({ streamUrl, sources, onClose }) => {
+  const backend = getBackend();
+  const isNative = Boolean(backend);
+
+  if (isNative) {
+    return <NativePlayer streamUrl={streamUrl} onClose={onClose} backend={backend!} />;
+  }
+
+  return <ShakaPlayer streamUrl={streamUrl} sources={sources} />;
+};
+
+function NativePlayer({ streamUrl, onClose, backend }: { streamUrl: string; onClose?: () => void; backend: BackendApi }) {
+  const [volume, setVolume] = useState(1);
+
+  useEffect(() => {
+    backend.PlayStream(streamUrl);
+    return () => { try { backend.StopPlayback(); } catch {} };
+  }, [streamUrl, backend]);
+
+  const handleVolume = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const v = parseFloat(e.target.value);
+    setVolume(v);
+    backend.SetVolume(v);
+  };
+
+  return (
+    <div className="relative w-full h-full bg-black flex items-center justify-center">
+      <div className="text-center text-white/50 text-sm">
+        <div className="text-4xl mb-2 opacity-30">▶</div>
+        <p className="text-xs uppercase tracking-wider">Native hardware playback</p>
+      </div>
+
+      <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-3 z-10">
+        {onClose && (
+          <button onClick={onClose} className="bg-white/10 hover:bg-white/20 text-white text-xs px-3 py-1.5 rounded-lg border border-white/10 transition-colors">
+            ← Browse
+          </button>
+        )}
+        <div className="flex items-center gap-2 ml-auto">
+          <span className="text-white/40 text-xs">Vol</span>
+          <input type="range" min="0" max="1" step="0.05" value={volume} onChange={handleVolume} className="w-20 accent-white/60" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ShakaPlayer({ streamUrl, sources }: { streamUrl: string; sources?: string[] }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Build the full source list: primary URL first, then backups (deduplicated).
   const allSources = sources && sources.length > 0
     ? [streamUrl, ...sources.filter(u => u !== streamUrl)]
     : [streamUrl];
 
   const { isBuffering, error, setStream, playerReady } = usePlayer(videoRef, containerRef, allSources);
 
-  // Load the stream when the URL changes OR when the player finishes
-  // initializing for a URL that was already present.
   useEffect(() => {
     if (streamUrl && playerReady) {
       setStream(streamUrl);
@@ -70,4 +116,4 @@ export const VideoFrame: React.FC<VideoFrameProps> = ({ streamUrl, sources }) =>
       )}
     </div>
   );
-};
+}
