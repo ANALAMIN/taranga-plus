@@ -98,14 +98,6 @@ body {
   animation: live-pulse 1.5s ease-in-out infinite;
 }
 
-/* Hide default Shaka Player buffering spinner to use custom UILoader */
-.shaka-spinner-svg {
-  display: none !important;
-}
-.shaka-spinner-container {
-  display: none !important;
-}
-
 /* UILoader (LoadingLines) keyframes — lifted here so the component does not
    re-inject a <style> block on every buffer event. */
 @keyframes transformAnim {

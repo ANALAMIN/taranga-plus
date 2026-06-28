@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { usePlayer } from '../../hooks/usePlayer';
 import LoadingLines from '../UILoader';
-import 'shaka-player/dist/controls.css';
 
 interface VideoFrameProps {
   streamUrl: string;
@@ -39,9 +38,8 @@ export const VideoFrame: React.FC<VideoFrameProps> = ({ streamUrl, sources }) =>
 
   return (
     <div
-      id="video-player-container"
       ref={containerRef}
-      className="relative w-full h-full bg-black flex items-center justify-center overflow-hidden shaka-video-container"
+      className="relative w-full h-full bg-black flex items-center justify-center overflow-hidden"
     >
       <video
         ref={videoRef}

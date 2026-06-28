@@ -23,7 +23,6 @@
     "lucide-react": "^0.546.0",
     "react": "^19.0.1",
     "react-dom": "^19.0.1",
-    "shaka-player": "^5.1.10",
     "vite": "^6.2.3"
   },
   "devDependencies": {
