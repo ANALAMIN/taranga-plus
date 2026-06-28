@@ -2,6 +2,7 @@ import { writeFileSync, mkdirSync, readFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { createHash } from 'crypto';
+import { connect } from 'net';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -71,7 +72,7 @@ function resolveUrl(ref, base) {
   try { return new URL(ref, base).href; } catch { return ref; }
 }
 
-const FETCH_TIMEOUT = 5000;
+const FETCH_TIMEOUT = 3000;
 const SEGMENT_SIZE = 8192;
 
 async function fetchText(url) {
@@ -84,8 +85,24 @@ async function fetchText(url) {
   } catch { return null; } finally { clearTimeout(t); }
 }
 
+function tcpReachable(url) {
+  return new Promise(resolve => {
+    try {
+      const u = new URL(url);
+      const host = u.hostname;
+      const port = u.port ? parseInt(u.port, 10) : (u.protocol === 'https:' ? 443 : 80);
+      const sock = connect(port, host);
+      sock.setTimeout(1000);
+      sock.once('connect', () => { sock.destroy(); resolve(true); });
+      sock.once('timeout', () => { sock.destroy(); resolve(false); });
+      sock.once('error', () => { sock.destroy(); resolve(false); });
+    } catch { resolve(false); }
+  });
+}
+
 async function checkStream(url) {
   const start = performance.now();
+  if (!await tcpReachable(url)) return { ok: false, latency: 0, reason: 'tcp dead' };
 
   // HLS (.m3u8) — download a real segment and verify content
   if (url.includes('.m3u8')) {
