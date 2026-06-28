@@ -1,76 +1,35 @@
 name: Validate Channels
 
 on:
-  # Chain trigger: validation sesh hole next run ei event diye hobe
-  repository_dispatch:
-    types: [chain-validation]
-  # Fallback: chain broken hole daily ekbar trigger
   schedule:
-    - cron: '0 0 * * *'
-  # Manual trigger
+    - cron: '*/30 * * * *'
   workflow_dispatch:
 
 permissions:
   contents: write
-  actions: write
 
 jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@v4
 
-      - name: Setup Go
-        uses: actions/setup-go@d35c59abb061a4a6fb18e82ac0862c26744d6ab5 # v5.5.0
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          go-version: '1.23'
+          node-version: 22
 
-      - name: Build Go validator
-        run: go build -o taranga-validate .
-        working-directory: validate
+      - name: Run validator
+        run: node validate/validate.mjs
 
-      - name: Run channel validation
-        run: ./taranga-validate
-        working-directory: validate
-
-      - name: Commit validated channels to master
-        id: commit
+      - name: Commit changes
         run: |
-          set -euo pipefail
           git config user.name "Taranga+ Bot"
           git config user.email "bot@taranga-plus.dev"
           git add data/channels.json
-          if git diff --cached --quiet; then
-            echo "No changes to commit"
-            echo "diff_lines=0" >> "$GITHUB_OUTPUT"
-          else
-            LINES=$(git diff --cached --stat -- data/channels.json | tail -1 | grep -oP '\d+')
-            echo "diff_lines=${LINES}" >> "$GITHUB_OUTPUT"
-            echo "📦 ${LINES} lines changed"
+          if ! git diff --cached --quiet; then
             git commit -m "chore: auto-validate channels $(date -u +'%Y-%m-%d %H:%M UTC')"
-            git pull --rebase origin master || true
-            git push origin master
+            git push
+          else
+            echo "No changes to commit"
           fi
-
-      - name: Schedule next validation (dynamic interval)
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          DIFF=${{ steps.commit.outputs.diff_lines }}
-
-          # Dynamic interval based on change volume:
-          #   High churn   (100+ lines) →  10 min  (channels unstable, check often)
-          #   Medium churn (1-99 lines) → 30 min  (normal pace)
-          #   No change    (0 lines)    → 60 min  (stable, back off)
-          if   [ "$DIFF" -ge 100 ]; then INTERVAL=600  REASON="high churn ($DIFF lines)"
-          elif [ "$DIFF" -ge 1   ]; then INTERVAL=1800 REASON="normal ($DIFF lines)"
-          else                         INTERVAL=3600 REASON="no changes"
-          fi
-
-          MINUTES=$((INTERVAL / 60))
-          echo "⏳ Sleeping ${MINUTES} min (${REASON}) before next validation..."
-          sleep "$INTERVAL"
-          echo "🚀 Triggering next validation via repository_dispatch..."
-          printf '{"event_type":"chain-validation","client_payload":{"triggered_by":"auto-chain","run_id":"${{ github.run_id }}","interval":%d}}' "$INTERVAL" \
-            | gh api repos/${{ github.repository }}/dispatches --method POST --input -
