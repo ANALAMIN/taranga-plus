@@ -142,6 +142,19 @@ export function usePlayer(
       }
 
       await activePlayer.load(url);
+
+      // Soft seek: try to move 25s behind the live edge for built-in buffer.
+      // If the stream doesn't support it (VOD, small window), playback continues
+      // from the default start position — never blocks.
+      try {
+        const seekRange = activePlayer.seekRange();
+        if (seekRange && seekRange.end - seekRange.start > 15) {
+          const target = Math.max(seekRange.start, seekRange.end - 25);
+          const videoEl = videoRef.current;
+          if (videoEl) videoEl.currentTime = target;
+        }
+      } catch {} // seek is best-effort only
+
       setIsPlaying(true);
 
       cleanupRecoveryRef.current = setupAutoRecovery(
