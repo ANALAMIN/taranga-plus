@@ -18,3 +18,4 @@ validate/taranga-validate.exe
 backend/bin/
 backend/obj/
 src-tauri/target/
+data/

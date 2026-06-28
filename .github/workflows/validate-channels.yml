@@ -8,22 +8,63 @@ on:
 permissions:
   contents: write
 
+env:
+  TOTAL_CHUNKS: 10
+
 jobs:
-  validate:
+  split:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - run: node validate/validate.mjs dump-sources
+      - uses: actions/upload-artifact@v4
+        with:
+          name: all-channels
+          path: data/all-channels.json
 
-      - name: Run validator
-        run: node validate/validate.mjs
+  validate:
+    needs: split
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        chunk: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/download-artifact@v4
+        with:
+          name: all-channels
+          path: data
+      - run: node validate/validate.mjs check-chunk
+        env:
+          CHUNK_INDEX: ${{ matrix.chunk }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: valid-chunk-${{ matrix.chunk }}
+          path: data/valid-chunk-${{ matrix.chunk }}.json
 
-      - name: Commit changes
-        run: |
+  merge:
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: valid-chunk-*
+          merge-multiple: true
+          path: data
+      - run: node validate/validate.mjs merge
+        env:
+          TOTAL_CHUNKS: 10
+      - run: |
           git config user.name "Taranga+ Bot"
           git config user.email "bot@taranga-plus.dev"
           git add data/channels.json

@@ -1,4 +1,4 @@
-import { writeFileSync, mkdirSync } from 'fs';
+import { writeFileSync, mkdirSync, readFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { createHash } from 'crypto';
@@ -177,12 +177,15 @@ function hash(str) {
   return createHash('sha256').update(str).digest('hex').slice(0, 16);
 }
 
-async function main() {
-  console.log('=== Taranga+ Validator ===\n');
+const TOTAL_CHUNKS = parseInt(process.env.TOTAL_CHUNKS || '1', 10);
+const CHUNK_INDEX = parseInt(process.env.CHUNK_INDEX || '0', 10);
+const DATA_DIR = join(ROOT, 'data');
 
+function ensureDir() { mkdirSync(DATA_DIR, { recursive: true }); }
+
+async function dumpSources() {
+  console.log('=== Dump Sources ===\n');
   const all = [];
-
-  // Fetch & parse M3U sources
   for (const src of SOURCES) {
     try {
       const res = await fetch(src.url, { headers: { 'User-Agent': 'TarangaPlus/2.0' } });
@@ -195,28 +198,49 @@ async function main() {
       console.log(`  ✗ ${src.id}: ${e.message}`);
     }
   }
+  console.log(`\nTotal: ${all.length}`);
+  ensureDir();
+  writeFileSync(join(DATA_DIR, 'all-channels.json'), JSON.stringify(all));
+  console.log('Saved all-channels.json');
+}
 
-  console.log(`\nTotal raw: ${all.length}`);
+async function checkChunk() {
+  console.log(`=== Check Chunk ${CHUNK_INDEX}/${TOTAL_CHUNKS} ===\n`);
+  const raw = readFileSync(join(DATA_DIR, 'all-channels.json'), 'utf-8');
+  const all = JSON.parse(raw);
+  const size = Math.ceil(all.length / TOTAL_CHUNKS);
+  const chunk = all.slice(CHUNK_INDEX * size, (CHUNK_INDEX + 1) * size);
+  console.log(`Chunk size: ${chunk.length}`);
 
-  // Validate streams in parallel
   const valid = [];
   const CONCURRENCY = 30;
-  for (let i = 0; i < all.length; i += CONCURRENCY) {
-    const batch = all.slice(i, i + CONCURRENCY);
+  for (let i = 0; i < chunk.length; i += CONCURRENCY) {
+    const batch = chunk.slice(i, i + CONCURRENCY);
     const results = await Promise.all(batch.map(ch => checkStream(ch.url)));
     for (let j = 0; j < results.length; j++) {
-      if (results[j].ok) {
-        valid.push({ ...batch[j], latencyMs: results[j].latency });
-      }
-    }
-    if ((i + CONCURRENCY) % 300 === 0 || i + CONCURRENCY >= all.length) {
-      console.log(`  Validated ${Math.min(i + CONCURRENCY, all.length)}/${all.length}...`);
+      if (results[j].ok) valid.push({ ...batch[j], latencyMs: results[j].latency });
     }
   }
+  console.log(`Alive in chunk: ${valid.length}`);
+  ensureDir();
+  writeFileSync(join(DATA_DIR, `valid-chunk-${CHUNK_INDEX}.json`), JSON.stringify(valid));
+  console.log(`Saved valid-chunk-${CHUNK_INDEX}.json`);
+}
 
-  console.log(`Alive: ${valid.length}\n`);
+async function mergeChunks() {
+  console.log('=== Merge Chunks ===\n');
+  const valid = [];
+  for (let i = 0; i < TOTAL_CHUNKS; i++) {
+    const f = join(DATA_DIR, `valid-chunk-${i}.json`);
+    try {
+      const raw = readFileSync(f, 'utf-8');
+      const chunk = JSON.parse(raw);
+      valid.push(...chunk);
+      console.log(`  ✓ chunk ${i}: ${chunk.length} channels`);
+    } catch { console.log(`  ✗ chunk ${i}: not found`); }
+  }
+  console.log(`\nTotal alive: ${valid.length}`);
 
-  // Deduplicate by name → pick lowest latency
   const groups = {};
   for (const ch of valid) {
     const key = normalizeName(ch.name);
@@ -229,7 +253,6 @@ async function main() {
     .map(group => {
       group.sort((a, b) => a.latencyMs - b.latencyMs);
       const best = group[0];
-      const sources = [...new Set(group.map(c => c.url))];
       return {
         id: hash(normalizeName(best.name)),
         name: best.name,
@@ -238,19 +261,44 @@ async function main() {
         category: best.category,
         latencyMs: best.latencyMs,
         tier: 'global',
-        sources,
+        sources: [...new Set(group.map(c => c.url))],
         lastValidated: new Date().toISOString(),
       };
     })
     .sort((a, b) => a.name.localeCompare(b.name));
 
-  console.log(`Final: ${final.length} unique channels\n`);
-
-  // Write output
+  console.log(`Final unique: ${final.length}`);
   const outPath = join(ROOT, 'data', 'channels.json');
-  mkdirSync(dirname(outPath), { recursive: true });
   writeFileSync(outPath, JSON.stringify(final, null, 2));
-  console.log(`Saved to ${outPath}`);
+  console.log(`Saved ${outPath}`);
 }
 
-main().catch(console.error);
+async function full() {
+  await dumpSources();
+  const raw = readFileSync(join(DATA_DIR, 'all-channels.json'), 'utf-8');
+  const all = JSON.parse(raw);
+  const TOTAL_CHUNKS = 1, CHUNK_INDEX = 0;
+  const size = all.length;
+  const chunk = all.slice(0, size);
+  const valid = [];
+  const CONCURRENCY = 30;
+  for (let i = 0; i < chunk.length; i += CONCURRENCY) {
+    const batch = chunk.slice(i, i + CONCURRENCY);
+    const results = await Promise.all(batch.map(ch => checkStream(ch.url)));
+    for (let j = 0; j < results.length; j++) {
+      if (results[j].ok) valid.push({ ...batch[j], latencyMs: results[j].latency });
+    }
+    if ((i + CONCURRENCY) % 600 === 0 || i + CONCURRENCY >= chunk.length) {
+      console.log(`  Validated ${Math.min(i + CONCURRENCY, chunk.length)}/${chunk.length}...`);
+    }
+  }
+  writeFileSync(join(DATA_DIR, 'valid-chunk-0.json'), JSON.stringify(valid));
+  console.log(`Alive: ${valid.length}`);
+  await mergeChunks();
+}
+
+const MODE = process.argv[2] || 'full';
+if (MODE === 'dump-sources') dumpSources().catch(console.error);
+else if (MODE === 'check-chunk') checkChunk().catch(console.error);
+else if (MODE === 'merge') mergeChunks().catch(console.error);
+else full().catch(console.error);
