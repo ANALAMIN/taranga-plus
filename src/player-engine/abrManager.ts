@@ -29,9 +29,9 @@ export function configureAbr(player: shaka.Player): void {
     abr: {
       enabled: true,
       defaultBandwidthEstimate: seedBandwidthEstimate(),
-      switchInterval: 10,              // was 8 — less thrash
-      bandwidthUpgradeTarget: 0.85,
-      bandwidthDowngradeTarget: 0.95,
+      switchInterval: 2,               // fast adaptation — re-evaluate every 2s
+      bandwidthUpgradeTarget: 0.6,     // upgrade sooner when headroom available
+      bandwidthDowngradeTarget: 0.8,   // downgrade quickly on congestion
     }
   });
 }

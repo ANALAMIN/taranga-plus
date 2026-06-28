@@ -6,66 +6,64 @@ import 'shaka-player/dist/controls.css';
 interface VideoFrameProps {
   streamUrl: string;
   sources?: string[];
-  onClose?: () => void;
 }
 
-interface BackendApi {
-  PlayStream: (url: string) => void;
-  StopPlayback: () => void;
-  PausePlayback: () => void;
-  ResumePlayback: () => void;
-  SetVolume: (level: number) => void;
-}
-
-function getBackend(): BackendApi | undefined {
+function supportsNativeHls(): boolean {
   try {
-    return (window as any).chrome?.webview?.hostObjects?.backend;
-  } catch { return undefined; }
+    const v = document.createElement('video');
+    return ['application/vnd.apple.mpegurl', 'application/x-mpegURL', 'vnd.apple.mpegURL']
+      .some(t => v.canPlayType(t) === 'probably' || v.canPlayType(t) === 'maybe');
+  } catch { return false; }
 }
 
-export const VideoFrame: React.FC<VideoFrameProps> = ({ streamUrl, sources, onClose }) => {
-  const backend = getBackend();
-  const isNative = Boolean(backend);
+export const VideoFrame: React.FC<VideoFrameProps> = ({ streamUrl, sources }) => {
+  const [useNative, setUseNative] = useState(false);
 
-  if (isNative) {
-    return <NativePlayer streamUrl={streamUrl} onClose={onClose} backend={backend!} />;
+  useEffect(() => {
+    setUseNative(supportsNativeHls());
+  }, []);
+
+  if (useNative) {
+    return <NativeHlsPlayer streamUrl={streamUrl} />;
   }
 
   return <ShakaPlayer streamUrl={streamUrl} sources={sources} />;
 };
 
-function NativePlayer({ streamUrl, onClose, backend }: { streamUrl: string; onClose?: () => void; backend: BackendApi }) {
-  const [volume, setVolume] = useState(1);
+function NativeHlsPlayer({ streamUrl }: { streamUrl: string }) {
+  const [showBuffering, setShowBuffering] = useState(false);
+  const bufferingTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    backend.PlayStream(streamUrl);
-    return () => { try { backend.StopPlayback(); } catch {} };
-  }, [streamUrl, backend]);
+    setShowBuffering(false);
+  }, [streamUrl]);
 
-  const handleVolume = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const v = parseFloat(e.target.value);
-    setVolume(v);
-    backend.SetVolume(v);
+  const handleWaiting = () => {
+    bufferingTimer.current = setTimeout(() => setShowBuffering(true), 2000);
+  };
+  const handleCanPlay = () => {
+    if (bufferingTimer.current) clearTimeout(bufferingTimer.current);
+    setShowBuffering(false);
   };
 
   return (
-    <div className="relative w-full h-full bg-black flex items-center justify-center">
-      <div className="text-center text-white/50 text-sm">
-        <div className="text-4xl mb-2 opacity-30">▶</div>
-        <p className="text-xs uppercase tracking-wider">Native hardware playback</p>
-      </div>
-
-      <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-3 z-10">
-        {onClose && (
-          <button onClick={onClose} className="bg-white/10 hover:bg-white/20 text-white text-xs px-3 py-1.5 rounded-lg border border-white/10 transition-colors">
-            ← Browse
-          </button>
-        )}
-        <div className="flex items-center gap-2 ml-auto">
-          <span className="text-white/40 text-xs">Vol</span>
-          <input type="range" min="0" max="1" step="0.05" value={volume} onChange={handleVolume} className="w-20 accent-white/60" />
+    <div className="relative w-full h-full bg-black">
+      <video
+        key={streamUrl}
+        src={streamUrl}
+        autoPlay
+        controls={false}
+        playsInline
+        className="w-full h-full"
+        onWaiting={handleWaiting}
+        onCanPlay={handleCanPlay}
+        onPlaying={handleCanPlay}
+      />
+      {showBuffering && (
+        <div className="absolute inset-0 flex items-center justify-center bg-black/40 pointer-events-none z-[100]">
+          <LoadingLines />
         </div>
-      </div>
+      )}
     </div>
   );
 }
@@ -79,6 +77,19 @@ function ShakaPlayer({ streamUrl, sources }: { streamUrl: string; sources?: stri
     : [streamUrl];
 
   const { isBuffering, error, setStream, playerReady } = usePlayer(videoRef, containerRef, allSources);
+
+  const [showBuffering, setShowBuffering] = useState(false);
+  const bufferingTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    if (isBuffering) {
+      bufferingTimer.current = setTimeout(() => setShowBuffering(true), 2000);
+    } else {
+      if (bufferingTimer.current) clearTimeout(bufferingTimer.current);
+      setShowBuffering(false);
+    }
+    return () => { if (bufferingTimer.current) clearTimeout(bufferingTimer.current); };
+  }, [isBuffering]);
 
   useEffect(() => {
     if (streamUrl && playerReady) {
@@ -101,7 +112,7 @@ function ShakaPlayer({ streamUrl, sources }: { streamUrl: string; sources?: stri
         className="w-full h-full"
       />
 
-      {isBuffering && (
+      {showBuffering && (
         <div className="absolute inset-0 flex items-center justify-center bg-black/40 pointer-events-none z-[100]">
           <LoadingLines />
         </div>
