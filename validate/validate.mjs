@@ -71,7 +71,7 @@ function resolveUrl(ref, base) {
   try { return new URL(ref, base).href; } catch { return ref; }
 }
 
-const FETCH_TIMEOUT = 8000;
+const FETCH_TIMEOUT = 5000;
 const SEGMENT_SIZE = 8192;
 
 async function fetchText(url) {
