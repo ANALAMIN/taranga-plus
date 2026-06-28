@@ -21,24 +21,49 @@ async function blobToBase64(blob: Blob): Promise<string> {
   });
 }
 
+async function resolveCachedLogos(channels: ChannelFinal[]): Promise<ChannelFinal[]> {
+  const resolved = channels.map(ch => ({ ...ch }));
+  await Promise.all(resolved.map(async (ch) => {
+    if (ch.logoUrl && !ch.logoUrl.startsWith('data:')) {
+      try {
+        const blob = await localDb.getCachedLogo(ch.id);
+        if (blob) {
+          const base64 = await blobToBase64(blob);
+          ch.logoUrl = `data:${blob.type};base64,${base64}`;
+        }
+      } catch {}
+    }
+  }));
+  return resolved;
+}
+
 async function cacheHttpLogos(channels: ChannelFinal[]): Promise<void> {
   const httpChannels = channels.filter(c => c.logoUrl && !c.logoUrl.startsWith('data:'));
   if (httpChannels.length === 0) return;
 
+  let changed = false;
   for (let i = 0; i < httpChannels.length; i += 6) {
     await Promise.all(httpChannels.slice(i, i + 6).map(async (ch) => {
       try {
+        const existing = await localDb.getCachedLogo(ch.id);
+        if (existing) {
+          const base64 = await blobToBase64(existing);
+          ch.logoUrl = `data:${existing.type};base64,${base64}`;
+          changed = true;
+          return;
+        }
         const resp = await fetch(ch.logoUrl, { signal: AbortSignal.timeout(5000) });
         if (!resp.ok) return;
         const blob = await resp.blob();
         const base64 = await blobToBase64(blob);
         ch.logoUrl = `data:${blob.type};base64,${base64}`;
         await localDb.cacheLogo(ch.id, blob);
+        changed = true;
       } catch {}
     }));
   }
 
-  await localDb.cacheChannels(channels);
+  if (changed) await localDb.cacheChannels(channels);
 }
 
 export function useChannels() {
@@ -54,7 +79,9 @@ export function useChannels() {
       if (cancelled) return;
 
       if (cached && cached.length > 0) {
-        setChannels(cached);
+        const withLogos = await resolveCachedLogos(cached);
+        if (cancelled) return;
+        setChannels(withLogos);
         setLoading(false);
       }
 
@@ -66,13 +93,18 @@ export function useChannels() {
         const cachedTs = cached ? getLatestTimestamp(cached) : 0;
 
         if (freshTs > cachedTs) {
-          // Cache HTTP logos in background, then save channels with base64 URLs
+          // Resolve any already-cached logos from IDB for instant display,
+          // then cache remaining HTTP logos in background.
+          const withLogos = await resolveCachedLogos(fresh);
+          if (cancelled) return;
           cacheHttpLogos(fresh).then(() => {
             if (!cancelled) setChannels([...fresh]);
           });
-          setChannels(fresh);
+          setChannels(withLogos);
         } else if (!cached || cached.length === 0) {
-          setChannels(fresh);
+          const withLogos = await resolveCachedLogos(fresh);
+          if (cancelled) return;
+          setChannels(withLogos);
         }
       } catch (err: unknown) {
         console.error(err);
