@@ -22,12 +22,17 @@ public partial class MainWindow : Window
         // Access-Control-Allow-Origin headers, which would cause Shaka Player
         // (running in a browser context) to fail with "Channel Unavailable".
         var options = new CoreWebView2EnvironmentOptions(
-            "--autoplay-policy=no-user-gesture-required --disable-web-security");
+            "--autoplay-policy=no-user-gesture-required --disable-web-security " +
+            "--disable-sync --disable-component-update " +
+            "--disable-features=TranslateUI,ChromeWhatsNewUI,ChromeLabs,MediaRouter");
         var env = await CoreWebView2Environment.CreateAsync(
             userDataFolder: Path.Combine(Path.GetTempPath(), "TarangaPlus-WebView2"),
             options: options);
         await webView.EnsureCoreWebView2Async(env);
-        webView.CoreWebView2.Settings.AreDevToolsEnabled = true;
+        webView.CoreWebView2.Settings.AreDefaultContextMenusEnabled = false;
+#if !DEBUG
+        webView.CoreWebView2.Settings.AreDevToolsEnabled = false;
+#endif
         webView.CoreWebView2.AddHostObjectToScript("backend", new Backend());
 
         // Removed GitHub raw URL interception.
@@ -49,6 +54,16 @@ public partial class MainWindow : Window
                 WindowState = WindowState.Normal;
                 ResizeMode = ResizeMode.CanResize;
             }
+        };
+
+        // Reduce memory when window is minimized — swap browser caches to disk
+        // Restore to normal when user comes back so playback stays smooth.
+        this.StateChanged += (_, _) =>
+        {
+            if (WindowState == WindowState.Minimized)
+                webView.CoreWebView2.MemoryUsageTargetLevel = CoreWebView2MemoryUsageTargetLevel.Low;
+            else
+                webView.CoreWebView2.MemoryUsageTargetLevel = CoreWebView2MemoryUsageTargetLevel.Normal;
         };
 
 #if DEBUG
