@@ -83,15 +83,19 @@ function resolveUrl(ref, base) {
 
 const FETCH_TIMEOUT = 3000;
 const SEGMENT_SIZE = 8192;
+const BROWSER_UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
 
 async function fetchText(url) {
-  const ctrl = new AbortController();
-  const t = setTimeout(() => ctrl.abort(), FETCH_TIMEOUT);
-  try {
-    const res = await fetch(url, { signal: ctrl.signal, headers: { 'User-Agent': 'TarangaPlus/2.0' } });
-    if (!res.ok) return null;
-    return await res.text();
-  } catch { return null; } finally { clearTimeout(t); }
+  for (let attempt = 0; attempt < 2; attempt++) {
+    if (attempt > 0) await new Promise(r => setTimeout(r, 500));
+    const ctrl = new AbortController();
+    const t = setTimeout(() => ctrl.abort(), FETCH_TIMEOUT);
+    try {
+      const res = await fetch(url, { signal: ctrl.signal, headers: { 'User-Agent': BROWSER_UA } });
+      if (!res.ok) return null;
+      return await res.text();
+    } catch { if (attempt === 1) return null; } finally { clearTimeout(t); }
+  }
 }
 
 function tcpReachable(url) {
@@ -178,19 +182,22 @@ function isVideoContent(buf) {
 }
 
 async function fetchBytes(url, maxBytes) {
-  const ctrl = new AbortController();
-  const t = setTimeout(() => ctrl.abort(), FETCH_TIMEOUT);
-  try {
-    const res = await fetch(url, {
-      signal: ctrl.signal,
-      headers: { 'User-Agent': 'TarangaPlus/2.0', Range: `bytes=0-${maxBytes - 1}` },
-    });
-    if (!res.ok && res.status !== 206) return null;
-    const contentType = res.headers.get('content-type') || '';
-    if (contentType.startsWith('text/html') || contentType.startsWith('application/json') || contentType.startsWith('text/xml') || contentType.includes('javascript')) return null;
-    const buf = await res.arrayBuffer();
-    return new Uint8Array(buf);
-  } catch { return null; } finally { clearTimeout(t); }
+  for (let attempt = 0; attempt < 2; attempt++) {
+    if (attempt > 0) await new Promise(r => setTimeout(r, 500));
+    const ctrl = new AbortController();
+    const t = setTimeout(() => ctrl.abort(), FETCH_TIMEOUT);
+    try {
+      const res = await fetch(url, {
+        signal: ctrl.signal,
+        headers: { 'User-Agent': BROWSER_UA, Range: `bytes=0-${maxBytes - 1}` },
+      });
+      if (!res.ok && res.status !== 206) return null;
+      const contentType = res.headers.get('content-type') || '';
+      if (contentType.startsWith('text/html') || contentType.startsWith('application/json') || contentType.startsWith('text/xml') || contentType.includes('javascript')) return null;
+      const buf = await res.arrayBuffer();
+      return new Uint8Array(buf);
+    } catch { if (attempt === 1) return null; } finally { clearTimeout(t); }
+  }
 }
 
 function normalizeName(name) {
@@ -217,7 +224,7 @@ async function dumpSources() {
   const all = [];
   for (const src of SOURCES) {
     try {
-      const res = await fetch(src.url, { headers: { 'User-Agent': 'TarangaPlus/2.0' } });
+      const res = await fetch(src.url, { headers: { 'User-Agent': BROWSER_UA } });
       if (!res.ok) { console.log(`  ✗ ${src.id}: HTTP ${res.status}`); continue; }
       const text = await res.text();
       const channels = parseM3U(text, src.id);
