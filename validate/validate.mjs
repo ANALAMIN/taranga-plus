@@ -8,36 +8,44 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 
 const SOURCES = [
-  { id: 'iptv-org-bd',          url: 'https://iptv-org.github.io/iptv/countries/bd.m3u' },
-  { id: 'iptv-org-india',       url: 'https://iptv-org.github.io/iptv/countries/in.m3u' },
-  { id: 'iptv-org-sports',      url: 'https://iptv-org.github.io/iptv/categories/sports.m3u' },
-  { id: 'iptv-org-movies',      url: 'https://iptv-org.github.io/iptv/categories/movies.m3u' },
-  { id: 'iptv-org-documentary', url: 'https://iptv-org.github.io/iptv/categories/documentary.m3u' },
-  { id: 'iptv-org-music',       url: 'https://iptv-org.github.io/iptv/categories/music.m3u' },
-  { id: 'iptv-org-kids',        url: 'https://iptv-org.github.io/iptv/categories/kids.m3u' },
-  { id: 'free-tv',              url: 'https://raw.githubusercontent.com/Free-TV/IPTV/master/playlists/playlist.m3u8' },
+  { id: 'iptv-org-ben',         url: 'https://iptv-org.github.io/iptv/languages/ben.m3u' },
+  { id: 'iptv-org-hin',         url: 'https://iptv-org.github.io/iptv/languages/hin.m3u' },
+  { id: 'iptv-org-eng',         url: 'https://iptv-org.github.io/iptv/languages/eng.m3u' },
   { id: 'mrgify-bd',            url: 'https://raw.githubusercontent.com/abusaeeidx/Mrgify-BDIX-IPTV/main/playlist.m3u' },
   { id: 'imshakil-tvlink',      url: 'https://raw.githubusercontent.com/imShakil/tvlink/refs/heads/main/iptv.m3u8' },
   { id: 'toffee',               url: 'https://raw.githubusercontent.com/johirxofficial/Toffee-Auto-Playlist/main/toffee_playlist.m3u' },
 ];
 
 const CATEGORY_MAP = {
-  sports: { sources: ['iptv-org-sports'], keywords: ['sport', 'espn', 'sky sport'] },
-  movies: { keywords: ['movie', 'cinema', 'film', 'star gold', 'sony max'] },
-  music:  { keywords: ['music', 'mtv', 'vh1', '9xm', 'zoom'] },
-  kids:   { keywords: ['kid', 'cartoon', 'nick', 'disney', 'pogo', 'duronto', 'hungama'] },
-  documentary: { keywords: ['discovery', 'natgeo', 'national geographic', 'animal planet', 'docu'] },
-  entertainment: { keywords: ['entertain', 'general', 'star plus', 'sony tv', 'zee'] },
+  sports: { keywords: ['sport', 'espn', 'sky sport', 'cricket', 'football', 'wwe'] },
+  movies: { keywords: ['movie', 'cinema', 'film', 'star gold', 'sony max', 'hbo'] },
+  music:  { keywords: ['music', 'mtv', 'vh1', '9xm', 'zoom', 'b4u'] },
+  kids:   { keywords: ['kid', 'cartoon', 'nick', 'disney', 'pogo', 'duronto', 'hungama', 'animation'] },
+  documentary: { keywords: ['discovery', 'natgeo', 'national geographic', 'animal planet', 'docu', 'history', 'science', 'nature', 'education'] },
+  news:   { keywords: ['news', 'weather', 'somoy', 'bbc', 'cnn', 'al jazeera', 'abp', 'aaj tak', 'ndtv'] },
+  entertainment: { keywords: ['entertain', 'general', 'star plus', 'sony tv', 'zee', 'colors', 'jalsha', 'nativ', 'comedy', 'lifestyle'] },
 };
 
-function classify(name, sourceId) {
-  if (sourceId === 'iptv-org-sports') return 'sports';
-  const n = name.toLowerCase();
+function classify(name, groupTitle) {
+  const gt = (groupTitle || '').toLowerCase();
+  const n = (name || '').toLowerCase();
+
+  // 1. Try matching by group-title first (most accurate for iptv-org)
+  if (gt) {
+    for (const [cat, rules] of Object.entries(CATEGORY_MAP)) {
+      for (const kw of rules.keywords) {
+        if (gt.includes(kw)) return cat;
+      }
+    }
+  }
+
+  // 2. Fallback to channel name
   for (const [cat, rules] of Object.entries(CATEGORY_MAP)) {
     for (const kw of rules.keywords) {
       if (n.includes(kw)) return cat;
     }
   }
+
   return 'all';
 }
 
@@ -59,7 +67,7 @@ function parseM3U(text, sourceId) {
         entries.push({
           name, url,
           logo: logoMatch?.[1] || '',
-          category: classify(name, sourceId),
+          category: classify(name, groupMatch?.[1]),
           sourceId,
         });
         break;
@@ -137,7 +145,6 @@ async function checkStream(url) {
     }
 
     // Get the first .ts or .m4s segment URL
-    const segLine = media.split('\n').find(l => l.trim() && !l.startsWith('#') && !l.startsWith('http'));
     const segUrlLine = media.split('\n').find(l => l.trim() && !l.startsWith('#'));
     const segUrl = segUrlLine ? resolveUrl(segUrlLine.trim(), mediaUrl) : null;
     if (!segUrl) return { ok: false, latency: 0, reason: 'no segment' };
@@ -160,20 +167,14 @@ async function checkStream(url) {
 function isVideoContent(buf) {
   if (buf.length < 64) return false;
   const head = new TextDecoder().decode(buf.slice(0, Math.min(256, buf.length))).toLowerCase();
-  if (head.includes('<!doctype') || head.includes('<html') || head.includes('{"error"') || head.includes('"status":') || head.includes('access denied') || head.includes('404 not found') || head.includes('<error') || head.includes('not found')) return false;
+  if (head.includes('<!doctype') || head.includes('<html') || head.includes('<?xml') || head.includes('{"error"') || head.includes('"status":') || head.includes('access denied') || head.includes('404 not found') || head.includes('<error') || head.includes('not found')) return false;
 
-  // Known video container signatures
+  // Known video container signatures only — no fuzzy binary heuristic
   if (buf[0] === 0x47) return true;                         // MPEG-TS
   if (buf[0] === 0x1a && buf[1] === 0x45) return true;      // WebM/Matroska
-  if (head.includes('ftyp') || head.includes('moov')) return true;  // fMP4/MP4
+  if (head.includes('ftyp') || head.includes('moov') || head.includes('moof') || head.includes('mdat')) return true;  // fMP4/MP4/ISOBMFF
 
-  // Binary content check: at least 15% non-printable bytes
-  let binary = 0;
-  for (let i = 0; i < buf.length; i++) {
-    const b = buf[i];
-    if (b < 32 && b !== 9 && b !== 10 && b !== 13) binary++;
-  }
-  return binary / buf.length > 0.15;
+  return false;  // Removed the 15% binary heuristic
 }
 
 async function fetchBytes(url, maxBytes) {
@@ -185,6 +186,8 @@ async function fetchBytes(url, maxBytes) {
       headers: { 'User-Agent': 'TarangaPlus/2.0', Range: `bytes=0-${maxBytes - 1}` },
     });
     if (!res.ok && res.status !== 206) return null;
+    const contentType = res.headers.get('content-type') || '';
+    if (contentType.startsWith('text/html') || contentType.startsWith('application/json') || contentType.startsWith('text/xml') || contentType.includes('javascript')) return null;
     const buf = await res.arrayBuffer();
     return new Uint8Array(buf);
   } catch { return null; } finally { clearTimeout(t); }

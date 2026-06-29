@@ -1,13 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { usePlayer } from '../../hooks/usePlayer';
+import { useNativeBridge } from '../../hooks/useNativeBridge';
 import LoadingLines from '../UILoader';
+import { PictureInPicture2 } from 'lucide-react';
+import 'shaka-player/dist/controls.css';
 
 interface VideoFrameProps {
   streamUrl: string;
   sources?: string[];
+  channelTitle?: string;
 }
 
-export const VideoFrame: React.FC<VideoFrameProps> = ({ streamUrl, sources }) => {
+export const VideoFrame: React.FC<VideoFrameProps> = ({ streamUrl, sources, channelTitle = 'Taranga+' }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -15,7 +19,8 @@ export const VideoFrame: React.FC<VideoFrameProps> = ({ streamUrl, sources }) =>
     ? [streamUrl, ...sources.filter(u => u !== streamUrl)]
     : [streamUrl];
 
-  const { isBuffering, error, setStream, playerReady } = usePlayer(videoRef, containerRef, allSources);
+  const { isBuffering, error, setStream, playerReady } = usePlayer(videoRef, containerRef, allSources, channelTitle);
+  const { isNative, togglePiP } = useNativeBridge();
 
   const [showBuffering, setShowBuffering] = useState(false);
   const bufferingTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -38,19 +43,29 @@ export const VideoFrame: React.FC<VideoFrameProps> = ({ streamUrl, sources }) =>
 
   return (
     <div
+      id="video-player-container"
       ref={containerRef}
-      className="relative w-full h-full bg-black flex items-center justify-center overflow-hidden"
+      className="relative w-full h-full bg-black flex items-center justify-center overflow-hidden shaka-video-container"
     >
       <video
         ref={videoRef}
         autoPlay
-        muted
-        playsInline
         controls={false}
         disablePictureInPicture={false}
         crossOrigin="anonymous"
         className="w-full h-full"
       />
+
+      {/* Native PiP button — only visible inside the WPF app */}
+      {isNative && (
+        <button
+          onClick={togglePiP}
+          title="Picture in Picture (Native)"
+          className="absolute top-3 left-3 z-[110] bg-black/60 hover:bg-black/90 text-white p-1.5 rounded-lg border border-white/15 transition-all duration-200 backdrop-blur-sm shadow-lg"
+        >
+          <PictureInPicture2 size={16} strokeWidth={2} />
+        </button>
+      )}
 
       {showBuffering && (
         <div className="absolute inset-0 flex items-center justify-center bg-black/40 pointer-events-none z-[100]">
