@@ -117,3 +117,8 @@ body {
   20% { opacity: 0.2; }
   100% { opacity: 0; }
 }
+
+/* Hide Shaka UI's built-in spinner — we use our own LoadingLines component */
+.shaka-spinner {
+  display: none !important;
+}
