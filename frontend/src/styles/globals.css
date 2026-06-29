@@ -122,3 +122,12 @@ body {
 .shaka-spinner {
   display: none !important;
 }
+
+/* Hide all Shaka UI controls when player falls back to native <video> playback */
+.native-fallback .shaka-controls,
+.native-fallback .shaka-play-button,
+.native-fallback .shaka-bottom-controls,
+.native-fallback .shaka-overflow-menu,
+.native-fallback .shaka-controls-button-panel {
+  display: none !important;
+}

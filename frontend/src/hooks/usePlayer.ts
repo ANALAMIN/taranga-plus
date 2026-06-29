@@ -27,6 +27,9 @@ export function usePlayer(
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const playerRef = useRef<shaka.Player | null>(null);
   const sourcesRef = useRef<string[]>(sources);
+  const isNativeFallbackRef = useRef(false);
+  const unmuteTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const shakaUiRef = useRef<shaka.ui.Overlay | null>(null);
 
   const setStreamError = useCallback((msg: string | null) => {
     setError(msg);
@@ -54,6 +57,7 @@ export function usePlayer(
         }
         shakaPlayer = p;
         shakaUI = ui;
+        shakaUiRef.current = ui;
         playerRef.current = p;
         setPlayer(p);
         setPlayerReady(true);
@@ -85,6 +89,10 @@ export function usePlayer(
 
     return () => {
       cancelled = true;
+      if (unmuteTimerRef.current) {
+        clearTimeout(unmuteTimerRef.current);
+        unmuteTimerRef.current = null;
+      }
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
         intervalRef.current = null;
@@ -99,6 +107,7 @@ export function usePlayer(
         cleanupRecoveryRef.current();
       }
       playerRef.current = null;
+      shakaUiRef.current = null;
     };
   }, [videoRef, containerRef]);
 
@@ -114,6 +123,14 @@ export function usePlayer(
     if (cleanupRecoveryRef.current) {
       cleanupRecoveryRef.current();
       cleanupRecoveryRef.current = null;
+    }
+    if (unmuteTimerRef.current) {
+      clearTimeout(unmuteTimerRef.current);
+      unmuteTimerRef.current = null;
+    }
+    if (isNativeFallbackRef.current) {
+      containerRef?.current?.classList.remove('native-fallback');
+      isNativeFallbackRef.current = false;
     }
 
     const allUrls = [url, ...sourcesRef.current.filter(u => u !== url)];
@@ -138,7 +155,33 @@ export function usePlayer(
         return;
       } catch (err) {
         lastError = err;
-        console.warn(`[Taranga+] Source ${i + 1}/${allUrls.length} failed: ${allUrls[i]}`);
+        console.warn(`[Taranga+] Shaka failed for source ${i + 1}/${allUrls.length}: ${allUrls[i]}`);
+
+        // Shaka failed — try muted native <video> fallback
+        const v = videoRef.current;
+        if (v) {
+          try {
+            await activePlayer.unload();
+            v.muted = true;
+            v.src = allUrls[i];
+            await v.play();
+
+            // Native fallback succeeded — auto unmute after 1 second
+            unmuteTimerRef.current = setTimeout(() => {
+              if (v) v.muted = false;
+              unmuteTimerRef.current = null;
+            }, 1000);
+            containerRef?.current?.classList.add('native-fallback');
+            isNativeFallbackRef.current = true;
+            setIsPlaying(true);
+            updateMediaState(true, channelTitleRef.current);
+            setKeepScreenOn(true);
+            loadingRef.current = false;
+            return;
+          } catch (e2) {
+            console.warn(`[Taranga+] Native fallback also failed for ${allUrls[i]}`);
+          }
+        }
       }
     }
 
