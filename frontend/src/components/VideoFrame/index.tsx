@@ -46,6 +46,7 @@ export const VideoFrame: React.FC<VideoFrameProps> = ({ streamUrl, sources, chan
       id="video-player-container"
       ref={containerRef}
       className="relative w-full h-full bg-black flex items-center justify-center overflow-hidden shaka-video-container"
+      onContextMenu={(e) => e.preventDefault()}
     >
       <video
         ref={videoRef}
