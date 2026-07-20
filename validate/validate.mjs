@@ -3,11 +3,22 @@ import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { createHash } from 'crypto';
 import { connect } from 'net';
+import { promises as dns } from 'dns';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 
+const BD_LIST_PATH = join(__dirname, 'bd-channels.m3u');
+
+function readLocalM3U(filePath, sourceId) {
+  try {
+    const text = readFileSync(filePath, 'utf-8');
+    return parseM3U(text, sourceId);
+  } catch { return []; }
+}
+
 const SOURCES = [
+  { id: 'bd-channels',          url: null, local: BD_LIST_PATH },
   { id: 'iptv-org-ben',         url: 'https://iptv-org.github.io/iptv/languages/ben.m3u' },
   { id: 'iptv-org-hin',         url: 'https://iptv-org.github.io/iptv/languages/hin.m3u' },
   { id: 'iptv-org-eng',         url: 'https://iptv-org.github.io/iptv/languages/eng.m3u' },
@@ -81,7 +92,8 @@ function resolveUrl(ref, base) {
   try { return new URL(ref, base).href; } catch { return ref; }
 }
 
-const FETCH_TIMEOUT = 3000;
+const FETCH_TIMEOUT = 2000;
+const TCP_TIMEOUT = 2000;
 const SEGMENT_SIZE = 8192;
 const BROWSER_UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
 
@@ -98,6 +110,10 @@ async function fetchText(url) {
   }
 }
 
+async function dnsResolves(host) {
+  try { await dns.resolve4(host); return true; } catch { return false; }
+}
+
 function tcpReachable(url) {
   return new Promise(resolve => {
     try {
@@ -105,7 +121,7 @@ function tcpReachable(url) {
       const host = u.hostname;
       const port = u.port ? parseInt(u.port, 10) : (u.protocol === 'https:' ? 443 : 80);
       const sock = connect(port, host);
-      sock.setTimeout(1000);
+      sock.setTimeout(TCP_TIMEOUT);
       sock.once('connect', () => { sock.destroy(); resolve(true); });
       sock.once('timeout', () => { sock.destroy(); resolve(false); });
       sock.once('error', () => { sock.destroy(); resolve(false); });
@@ -115,12 +131,20 @@ function tcpReachable(url) {
 
 async function checkStream(url) {
   const start = performance.now();
+
+  if (isRiskyExtension(url)) return { ok: false, latency: 0, reason: 'risky extension' };
+
+  const u = new URL(url);
+  if (!await dnsResolves(u.hostname)) return { ok: false, latency: 0, reason: 'dns dead' };
+
   if (!await tcpReachable(url)) return { ok: false, latency: 0, reason: 'tcp dead' };
 
   // HLS (.m3u8) — download a real segment and verify content
   if (url.includes('.m3u8')) {
     const master = await fetchText(url);
     if (!master) return { ok: false, latency: 0, reason: 'unreachable' };
+
+    if (!master.startsWith('#EXTM3U')) return { ok: false, latency: 0, reason: 'invalid hls' };
 
     // Find the highest-bandwidth variant
     const bwRe = /#EXT-X-STREAM-INF[^]*?BANDWIDTH=(\d+)[\s\S]*?\n([^\n]+)/g;
@@ -136,6 +160,7 @@ async function checkStream(url) {
     // Fetch media playlist to get segment URLs
     const media = await fetchText(mediaUrl);
     if (!media) return { ok: false, latency: 0, reason: 'media unreachable' };
+    if (!media.startsWith('#EXTM3U') && !media.includes('#EXTINF')) return { ok: false, latency: 0, reason: 'invalid media' };
     if (media.includes('#EXT-X-MAP')) {
       // fMP4 — GET the init segment
       const mapMatch = media.match(/EXT-X-MAP:URI="([^"]+)"/);
@@ -168,17 +193,38 @@ async function checkStream(url) {
   return { ok: true, latency: Math.round(performance.now() - start) };
 }
 
+const GEO_BLOCK_KEYWORDS = [
+  'geo-block', 'geo block', 'geoblock', 'not available in your country',
+  'not available in your region', 'content unavailable', 'geo-restricted',
+  'this content is not available', 'streaming not available', 'for usa only',
+  'for uk only', 'for canada only', 'country restricted', '地域制限',
+];
+
+function isGeoBlocked(head) {
+  return GEO_BLOCK_KEYWORDS.some(kw => head.includes(kw));
+}
+
+const RISKY_EXTENSIONS = ['.mp4', '.mkv', '.avi', '.mov', '.flv', '.mpd'];
+
+function isRiskyExtension(url) {
+  const u = url.toLowerCase();
+  const pathname = u.split('?')[0].split('#')[0];
+  return RISKY_EXTENSIONS.some(ext => pathname.endsWith(ext));
+}
+
 function isVideoContent(buf) {
   if (buf.length < 64) return false;
-  const head = new TextDecoder().decode(buf.slice(0, Math.min(256, buf.length))).toLowerCase();
+  const head = new TextDecoder().decode(buf.slice(0, Math.min(512, buf.length))).toLowerCase();
   if (head.includes('<!doctype') || head.includes('<html') || head.includes('<?xml') || head.includes('{"error"') || head.includes('"status":') || head.includes('access denied') || head.includes('404 not found') || head.includes('<error') || head.includes('not found')) return false;
+
+  if (isGeoBlocked(head)) return false;
 
   // Known video container signatures only — no fuzzy binary heuristic
   if (buf[0] === 0x47) return true;                         // MPEG-TS
   if (buf[0] === 0x1a && buf[1] === 0x45) return true;      // WebM/Matroska
   if (head.includes('ftyp') || head.includes('moov') || head.includes('moof') || head.includes('mdat')) return true;  // fMP4/MP4/ISOBMFF
 
-  return false;  // Removed the 15% binary heuristic
+  return false;
 }
 
 async function fetchBytes(url, maxBytes) {
@@ -193,8 +239,10 @@ async function fetchBytes(url, maxBytes) {
       });
       if (!res.ok && res.status !== 206) return null;
       const contentType = res.headers.get('content-type') || '';
-      if (contentType.startsWith('text/html') || contentType.startsWith('application/json') || contentType.startsWith('text/xml') || contentType.includes('javascript')) return null;
+      if (contentType.startsWith('text/html') || contentType.startsWith('application/json') || contentType.startsWith('text/xml') || contentType.includes('javascript') || contentType.startsWith('text/plain')) return null;
       const buf = await res.arrayBuffer();
+      const head = new TextDecoder().decode(new Uint8Array(buf).slice(0, Math.min(512, buf.byteLength))).toLowerCase();
+      if (isGeoBlocked(head)) return null;
       return new Uint8Array(buf);
     } catch { if (attempt === 1) return null; } finally { clearTimeout(t); }
   }
@@ -224,6 +272,12 @@ async function dumpSources() {
   const all = [];
   for (const src of SOURCES) {
     try {
+      if (src.local) {
+        const channels = readLocalM3U(src.local, src.id);
+        console.log(`  ✓ ${src.id} (local): ${channels.length} channels`);
+        all.push(...channels);
+        continue;
+      }
       const res = await fetch(src.url, { headers: { 'User-Agent': BROWSER_UA } });
       if (!res.ok) { console.log(`  ✗ ${src.id}: HTTP ${res.status}`); continue; }
       const text = await res.text();
@@ -298,19 +352,37 @@ async function mergeChunks() {
     groups[key].push(ch);
   }
 
+  const BD_SOURCE_IDS = ['bd-channels', 'mrgify-bd'];
+
+  const urlCounts = {};
+  for (const ch of valid) {
+    urlCounts[ch.url] = (urlCounts[ch.url] || 0) + 1;
+  }
+
   let final = Object.values(groups)
     .map(group => {
       group.sort((a, b) => a.latencyMs - b.latencyMs);
       const best = group[0];
+      const isBd = best.sourceId === 'bd-channels' || BD_SOURCE_IDS.includes(best.sourceId) || /\.bd\b/i.test(best.url);
+      const uniqueUrls = [...new Set(group.map(c => c.url))];
+      const sourceCount = uniqueUrls.length;
+      const latency = best.latencyMs;
+      let tier;
+      if (isBd) tier = 'bd';
+      else if (urlCounts[best.url] > 1) tier = 'duplicate';
+      else if (latency < 500) tier = 'fast';
+      else if (latency < 1500) tier = 'medium';
+      else tier = 'slow';
       return {
         id: hash(normalizeName(best.name)),
         name: best.name,
         logoUrl: best.logo,
         streamUrl: best.url,
         category: best.category,
-        latencyMs: best.latencyMs,
-        tier: 'global',
-        sources: [...new Set(group.map(c => c.url))],
+        latencyMs: latency,
+        sourceCount,
+        tier,
+        sources: uniqueUrls,
         lastValidated: new Date().toISOString(),
       };
     })
