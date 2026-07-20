@@ -1,5 +1,4 @@
 using System.IO;
-using System.Text;
 using System.Windows;
 using Microsoft.Web.WebView2.Core;
 
@@ -7,20 +6,17 @@ namespace TarangaPlus;
 
 public partial class MainWindow : Window
 {
+    public NativeVideoPlayer NativePlayer { get; } = new();
+
     public MainWindow()
     {
         InitializeComponent();
         Loaded += OnLoaded;
+        Closing += (_, _) => NativePlayer.Dispose();
     }
 
     private async void OnLoaded(object sender, RoutedEventArgs e)
     {
-        // --autoplay-policy=no-user-gesture-required: prevents WebView2's
-        // Chromium engine from silently blocking video.play() calls.
-        // --disable-web-security: completely bypasses CORS restrictions.
-        // This is REQUIRED because most third-party IPTV servers do not send
-        // Access-Control-Allow-Origin headers, which would cause Shaka Player
-        // (running in a browser context) to fail with "Channel Unavailable".
         var options = new CoreWebView2EnvironmentOptions(
             "--autoplay-policy=no-user-gesture-required --disable-web-security " +
             "--disable-sync --disable-component-update " +
@@ -33,13 +29,14 @@ public partial class MainWindow : Window
 #if !DEBUG
         webView.CoreWebView2.Settings.AreDevToolsEnabled = false;
 #endif
-        webView.CoreWebView2.AddHostObjectToScript("backend", new Backend());
 
-        // Removed GitHub raw URL interception.
-        // The app will now fetch the live, validated channels.json directly from GitHub
-        // instead of forcing the local file. This ensures the 30-minute GitHub Action updates are received.
+        webView.DefaultBackgroundColor = System.Drawing.Color.FromArgb(0, 0, 0, 0);
 
-        // Handle HTML5 fullscreen (Shaka Player fullscreen button)
+        var backend = new Backend(NativePlayer);
+        NativePlayer.Attach(vlcPlayer);
+        webView.CoreWebView2.AddHostObjectToScript("backend", backend);
+        webView.CoreWebView2.AddHostObjectToScript("nativePlayer", NativePlayer);
+
         webView.CoreWebView2.ContainsFullScreenElementChanged += (s, args) =>
         {
             if (webView.CoreWebView2.ContainsFullScreenElement)
@@ -56,8 +53,6 @@ public partial class MainWindow : Window
             }
         };
 
-        // Reduce memory when window is minimized — swap browser caches to disk
-        // Restore to normal when user comes back so playback stays smooth.
         this.StateChanged += (_, _) =>
         {
             if (WindowState == WindowState.Minimized)
@@ -73,5 +68,16 @@ public partial class MainWindow : Window
             AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "..", "frontend", "dist", "index.html"));
         webView.CoreWebView2.Navigate($"file:///{path.Replace('\\', '/')}");
 #endif
+    }
+
+    public void SetNativeMode(bool enabled)
+    {
+        Dispatcher.Invoke(() =>
+        {
+            vlcPlayer.Visibility = enabled ? Visibility.Visible : Visibility.Collapsed;
+            webView.DefaultBackgroundColor = enabled
+                ? System.Drawing.Color.FromArgb(0, 0, 0, 0)
+                : System.Drawing.Color.FromArgb(255, 0, 0, 0);
+        });
     }
 }

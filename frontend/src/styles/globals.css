@@ -68,6 +68,11 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+body.native-mode,
+body.native-mode #root {
+  background-color: transparent !important;
+}
+
 @keyframes shimmer {
   0% { background-position: -400px 0; }
   100% { background-position: 400px 0; }
@@ -118,16 +123,7 @@ body {
   100% { opacity: 0; }
 }
 
-/* Hide Shaka UI's built-in spinner — we use our own LoadingLines component */
-.shaka-spinner {
-  display: none !important;
-}
-
-/* Hide all Shaka UI controls when player falls back to native <video> playback */
-.native-fallback .shaka-controls,
-.native-fallback .shaka-play-button,
-.native-fallback .shaka-bottom-controls,
-.native-fallback .shaka-overflow-menu,
-.native-fallback .shaka-controls-button-panel {
+/* Hide native <video> element when using native DirectX playback */
+.native-fallback video {
   display: none !important;
 }

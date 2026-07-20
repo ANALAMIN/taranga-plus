@@ -3,7 +3,6 @@ import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { createHash } from 'crypto';
 import { connect } from 'net';
-import { promises as dns } from 'dns';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -93,25 +92,18 @@ function resolveUrl(ref, base) {
 }
 
 const FETCH_TIMEOUT = 2000;
-const TCP_TIMEOUT = 2000;
-const SEGMENT_SIZE = 8192;
+const TCP_TIMEOUT = 1500;
+const SEGMENT_SIZE = 4096;
 const BROWSER_UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
 
 async function fetchText(url) {
-  for (let attempt = 0; attempt < 2; attempt++) {
-    if (attempt > 0) await new Promise(r => setTimeout(r, 500));
-    const ctrl = new AbortController();
-    const t = setTimeout(() => ctrl.abort(), FETCH_TIMEOUT);
-    try {
-      const res = await fetch(url, { signal: ctrl.signal, headers: { 'User-Agent': BROWSER_UA } });
-      if (!res.ok) return null;
-      return await res.text();
-    } catch { if (attempt === 1) return null; } finally { clearTimeout(t); }
-  }
-}
-
-async function dnsResolves(host) {
-  try { await dns.resolve4(host); return true; } catch { return false; }
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), FETCH_TIMEOUT);
+  try {
+    const res = await fetch(url, { signal: ctrl.signal, headers: { 'User-Agent': BROWSER_UA } });
+    if (!res.ok) return null;
+    return await res.text();
+  } catch { return null; } finally { clearTimeout(t); }
 }
 
 function tcpReachable(url) {
@@ -133,9 +125,6 @@ async function checkStream(url) {
   const start = performance.now();
 
   if (isRiskyExtension(url)) return { ok: false, latency: 0, reason: 'risky extension' };
-
-  const u = new URL(url);
-  if (!await dnsResolves(u.hostname)) return { ok: false, latency: 0, reason: 'dns dead' };
 
   if (!await tcpReachable(url)) return { ok: false, latency: 0, reason: 'tcp dead' };
 
@@ -228,24 +217,21 @@ function isVideoContent(buf) {
 }
 
 async function fetchBytes(url, maxBytes) {
-  for (let attempt = 0; attempt < 2; attempt++) {
-    if (attempt > 0) await new Promise(r => setTimeout(r, 500));
-    const ctrl = new AbortController();
-    const t = setTimeout(() => ctrl.abort(), FETCH_TIMEOUT);
-    try {
-      const res = await fetch(url, {
-        signal: ctrl.signal,
-        headers: { 'User-Agent': BROWSER_UA, Range: `bytes=0-${maxBytes - 1}` },
-      });
-      if (!res.ok && res.status !== 206) return null;
-      const contentType = res.headers.get('content-type') || '';
-      if (contentType.startsWith('text/html') || contentType.startsWith('application/json') || contentType.startsWith('text/xml') || contentType.includes('javascript') || contentType.startsWith('text/plain')) return null;
-      const buf = await res.arrayBuffer();
-      const head = new TextDecoder().decode(new Uint8Array(buf).slice(0, Math.min(512, buf.byteLength))).toLowerCase();
-      if (isGeoBlocked(head)) return null;
-      return new Uint8Array(buf);
-    } catch { if (attempt === 1) return null; } finally { clearTimeout(t); }
-  }
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), FETCH_TIMEOUT);
+  try {
+    const res = await fetch(url, {
+      signal: ctrl.signal,
+      headers: { 'User-Agent': BROWSER_UA, Range: `bytes=0-${maxBytes - 1}` },
+    });
+    if (!res.ok && res.status !== 206) return null;
+    const contentType = res.headers.get('content-type') || '';
+    if (contentType.startsWith('text/html') || contentType.startsWith('application/json') || contentType.startsWith('text/xml') || contentType.includes('javascript') || contentType.startsWith('text/plain')) return null;
+    const buf = await res.arrayBuffer();
+    const head = new TextDecoder().decode(new Uint8Array(buf).slice(0, Math.min(512, buf.byteLength))).toLowerCase();
+    if (isGeoBlocked(head)) return null;
+    return new Uint8Array(buf);
+  } catch { return null; } finally { clearTimeout(t); }
 }
 
 function normalizeName(name) {
@@ -303,12 +289,13 @@ async function checkChunk() {
   console.log(`Chunk size: ${chunk.length}`);
 
   const valid = [];
-  const CONCURRENCY = 30;
+  const CONCURRENCY = 15;
   for (let i = 0; i < chunk.length; i += CONCURRENCY) {
     const batch = chunk.slice(i, i + CONCURRENCY);
-    const results = await Promise.all(batch.map(ch => checkStream(ch.url)));
+    const results = await Promise.allSettled(batch.map(ch => checkStream(ch.url)));
     for (let j = 0; j < results.length; j++) {
-      if (results[j].ok) valid.push({ ...batch[j], latencyMs: results[j].latency });
+      if (results[j].status === 'fulfilled' && results[j].value.ok)
+        valid.push({ ...batch[j], latencyMs: results[j].value.latency });
     }
   }
   console.log(`Alive in chunk: ${valid.length}`);
@@ -415,14 +402,15 @@ async function full() {
   const size = all.length;
   const chunk = all.slice(0, size);
   const valid = [];
-  const CONCURRENCY = 30;
+  const CONCURRENCY = 15;
   for (let i = 0; i < chunk.length; i += CONCURRENCY) {
     const batch = chunk.slice(i, i + CONCURRENCY);
-    const results = await Promise.all(batch.map(ch => checkStream(ch.url)));
+    const results = await Promise.allSettled(batch.map(ch => checkStream(ch.url)));
     for (let j = 0; j < results.length; j++) {
-      if (results[j].ok) valid.push({ ...batch[j], latencyMs: results[j].latency });
+      if (results[j].status === 'fulfilled' && results[j].value.ok)
+        valid.push({ ...batch[j], latencyMs: results[j].value.latency });
     }
-    if ((i + CONCURRENCY) % 600 === 0 || i + CONCURRENCY >= chunk.length) {
+    if ((i + CONCURRENCY) % 300 === 0 || i + CONCURRENCY >= chunk.length) {
       console.log(`  Validated ${Math.min(i + CONCURRENCY, chunk.length)}/${chunk.length}...`);
     }
   }

@@ -1,17 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { usePlayer } from '../../hooks/usePlayer';
 import { useNativeBridge } from '../../hooks/useNativeBridge';
+import { setStreamNetworkingConfig, StreamNetworkingConfig } from '../../player-engine/customFilters';
+import { PlayerControls } from '../PlayerControls';
 import LoadingLines from '../UILoader';
-import { PictureInPicture2 } from 'lucide-react';
-import 'shaka-player/dist/controls.css';
 
 interface VideoFrameProps {
   streamUrl: string;
   sources?: string[];
   channelTitle?: string;
+  networkConfig?: StreamNetworkingConfig;
 }
 
-export const VideoFrame: React.FC<VideoFrameProps> = ({ streamUrl, sources, channelTitle = 'Taranga+' }) => {
+export const VideoFrame: React.FC<VideoFrameProps> = ({ streamUrl, sources, channelTitle = 'Taranga+', networkConfig }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -19,57 +20,68 @@ export const VideoFrame: React.FC<VideoFrameProps> = ({ streamUrl, sources, chan
     ? [streamUrl, ...sources.filter(u => u !== streamUrl)]
     : [streamUrl];
 
-  const { isBuffering, error, setStream, playerReady } = usePlayer(videoRef, containerRef, allSources, channelTitle);
-  const { isNative, togglePiP } = useNativeBridge();
-
-  const [showBuffering, setShowBuffering] = useState(false);
-  const bufferingTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const {
+    mode, isPlaying, isBuffering, error, playerReady,
+    levels, currentLevelIndex,
+    play, pause, setLevel, setStream,
+  } = usePlayer(videoRef, containerRef, allSources, channelTitle);
+  const { isNative } = useNativeBridge();
+  const isNativeMode = mode === 'native';
 
   useEffect(() => {
-    if (isBuffering) {
-      bufferingTimer.current = setTimeout(() => setShowBuffering(true), 2000);
+    if (isNativeMode) {
+      document.body.classList.add('native-mode');
     } else {
-      if (bufferingTimer.current) clearTimeout(bufferingTimer.current);
-      setShowBuffering(false);
+      document.body.classList.remove('native-mode');
     }
-    return () => { if (bufferingTimer.current) clearTimeout(bufferingTimer.current); };
-  }, [isBuffering]);
+    return () => document.body.classList.remove('native-mode');
+  }, [isNativeMode]);
 
   useEffect(() => {
     if (streamUrl && playerReady) {
+      if (networkConfig) {
+        setStreamNetworkingConfig(networkConfig);
+      } else {
+        setStreamNetworkingConfig({});
+      }
       setStream(streamUrl);
     }
-  }, [streamUrl, setStream, playerReady]);
+  }, [streamUrl, setStream, playerReady, networkConfig]);
 
   return (
     <div
       id="video-player-container"
       ref={containerRef}
-      className="relative w-full h-full bg-black flex items-center justify-center overflow-hidden shaka-video-container"
+      className={`relative w-full h-full flex items-center justify-center overflow-hidden ${isNativeMode ? 'bg-transparent' : 'bg-black'}`}
       onContextMenu={(e) => e.preventDefault()}
     >
-      <video
-        ref={videoRef}
-        autoPlay
-        controls={false}
-        disablePictureInPicture={false}
-        crossOrigin="anonymous"
-        className="w-full h-full"
-      />
-
-      {/* Native PiP button — only visible inside the WPF app */}
-      {isNative && (
-        <button
-          onClick={togglePiP}
-          title="Picture in Picture (Native)"
-          className="absolute top-3 left-3 z-[110] bg-black/60 hover:bg-black/90 text-white p-1.5 rounded-lg border border-white/15 transition-all duration-200 backdrop-blur-sm shadow-lg"
-        >
-          <PictureInPicture2 size={16} strokeWidth={2} />
-        </button>
+      {!isNativeMode && (
+        <video
+          ref={videoRef}
+          autoPlay
+          controls={false}
+          disablePictureInPicture={false}
+          crossOrigin="anonymous"
+          className="w-full h-full"
+        />
       )}
 
-      {showBuffering && (
-        <div className="absolute inset-0 flex items-center justify-center bg-black/40 pointer-events-none z-[100]">
+      {playerReady && (
+        <PlayerControls
+          videoRef={videoRef}
+          isPlaying={isPlaying}
+          isBuffering={isBuffering}
+          isNativeMode={isNativeMode}
+          levels={levels}
+          currentLevelIndex={currentLevelIndex}
+          onPlay={play}
+          onPause={pause}
+          onLevelChange={setLevel}
+        />
+      )}
+
+      {isBuffering && (
+        <div className="absolute inset-0 flex items-center justify-center bg-black/40 z-[100]">
           <LoadingLines />
         </div>
       )}
