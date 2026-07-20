@@ -70,7 +70,7 @@ jobs:
           git add -f data/channels.json
           if ! git diff --cached --quiet; then
             git commit -m "chore: auto-validate channels $(date -u +'%Y-%m-%d %H:%M UTC')"
-            git push
+            git pull --rebase --autostash && git push
           else
             echo "No changes to commit"
           fi
