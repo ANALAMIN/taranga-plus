@@ -91,8 +91,8 @@ function resolveUrl(ref, base) {
   try { return new URL(ref, base).href; } catch { return ref; }
 }
 
-const FETCH_TIMEOUT = 2000;
-const TCP_TIMEOUT = 1500;
+const FETCH_TIMEOUT = 5000;
+const TCP_TIMEOUT = 5000;
 const SEGMENT_SIZE = 4096;
 const BROWSER_UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
 
@@ -317,6 +317,64 @@ async function logoToDataUri(url, maxBytes = 32768) {
   } catch { return null; }
 }
 
+function isBangladeshi(ch) {
+  const bdSources = ['bd-channels', 'mrgify-bd', 'toffee'];
+  if (bdSources.includes(ch.sourceId)) return true;
+  return /[\u0980-\u09FF]/.test(ch.name);
+}
+
+function isHindi(ch) {
+  if (ch.sourceId === 'iptv-org-hin') return true;
+  return /[\u0900-\u097F]/.test(ch.name);
+}
+
+const CURATED_BUCKETS = {
+  'news-bd':              { max: Infinity, match: ch => ch.category === 'news' && isBangladeshi(ch) },
+  'international':        { max: 5,        match: ch => ch.category === 'news' && !isBangladeshi(ch) },
+  'sports':               { max: Infinity, match: ch => ch.category === 'sports' },
+  'entertainment-bd':     { max: Infinity, match: ch => ch.category === 'entertainment' && isBangladeshi(ch) },
+  'entertainment-hindi':  { max: 5,        match: ch => ch.category === 'entertainment' && isHindi(ch) },
+  'kids':                 { max: 10,       match: ch => ch.category === 'kids', priority: ch => isHindi(ch) ? 0 : 1 },
+  'documentary':          { max: Infinity, match: ch => ch.category === 'documentary' },
+  'movies':               { max: 0,        match: ch => ch.category === 'movies' },
+  'music':                { max: 0,        match: ch => ch.category === 'music' },
+};
+
+function curateChannels(channels) {
+  const buckets = {};
+  for (const ch of channels) {
+    for (const [bucket, rule] of Object.entries(CURATED_BUCKETS)) {
+      if (rule.match(ch)) {
+        if (!buckets[bucket]) buckets[bucket] = [];
+        buckets[bucket].push(ch);
+        break;
+      }
+    }
+  }
+
+  const result = [];
+  for (const [bucket, rule] of Object.entries(CURATED_BUCKETS)) {
+    const list = buckets[bucket] || [];
+    if (list.length === 0 || rule.max === 0) continue;
+    list.sort((a, b) => {
+      const pa = rule.priority ? rule.priority(a) : 0;
+      const pb = rule.priority ? rule.priority(b) : 0;
+      return pa - pb || a.latencyMs - b.latencyMs;
+    });
+    const selected = rule.max === Infinity ? list : list.slice(0, rule.max);
+    for (const ch of selected) {
+      result.push({
+        ...ch,
+        curatedBucket: bucket,
+        score: Math.max(0, 1000 - ch.latencyMs),
+      });
+    }
+  }
+
+  result.sort((a, b) => b.score - a.score);
+  return result;
+}
+
 async function mergeChunks() {
   console.log('=== Merge Chunks ===\n');
   const valid = [];
@@ -396,6 +454,11 @@ async function mergeChunks() {
   const outPath = join(ROOT, 'data', 'channels.json');
   writeFileSync(outPath, JSON.stringify(final, null, 2));
   console.log(`Saved ${outPath}`);
+
+  const curated = curateChannels(final);
+  const curatedPath = join(ROOT, 'data', 'curated-channels.json');
+  writeFileSync(curatedPath, JSON.stringify(curated, null, 2));
+  console.log(`Saved ${curatedPath} (${curated.length} curated channels)`);
 }
 
 async function full() {
