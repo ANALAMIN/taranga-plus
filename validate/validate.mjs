@@ -360,10 +360,14 @@ async function mergeChunks() {
       else if (latency < 500) tier = 'fast';
       else if (latency < 1500) tier = 'medium';
       else tier = 'slow';
+      const PLACEHOLDER_LOGOS = ['https://imgur.com/79g2kMA.png'];
+      function isRealLogoUrl(u) { return u && !PLACEHOLDER_LOGOS.includes(u); }
+      const logoUrl = isRealLogoUrl(best.logo) ? best.logo : group.find(c => isRealLogoUrl(c.logo))?.logo || null;
+
       return {
         id: hash(normalizeName(best.name)),
         name: best.name,
-        logoUrl: best.logo,
+        logoUrl,
         streamUrl: best.url,
         category: best.category,
         latencyMs: latency,
